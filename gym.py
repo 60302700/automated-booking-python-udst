@@ -175,7 +175,7 @@ category = ['178388', '178795']
 range_time = ['1.5', '1']
 
 # Example of how to calculate the date and time
-if args.fd == None and len(args.d) != 0:
+if not args.fd:
     book_slot(session=session, first_name=args.fn, last_name=args.ln, id_udst=args.i, date=args.d, time=args.t, category=category[args.ca], range_time=range_time[args.ca], login_cs=login_cs)
 else:
     date = future_day()
