@@ -161,8 +161,8 @@ parser.add_argument('--ln', type=str, help='Last Name')
 parser.add_argument('--i', required=True, type=str, help='User ID for login')
 parser.add_argument('--ca', type=int, required=True, help='Category index')
 parser.add_argument('--t',type=str,required=True,help="Time In 24 hrs format , 12:30 = 12.5")
-parser.add_argument('--fd',type=bool,required=True,help="7 days ahead booking")
-parser.add_argument('--d',type=str,required=True,help="set the day and date")
+parser.add_argument('--fd',type=bool,help="7 days ahead booking")
+parser.add_argument('--d',type=str,help="set the day and date")
 
 
 # Parse the arguments
@@ -175,7 +175,7 @@ category = ['178388', '178795']
 range_time = ['1.5', '1']
 
 # Example of how to calculate the date and time
-if args.fd == False and len(args.d) != 0:
+if args.fd == None and len(args.d) != 0:
     book_slot(session=session, first_name=args.fn, last_name=args.ln, id_udst=args.i, date=args.d, time=args.t, category=category[args.ca], range_time=range_time[args.ca], login_cs=login_cs)
 else:
     date = future_day()
