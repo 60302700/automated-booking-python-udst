@@ -1,1 +1,33 @@
+name: Gym Booking Automation
 
+on:
+  schedule:
+    # Run the workflow every day at 7:00 AM UTC
+    - cron: '0 7 * * *'
+  workflow_dispatch:
+
+jobs:
+  run-booking-scripts:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run Gym Booking for User 1
+      run: |
+        python /path/to/your/script.py --pa ${{ secrets.USER1_PASSWORD }} --i ${{ secrets.USER1_ID }} --fn User1FirstName --ln User1LastName --category 178388 --time 7.5 --range_time 1.5 --date "Sep 09, 2024"
+
+    - name: Run Gym Booking for User 2
+      run: |
+        python /path/to/your/script.py --pa ${{ secrets.USER2_PASSWORD }} --i ${{ secrets.USER2_ID }} --fn User2FirstName --ln User2LastName --category 178388 --time 7.5 --range_time 1.5 --date "Sep 09, 2024"
