@@ -3,7 +3,7 @@ name: Gym Booking Automation
 on:
   schedule:
     # Run the workflow every day at 7:00 AM UTC
-    - cron: 
+    - cron: 0 0 * * 0-4
   workflow_dispatch:
 
 jobs:
@@ -26,7 +26,7 @@ jobs:
 
     - name: Run Gym Booking for User 1
       run: |
-        python /path/to/your/script.py --pa ${{ secrets.USER1_PASSWORD }} --i ${{ secrets.USER1_ID }} --fn User1FirstName --ln User1LastName --category 178388 --time 7.5 --range_time 1.5 --date "Sep 09, 2024"
+        python gym.py --pa ${{ secrets.USER1_PASSWORD }} --i ${{ secrets.USER1_ID }} --fn User1FirstName --ln User1LastName --category 178388 --time 7.5 --range_time 1.5 --date "Sep 09, 2024"
 
     - name: Run Gym Booking for User 2
       run: |
