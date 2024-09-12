@@ -37,7 +37,7 @@ jobs:
 
     - name: Run Gym Booking Sunday
       run: |
-        python gym.py --pa ${{ secrets.ME_PASS }} --i ${{ secrets.ME_ID }} --ln${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
+        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
 
   run-booking-Monday-Gym:
     runs-on: ubuntu-latest
@@ -59,7 +59,7 @@ jobs:
 
     - name: Run Gym Booking Monday
       run: |
-        python gym.py --pa ${{ secrets.ME_PASS }} --i ${{ secrets.ME_ID }} --ln${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 13 --fd True
+        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 13 --fd True
         
   run-booking-Monday-Swimming:
       runs-on: ubuntu-latest
@@ -81,7 +81,7 @@ jobs:
   
       - name: Run Swimming Booking Monday
         run: |
-          python gym.py --pa ${{ secrets.ME_PASS }} --i ${{ secrets.ME_ID }} --fn ${{ secrets.ME_FIRST_NAME }} --ln ${{ secrets.ME_LAST_NAME }} --category 1 --time 15 --fd True
+          python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --fn ${{ secrets.ME_FIRST_NAME }} --ln ${{ secrets.ME_LAST_NAME }} --category 1 --time 15 --fd True
 
   run-booking-Tuesday-Gym:
     runs-on: ubuntu-latest
@@ -103,7 +103,7 @@ jobs:
 
     - name: Run Gym Booking for User 1 (Evening)
       run: |
-         python gym.py --pa ${{ secrets.ME_PASS }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 11 --fd True
+         python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 11 --fd True
    
   run-booking-Tuesday-Swimming:
       runs-on: ubuntu-latest
@@ -125,7 +125,7 @@ jobs:
   
       - name: Run Gym Booking for User 1 (Evening)
         run: |
-           python gym.py --pa ${{ secrets.ME_PASS }} --i ${{ secrets.ME_ID }} --ln${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 13 --fd True
+           python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 13 --fd True
 
   run-booking-Wednesday-Gym:
     runs-on: ubuntu-latest
@@ -147,7 +147,7 @@ jobs:
 
     - name: Run Gym Booking for User 2 (Morning)
       run: |
-         python gym.py --pa ${{ secrets.ME_PASS }} --i ${{ secrets.ME_ID }} --ln${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 15 --fd True
+         python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 15 --fd True
   
   run-booking-Wednesday-Swimming:
     runs-on: ubuntu-latest
@@ -169,7 +169,7 @@ jobs:
 
     - name: Run Gym Booking for User 2 (Morning)
       run: |
-         python gym.py --pa ${{ secrets.ME_PASS }} --i ${{ secrets.ME_ID }} --ln${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 1 --time 13 --fd True
+         python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 1 --time 13 --fd True
 
   run-booking-Thursday-Gym:
     runs-on: ubuntu-latest
@@ -191,7 +191,7 @@ jobs:
 
     - name: Run Gym Booking for User 2 (Afternoon)
       run: |
-         python gym.py --pa ${{ secrets.ME_PASS }} --i ${{ secrets.ME_ID }} --ln${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
+         python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
   
   run-booking-Thursday-Swimming:
     runs-on: ubuntu-latest
@@ -213,4 +213,4 @@ jobs:
 
     - name: Run Swimming Booking for User 2 (Afternoon)
       run: |
-         python gym.py --pa ${{ secrets.ME_PASS }} --i ${{ secrets.ME_ID }} --ln${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 1 --time 13 --fd True
+         python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 1 --time 13 --fd True
