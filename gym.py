@@ -5,9 +5,6 @@ import logging
 from bs4 import BeautifulSoup
 import random
 
-def fake_ip():
-    return f"{random.randrange(0,255)}.{random.randrange(0,255)}.{random.randrange(0,255)}.{random.randrange(0,255)}"
-
 
 # Set up logging
 logging.basicConfig(
@@ -132,8 +129,7 @@ def book_slot(session, first_name, last_name, id_udst, date, time, category, ran
         'Accept-Encoding': 'gzip, deflate, br',
         'Accept-Language': 'en-US,en;q=0.9',
         'Connection': 'keep-alive',
-        'X-CSRF-Token': booking_csrf_token,# Use the booking page CSRF token here
-        'X-Forwarded-For': fake_ip(),
+        'X-CSRF-Token': booking_csrf_token,
     }
 
     try:
