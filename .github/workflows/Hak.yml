@@ -3,23 +3,23 @@ name: Gym And Pool Booking Automation
 on:
   schedule:
   #GYM
-    - cron: '0 12 * * 0'  
-    - cron: '0 13 * * 1'  
-    - cron: '0 11 * * 2'  
-    - cron: '0 15 * * 3'  
-    - cron: '0 12 * * 4'
+    - cron: '0 9 * * 0'  
+    - cron: '0 10 * * 1'  
+    - cron: '0 8 * * 2'  
+    - cron: '0 12 * * 3'  
+    - cron: '0 9 * * 4'
   #SWIMMING
-    - cron: '0 15 * * 1'
-    - cron: '0 13 * * 2'
-    - cron: '0 13 * * 3'
-    - cron: '0 13 * * 4'
+    - cron: '0 12 * * 1'
+    - cron: '0 10 * * 2'
+    - cron: '0 10 * * 3'
+    - cron: '0 10 * * 4'
     
   workflow_dispatch:
 
 jobs:
   run-booking-Sunday-Gym:
     runs-on: ubuntu-latest
-    if: github.event.schedule == '0 12 * * 0'
+    if: github.event.schedule == '0 9 * * 0'
 
     steps:
     - name: Checkout repository
@@ -41,7 +41,7 @@ jobs:
 
   run-booking-Monday-Gym:
     runs-on: ubuntu-latest
-    if: github.event.schedule == '0 13 * * 1'
+    if: github.event.schedule == '0 10 * * 1'
 
     steps:
     - name: Checkout repository
@@ -63,7 +63,7 @@ jobs:
         
   run-booking-Monday-Swimming:
       runs-on: ubuntu-latest
-      if: github.event.schedule == '0 15 * * 1'
+      if: github.event.schedule == '0 12 * * 1'
   
       steps:
       - name: Checkout repository
@@ -85,7 +85,7 @@ jobs:
 
   run-booking-Tuesday-Gym:
     runs-on: ubuntu-latest
-    if: github.event.schedule == '0 11 * * 2'
+    if: github.event.schedule == '0 8 * * 2'
 
     steps:
     - name: Checkout repository
@@ -107,7 +107,7 @@ jobs:
    
   run-booking-Tuesday-Swimming:
       runs-on: ubuntu-latest
-      if: github.event.schedule == '0 13 * * 2'
+      if: github.event.schedule == '0 10 * * 2'
   
       steps:
       - name: Checkout repository
@@ -129,7 +129,7 @@ jobs:
 
   run-booking-Wednesday-Gym:
     runs-on: ubuntu-latest
-    if: github.event.schedule == '0 15 * * 3'
+    if: github.event.schedule == '0 12 * * 3'
 
     steps:
     - name: Checkout repository
@@ -151,7 +151,7 @@ jobs:
   
   run-booking-Wednesday-Swimming:
     runs-on: ubuntu-latest
-    if: github.event.schedule == '0 13 * * 3'
+    if: github.event.schedule == '0 10 * * 3'
 
     steps:
     - name: Checkout repository
@@ -173,7 +173,7 @@ jobs:
 
   run-booking-Thursday-Gym:
     runs-on: ubuntu-latest
-    if: github.event.schedule == '0 12 * * 4'
+    if: github.event.schedule == '0 9 * * 4'
 
     steps:
     - name: Checkout repository
@@ -195,7 +195,7 @@ jobs:
   
   run-booking-Thursday-Swimming:
     runs-on: ubuntu-latest
-    if: github.event.schedule == '0 13 * * 4'
+    if: github.event.schedule == '0 10 * * 4'
 
     steps:
     - name: Checkout repository
