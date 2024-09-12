@@ -1,14 +1,16 @@
-name: Gym Booking Automation
+name: Gym And Pool Booking Automation
 
 on:
   schedule:
-    - cron: '0 12 * * 0'  # Every day at 06:00 UTC
-    - cron: '0 13 * * 1'  # Every day at 09:00 UTC
-    - cron: '0 11 * * 2'  # Every day at 12:00 UTC
-    - cron: '0 15 * * 3'  # Every day at 15:00 UTC
-    - cron: '0 13 * * 4'  # Every day at 18:00 UTC
+  #GYM
+    - cron: '0 12 * * 0'  
+    - cron: '0 13 * * 1'  
+    - cron: '0 11 * * 2'  
+    - cron: '0 15 * * 3'  
+    - cron: '0 12 * * 4'
+  #SWIMMING
     - cron: '0 15 * * 1'
-    - corn: '0 13 * * 2'
+    - cron: '0 13 * * 2'
     - cron: '0 13 * * 3'
     - cron: '0 13 * * 4'
     
@@ -171,7 +173,7 @@ jobs:
 
   run-booking-Thursday-Gym:
     runs-on: ubuntu-latest
-    if: github.event.schedule == '0 15 * * 4'
+    if: github.event.schedule == '0 12 * * 4'
 
     steps:
     - name: Checkout repository
@@ -209,6 +211,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Run Gym Booking for User 2 (Afternoon)
+    - name: Run Swimming Booking for User 2 (Afternoon)
       run: |
          python gym.py --pa ${{ secrets.ME_PASS }} --i ${{ secrets.ME_ID }} --ln${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 1 --time 13 --fd True
