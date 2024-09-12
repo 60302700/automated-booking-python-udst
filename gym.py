@@ -17,10 +17,6 @@ logging.basicConfig(
 )
 
 def future_day():
-    date = datetime.now()
-    if date.hour > 23:
-        date = datetime.now() + timedelta(days=7)
-        return date.strftime("%B %d %Y")
     date = datetime.now() + timedelta(days=6)
     return date.strftime("%B %d %Y")
 
