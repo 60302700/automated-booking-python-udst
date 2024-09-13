@@ -1,0 +1,51 @@
+from instagrapi import Client
+import logging
+import os
+
+logging.basicConfig(
+    filename="Insta.log",
+    encoding="utf-8",
+    filemode="a",
+    format="{asctime} - {levelname} - {message}",
+    style="{",
+    datefmt="%Y-%m-%d %H:%M",
+)
+
+def get_days():
+    if "DAYS" in os.listdir(os.getcwd()):
+        with open("DAYS", 'r') as file:
+            day = file.readline()
+        with open("DAYS", "w") as file:
+            file.write(str(int(day) + 1))
+    return int(day)
+
+DAY = get_days()
+
+def video_upload(USERNAME, PASSWORD, PATH, CAPTION, SESSION):
+    Insta = Client()
+    Insta.load_settings(SESSION)
+    Insta.login(USERNAME, PASSWORD)
+    logging.info(f"Logging in as {Insta.user_id}")
+    Insta.clip_upload(PATH, CAPTION)
+    logging.info(f"Video uploaded: {PATH}")
+
+def scheduled_upload():
+    USERNAME = os.getenv('USERNAME1')
+    PASSWORD = os.getenv('PASSWORD1')
+    SESSION = os.getenv('SESSION1')
+    PATH = "grandpa.mp4"
+    global DAY
+    CAPTION = f'''DAY {DAY+1} \n #meme #trending #trending #viral #instagram #explorepage #explore #instagood #love #reels #follow #trend #like #photography #india #fyp #instadaily #tiktok #foryou #trendingreels #trendingnow #style #memes #photooftheday #music #reelsinstagram #viralpost #model #insta'''
+    video_upload(USERNAME, PASSWORD, PATH, CAPTION, SESSION)
+
+def scheduled_upload_benson():
+    USERNAME = os.getenv('USERNAME2')
+    PASSWORD = os.getenv('PASSWORD2')
+    SESSION = os.getenv('SESSION2')
+    PATH = "video.mp4"
+    global DAY
+    CAPTION = f'''DAY {DAY+1} \n #meme #trending #trending #viral #instagram #explorepage #explore #instagood #love #reels #follow #trend #like #photography #india #fyp #instadaily #tiktok #foryou #trendingreels #trendingnow #style #memes #photooftheday #music #reelsinstagram #viralpost #model #insta'''
+    video_upload(USERNAME, PASSWORD, PATH, CAPTION, SESSION)
+
+scheduled_upload()
+scheduled_upload_benson()
