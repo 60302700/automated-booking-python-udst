@@ -22,9 +22,8 @@ def get_days():
 
 DAY = get_days()
 
-def video_upload(USERNAME, PASSWORD, PATH, CAPTION, SESSION):
+def video_upload(USERNAME, PASSWORD, PATH, CAPTION):
     Insta = Client()
-    Insta.load_settings(SESSION)
     Insta.login(USERNAME, PASSWORD)
     time.sleep(5)
     logging.info(f"Logging in as {Insta.user_id}")
@@ -39,7 +38,7 @@ def scheduled_upload():
     PATH = "grandpa.mp4"
     global DAY
     CAPTION = f'''DAY {DAY+1} \n #meme #trending #trending #viral #instagram #explorepage #explore #instagood #love #reels #follow #trend #like #photography #india #fyp #instadaily #tiktok #foryou #trendingreels #trendingnow #style #memes #photooftheday #music #reelsinstagram #viralpost #model #insta'''
-    video_upload(USERNAME, PASSWORD, PATH, CAPTION, SESSION)
+    video_upload(USERNAME, PASSWORD, PATH, CAPTION)
 
 def scheduled_upload_benson():
     time.sleep(10)
@@ -49,7 +48,7 @@ def scheduled_upload_benson():
     PATH = "video.mp4"
     global DAY
     CAPTION = f'''DAY {DAY+1} \n #meme #trending #trending #viral #instagram #explorepage #explore #instagood #love #reels #follow #trend #like #photography #india #fyp #instadaily #tiktok #foryou #trendingreels #trendingnow #style #memes #photooftheday #music #reelsinstagram #viralpost #model #insta'''
-    video_upload(USERNAME, PASSWORD, PATH, CAPTION, SESSION)
+    video_upload(USERNAME, PASSWORD, PATH, CAPTION)
 
 scheduled_upload()
 scheduled_upload_benson()
