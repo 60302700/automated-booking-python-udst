@@ -2,7 +2,8 @@ name: Instagram Video Upload
 
 on:
   schedule:
-    - cron: '16 10 * * *'
+    - cron: '16 10 * * *'  # Runs every day at 10:16 AM UTC
+
 jobs:
   upload:
     runs-on: ubuntu-latest
