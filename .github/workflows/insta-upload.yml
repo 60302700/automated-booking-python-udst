@@ -15,7 +15,7 @@ jobs:
       with:
         python-version: '3.x'
     - name: Install dependencies
-      run: pip install instagrapi
+      run: pip install instagrapi Pillow moviepy
     - name: Run upload script
       env:
         USERNAME1: ${{ secrets.USERNAME1 }}
