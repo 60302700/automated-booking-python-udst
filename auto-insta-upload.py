@@ -33,9 +33,9 @@ def video_upload(USERNAME, PASSWORD, PATH, CAPTION, SESSION):
 
 def scheduled_upload():
     time.sleep(10)
-    USERNAME = os.getenv('USERNAME1')
-    PASSWORD = os.getenv('PASSWORD1')
-    SESSION = os.getenv('SESSION1')
+    USERNAME = str(os.getenv('USERNAME1'))
+    PASSWORD = str(os.getenv('PASSWORD1'))
+    SESSION = str(os.getenv('SESSION1'))
     PATH = "grandpa.mp4"
     global DAY
     CAPTION = f'''DAY {DAY+1} \n #meme #trending #trending #viral #instagram #explorepage #explore #instagood #love #reels #follow #trend #like #photography #india #fyp #instadaily #tiktok #foryou #trendingreels #trendingnow #style #memes #photooftheday #music #reelsinstagram #viralpost #model #insta'''
@@ -43,9 +43,9 @@ def scheduled_upload():
 
 def scheduled_upload_benson():
     time.sleep(10)
-    USERNAME = os.getenv('USERNAME2')
-    PASSWORD = os.getenv('PASSWORD2')
-    SESSION = os.getenv('SESSION2')
+    USERNAME = str(os.getenv('USERNAME2'))
+    PASSWORD = str(os.getenv('PASSWORD2'))
+    SESSION = str(os.getenv('SESSION2'))
     PATH = "video.mp4"
     global DAY
     CAPTION = f'''DAY {DAY+1} \n #meme #trending #trending #viral #instagram #explorepage #explore #instagood #love #reels #follow #trend #like #photography #india #fyp #instadaily #tiktok #foryou #trendingreels #trendingnow #style #memes #photooftheday #music #reelsinstagram #viralpost #model #insta'''
