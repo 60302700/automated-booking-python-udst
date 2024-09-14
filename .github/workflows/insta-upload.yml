@@ -2,8 +2,7 @@ name: Instagram Video Upload
 
 on:
   schedule:
-    - cron: '16 10 * * *'  # Runs every day at 8 AM UTC
-
+    - cron: '16 10 * * *'
 jobs:
   upload:
     runs-on: ubuntu-latest
@@ -14,7 +13,7 @@ jobs:
       with:
         python-version: '3.x'
     - name: Install dependencies
-      run: pip install instagrapi logging time
+      run: pip install instagrapi
     - name: Run upload script
       env:
         USERNAME1: ${{ secrets.USERNAME1 }}
