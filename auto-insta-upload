@@ -1,6 +1,7 @@
 from instagrapi import Client
 import logging
 import os
+import time
 
 logging.basicConfig(
     filename="Insta.log",
@@ -25,11 +26,13 @@ def video_upload(USERNAME, PASSWORD, PATH, CAPTION, SESSION):
     Insta = Client()
     Insta.load_settings(SESSION)
     Insta.login(USERNAME, PASSWORD)
+    time.sleep(5)
     logging.info(f"Logging in as {Insta.user_id}")
     Insta.clip_upload(PATH, CAPTION)
     logging.info(f"Video uploaded: {PATH}")
 
 def scheduled_upload():
+    time.sleep(10)
     USERNAME = os.getenv('USERNAME1')
     PASSWORD = os.getenv('PASSWORD1')
     SESSION = os.getenv('SESSION1')
@@ -39,6 +42,7 @@ def scheduled_upload():
     video_upload(USERNAME, PASSWORD, PATH, CAPTION, SESSION)
 
 def scheduled_upload_benson():
+    time.sleep(10)
     USERNAME = os.getenv('USERNAME2')
     PASSWORD = os.getenv('PASSWORD2')
     SESSION = os.getenv('SESSION2')
