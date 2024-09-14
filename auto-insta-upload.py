@@ -59,6 +59,6 @@ def scheduled_upload_benson():
     SESSION = get_session_dict_from_env(os.getenv('SESSION2'))
     PATH = "video.mp4"
     global DAY
-    CAPTION = f'''DAY {DAY+1} \n #meme #trending #trending #viral #instagram #explorepage #explore #instagood #love #reels #follow #trend #like #photography #india #fyp #instadaily #tiktok #foryou #trendingreels #trendingnow #style #memes #photooftheday #music #reelsinstagram #viralpost #model #insta'''
+    CAPTION = f"DAY {DAY+1} \n #meme #trending #trending #viral #instagram #explorepage #explore #instagood #love #reels #follow #trend #like #photography #india #fyp #instadaily #tiktok #foryou #trendingreels #trendingnow #style #memes #photooftheday #music #reelsinstagram #viralpost #model #insta"
     video_upload(USERNAME, PASSWORD, PATH, CAPTION,SESSION)
 '''
