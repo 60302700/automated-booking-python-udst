@@ -22,7 +22,7 @@ def future_day():
 
 def get_csrf_token_from_page(session, url):
     """Extract CSRF token from a given page URL."""
-    response = session.get(url,timeout=(10, 30),)
+    response = session.get(url,timeout=(10, 30),verify=True)
     soup = BeautifulSoup(response.text, 'html.parser')
     csrf_token = soup.find('input', {'name': '_token'})['value']
     return csrf_token
