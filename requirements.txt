@@ -1,5 +1,2 @@
 requests==2.31.0          # For making HTTP requests
 beautifulsoup4==4.12.2     # For parsing HTML and XML documents
-argparse                   # Built-in with Python, no need to install
-logging                    # Built-in with Python, no need to install
-random                     # Built-in with Python, no need to install
