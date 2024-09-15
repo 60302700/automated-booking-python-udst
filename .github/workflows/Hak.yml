@@ -34,6 +34,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install --upgrade requests
 
     - name: Run Gym Booking Sunday
       run: |
@@ -56,6 +57,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install --upgrade requests
 
     - name: Run Gym Booking Monday
       run: |
@@ -78,6 +80,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          pip install --upgrade requests
   
       - name: Run Swimming Booking Monday
         run: |
@@ -100,6 +103,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install --upgrade requests
 
     - name: Run Gym Booking for User 1 (Evening)
       run: |
@@ -122,7 +126,8 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-  
+          pip install --upgrade requests
+          
       - name: Run Gym Booking for User 1 (Evening)
         run: |
            python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 13 --fd True
@@ -144,6 +149,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install --upgrade requests
 
     - name: Run Gym Booking for User 2 (Morning)
       run: |
@@ -166,6 +172,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install --upgrade requests
 
     - name: Run Gym Booking for User 2 (Morning)
       run: |
@@ -188,6 +195,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install --upgrade requests
 
     - name: Run Gym Booking for User 2 (Afternoon)
       run: |
@@ -210,6 +218,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install --upgrade requests
 
     - name: Run Swimming Booking for User 2 (Afternoon)
       run: |
