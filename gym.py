@@ -138,6 +138,7 @@ def book_slot(session, first_name, last_name, id_udst, date, time, category, ran
         if response.status_code == 200:
             logging.info("Booking successful!")
             print(response.text)
+            session.close()
         else:
             logging.warning(f"Booking failed with status code: {response.status_code}")
             logging.debug(response.text)
