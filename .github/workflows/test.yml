@@ -52,7 +52,14 @@ jobs:
         pip install --upgrade requests
         cat hour.txt
     - name: Run Gym Booking Sunday
-      run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 12 --fd True
+      run: |
+        # Check if current hour is 9 and day is Sunday
+        if [ "$(date +%H)" == "09" ] && [ "$(date +%A)" == "Sunday" ]; then
+          echo "Conditions met. Running Python script..."
+          python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 12 --fd True
+        else
+          echo "Conditions not met. Exiting..."
+          exit 1
 
   run-booking-Monday-Gym:
 
