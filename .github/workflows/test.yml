@@ -21,21 +21,17 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Get Current Hour and Day
-      id: get_hour
-      run:
-        ${{ env.HOUR }} = (date +'%H')
-        ${{ env.DAY }} = (date +'%A')
-
-    - name: Echo Environment Variables and Save to Files
+    - name: Get Current Hour and Day and Save to Files
       run: |
-        # Echo the variables
-        echo "Current hour is ${{ env.HOUR }}"
-        echo "Current day is ${{ env.DAY }}"
+        current_hour=$(date +'%H')
+        current_day=$(date +'%A')
+        echo "$current_hour" > hour.txt
+        echo "$current_day" > day.txt
 
-        # Save the variables to files
-        echo ${{ env.HOUR }}
-        echo ${{ env.DAY }}
+    - name: Display Contents of Files
+      run: |
+        cat hour.txt
+        cat day.txt
         
   # Gym Booking Jobs
   run-booking-Sunday-Gym:
