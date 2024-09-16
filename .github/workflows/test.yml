@@ -29,18 +29,18 @@ jobs:
         current_day=$(date +'%A')
 
         # Export them as environment variables for use in later steps
-        echo "CURRENT_HOUR=$current_hour" >> $GITHUB_ENV
-        echo "CURRENT_DAY=$current_day" >> $GITHUB_ENV
+        echo "CURRENT_HOUR=$current_hour" >> ${{ env.HOUR }}
+        echo "CURRENT_DAY=$current_day" >> ${{ env.DAY }}
 
     - name: Echo Environment Variables and Save to Files
       run: |
         # Echo the variables
-        echo "Current hour is ${{ env.CURRENT_HOUR }}"
-        echo "Current day is ${{ env.CURRENT_DAY }}"
+        echo "Current hour is ${{ env.HOUR }}"
+        echo "Current day is ${{ env.DAY }}"
 
         # Save the variables to files
-        echo "${{ env.CURRENT_HOUR }}" > hour.txt
-        echo "${{ env.CURRENT_DAY }}" > day.txt
+        echo "${{ env.HOUR }}" > hour.txt
+        echo "${{ env.DAY }}" > day.txt
 
     - name: Display Contents of Files
       run: |
