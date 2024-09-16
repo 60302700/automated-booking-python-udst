@@ -1,4 +1,4 @@
-name: Gym And Pool Booking Automation test
+name: Gym And Pool Booking Automation
 
 on:
   schedule:
@@ -15,38 +15,124 @@ on:
   workflow_dispatch:
 
 jobs:
-  run-booking:
+  # Testing job (optional)
+  test:
     runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Test
+      run: echo "hello,world"
+
+  # Common setup job
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      current_hour: ${{ steps.get_hour.outputs.current_hour }}
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-    
     - name: Set up Python 3.x
       uses: actions/setup-python@v4
       with:
         python-version: '3.x'
-
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-
-    - name: Check Time and Run Script
+        pip install --upgrade requests
+    - name: Get Current Hour
+      id: get_hour
       run: |
-        # Define the target hour (24-hour format)
-        target_hour=12
-
-        # Get the current hour
         current_hour=$(date +%H)
+        echo "::set-output name=current_hour::$current_hour"
+    - name: Print Current Hour
+      run: echo "Current hour is ${{ steps.get_hour.outputs.current_hour }}"
 
-        # Print the current hour for debugging
-        echo "Current hour: $current_hour"
+  # Gym Booking Jobs
+  run-booking-Sunday-Gym:
+    needs: setup
+    runs-on: ubuntu-latest
+    if: ${{ needs.setup.outputs.current_hour == '09' }}
+    steps:
+    - name: Run Gym Booking Sunday
+      run: |
+        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
 
-        # Compare the current hour with the target hour
-        if [ "$current_hour" -eq "$target_hour" ]; then
-          echo "The current hour matches the target hour. Running the script..."
-          # Run your Python script here
-          echo "it works "
-        else
-          echo "The current hour does not match the target hour. Skipping execution."
-        fi
+  run-booking-Monday-Gym:
+    needs: setup
+    runs-on: ubuntu-latest
+    if: ${{ needs.setup.outputs.current_hour == '10' }}
+    steps:
+    - name: Run Gym Booking Monday
+      run: |
+        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 13 --fd True
+
+  run-booking-Tuesday-Gym:
+    needs: setup
+    runs-on: ubuntu-latest
+    if: ${{ needs.setup.outputs.current_hour == '08' }}
+    steps:
+    - name: Run Gym Booking Tuesday
+      run: |
+        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 11 --fd True
+
+  run-booking-Wednesday-Gym:
+    needs: setup
+    runs-on: ubuntu-latest
+    if: ${{ needs.setup.outputs.current_hour == '12' }}
+    steps:
+    - name: Run Gym Booking Wednesday
+      run: |
+        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 15 --fd True
+
+  run-booking-Thursday-Gym:
+    needs: setup
+    runs-on: ubuntu-latest
+    if: ${{ needs.setup.outputs.current_hour == '09' }}
+    steps:
+    - name: Run Gym Booking Thursday
+      run: |
+        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
+
+  # Swimming Booking Jobs
+  run-booking-Monday-Swimming:
+    needs: setup
+    runs-on: ubuntu-latest
+    if: ${{ needs.setup.outputs.current_hour == '12' }}
+    steps:
+    - name: Run Swimming Booking Monday
+      run: |
+        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --fn ${{ secrets.ME_FIRST_NAME }} --ln ${{ secrets.ME_LAST_NAME }} --category 1 --time 15 --fd True
+
+  run-booking-Tuesday-Swimming:
+    needs: setup
+    runs-on: ubuntu-latest
+    if: ${{ needs.setup.outputs.current_hour == '10' }}
+    steps:
+    - name: Run Swimming Booking Tuesday
+      run: |
+        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 1 --time 13 --fd True
+
+  run-booking-Wednesday-Swimming:
+    needs: setup
+    runs-on: ubuntu-latest
+    if: ${{ needs.setup.outputs.current_hour == '10' }}
+    steps:
+    - name: Run Swimming Booking Wednesday
+      run: |
+        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 1 --time 13 --fd True
+
+  run-booking-Thursday-Swimming:
+    needs: setup
+    runs-on: ubuntu-latest
+    if: ${{ needs.setup.outputs.current_hour == '10' }}
+    steps:
+    - name: Run Swimming Booking Thursday
+      run: |
+        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 1 --time 13 --fd True
