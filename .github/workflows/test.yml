@@ -40,8 +40,9 @@ jobs:
     steps:
     - name: Time_Check
       run: |        
-          if [ "$(date +%H)" != "09" ] && [ "$(date +%A)" != "Sunday" ]; then
-            exit 1
+          if [ "$(date +%H)" != "09" ] || [ "$(date +%A)" != "Sunday" ]; then
+          exit 1
+          fi
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Set up Python 3.x
@@ -64,8 +65,9 @@ jobs:
     steps:
     - name: Time_Check
       run: |        
-          if [ "$(date +%H)" != "09" ] && [ "$(date +%A)" != "Sunday" ]; then
-            exit 1
+          if [ "$(date +%H)" != "09" ] || [ "$(date +%A)" != "Sunday" ]; then
+          exit 1
+          fi
     - name: path for file
       run: ls -R && pwd
     - name: Checkout repository
@@ -89,8 +91,9 @@ jobs:
     steps:   
     - name: Time_Check
       run: |        
-          if [ "$(date +%H)" != "09" ] && [ "$(date +%A)" != "Sunday" ]; then
-            exit 1    
+          if [ "$(date +%H)" != "09" ] || [ "$(date +%A)" != "Sunday" ]; then
+          exit 1
+          fi   
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Set up Python 3.x
@@ -112,8 +115,9 @@ jobs:
     steps:
     - name: Time_Check
       run: |        
-          if [ "$(date +%H)" != "09" ] && [ "$(date +%A)" != "Sunday" ]; then
-            exit 1
+          if [ "$(date +%H)" != "09" ] || [ "$(date +%A)" != "Sunday" ]; then
+          exit 1
+          fi
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Set up Python 3.x
@@ -135,8 +139,9 @@ jobs:
     steps:
     - name: Time_Check
       run: |        
-          if [ "$(date +%H)" != "09" ] && [ "$(date +%A)" != "Sunday" ]; then
-            exit 1
+          if [ "$(date +%H)" != "09" ] || [ "$(date +%A)" != "Sunday" ]; then
+          exit 1
+          fi
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Set up Python 3.x
@@ -157,6 +162,11 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ needs.setup.outputs.current_hour == '12' }} && {{ steps.get_hour.outputs.current_day == 'Monday' }}
     steps:
+    - name: Time_Check
+      run: |        
+          if [ "$(date +%H)" != "09" ] || [ "$(date +%A)" != "Sunday" ]; then
+          exit 1
+          fi
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Set up Python 3.x
@@ -176,6 +186,11 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ needs.setup.outputs.current_hour == '10' }} && {{ steps.get_hour.outputs.current_day == 'Tuesday' }}
     steps:
+    - name: Time_Check
+      run: |        
+          if [ "$(date +%H)" != "09" ] || [ "$(date +%A)" != "Sunday" ]; then
+          exit 1
+          fi
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Set up Python 3.x
@@ -195,6 +210,11 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ needs.setup.outputs.current_hour == '10' }} && {{ steps.get_hour.outputs.current_day == 'Wednesday' }}
     steps:
+    - name: Time_Check
+      run: |        
+          if [ "$(date +%H)" != "09" ] || [ "$(date +%A)" != "Sunday" ]; then
+          exit 1
+          fi
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Set up Python 3.x
@@ -214,6 +234,11 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ needs.setup.outputs.current_hour == '10' }} && {{ steps.get_hour.outputs.current_day == 'Thursday' }}
     steps:
+    - name: Time_Check
+      run: |        
+          if [ "$(date +%H)" != "09" ] || [ "$(date +%A)" != "Sunday" ]; then
+          exit 1
+          fi
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Set up Python 3.x
