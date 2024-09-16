@@ -46,7 +46,7 @@ jobs:
         current_day=$(date +%A)
         echo "::set-output name=current_day::$current_day"
     - name: Print Current Hour
-      run: echo "Current hour is ${{ steps.get_hour.outputs.current_hour }}" && echo "Current hour is ${{ steps.get_hour.outputs.current_day }}" && pwd && ls -R
+      run: echo "Current hour is ${{ steps.get_hour.outputs.get_hour }}" && echo "Current hour is ${{ steps.get_hour.outputs.get_day }}" && pwd && ls -R
 
   # Gym Booking Jobs
   run-booking-Sunday-Gym:
