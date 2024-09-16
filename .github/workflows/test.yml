@@ -23,12 +23,9 @@ jobs:
 
     - name: Get Current Hour and Day
       id: get_hour
-      run: |
-        # Get current hour and day
+      run:
         current_hour=$(date +'%H')
         current_day=$(date +'%A')
-
-        # Export them as environment variables for use in later steps
         echo "CURRENT_HOUR=$current_hour" >> ${{ env.HOUR }}
         echo "CURRENT_DAY=$current_day" >> ${{ env.DAY }}
 
