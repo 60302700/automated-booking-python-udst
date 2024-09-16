@@ -1,0 +1,29 @@
+name: Time and Day Condition Workflow
+
+on: schedule:
+  # Run daily at 10:00 AM
+  schedule:
+    - cron: '0 10 * * 1'
+ workflow_dispatch:
+jobs:
+  conditional_job:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Get current time and day
+      id: currentTimeDay
+      run: |
+        echo "Current hour: $(date +%H)" >> $GITHUB_OUTPUT
+        echo "Current day: $(date +%A)" >> $GITHUB_OUTPUT
+        
+    - name: Check conditions
+      if: steps.currentTimeDay.outputs.CurrentHour == "14" && steps.currentTimeDay.outputs.CurrentDay == "Monday"
+      run: |
+        echo "It's 1 hour on Monday!"
+        # Add your actions here
+    
+    - name: Alternative action
+      if: steps.currentTimeDay.outputs.CurrentHour != "1" || steps.currentTimeDay.outputs.CurrentDay != "Monday"
+      run: |
+        echo "It's not 1 hour on Monday!"
+        # Add alternative actions here
