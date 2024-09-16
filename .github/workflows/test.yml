@@ -15,39 +15,38 @@ on:
   workflow_dispatch:
 
 jobs:
-
-  # Common setup job
-  setup:
+  get-hour-day:
     runs-on: ubuntu-latest
-    outputs:
-      current_hour: ${{ steps.get_hour.outputs.current_hour }}
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-    - name: Set up Python 3.x
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.x'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install --upgrade requests
-    - name: Get Current Hour
+
+    - name: Get Current Hour and Day
       id: get_hour
       run: |
-        current_hour=$(date +%H)
-        current_day=$(date +%A)
-        echo "::set-output name=current_hour::$current_hour"
-        echo "::set-output name=current_day::$current_day"
-    - name: Get Current Day
-      id: get_day
-      run: |
-        current_day=$(date +%A)
-        echo "::set-output name=current_day::$current_day"
-    - name: Print Current Hour
-      run: echo "Current hour is ${{ steps.get_hour.outputs.get_hour }}" && echo "Current hour is ${{ steps.get_hour.outputs.get_day }}" && pwd && ls -R
+        # Get current hour and day
+        current_hour=$(date +'%H')
+        current_day=$(date +'%A')
 
+        # Export them as environment variables for use in later steps
+        echo "CURRENT_HOUR=$current_hour" >> $GITHUB_ENV
+        echo "CURRENT_DAY=$current_day" >> $GITHUB_ENV
+
+    - name: Echo Environment Variables and Save to Files
+      run: |
+        # Echo the variables
+        echo "Current hour is ${{ env.CURRENT_HOUR }}"
+        echo "Current day is ${{ env.CURRENT_DAY }}"
+
+        # Save the variables to files
+        echo "${{ env.CURRENT_HOUR }}" > hour.txt
+        echo "${{ env.CURRENT_DAY }}" > day.txt
+
+    - name: Display Contents of Files
+      run: |
+        cat hour.txt
+        cat day.txt
+        
   # Gym Booking Jobs
   run-booking-Sunday-Gym:
     needs: setup
@@ -67,8 +66,6 @@ jobs:
         pip install --upgrade requests
     - name: Run Gym Booking Sunday
       run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 12 --fd True
-    - name: test
-      run: echo "Current hour is ${{ steps.get_hour.outputs.current_hour }}" && echo "Current hour is ${{ steps.get_hour.outputs.current_day }}"
 
   run-booking-Monday-Gym:
     needs: setup
