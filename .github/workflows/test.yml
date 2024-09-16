@@ -2,7 +2,7 @@ name: 60302700-Abdullah
 
 on:
   schedule:
-    - cron: '53 18 * * *'
+    - cron: '58 18 * * *'
     - cron: '0 9 * * 0'  # Sunday Gym
     - cron: '0 10 * * 1'  # Monday Gym
     - cron: '0 8 * * 2'  # Tuesday Gym
@@ -27,7 +27,7 @@ jobs:
     - name: Time_Check
       run: |        
           if [ "$(date +%H)" != "09" ] || [ "$(date +%A)" != "Sunday" ]; then
-          exit 1
+          exit 0
           fi
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -51,7 +51,7 @@ jobs:
     - name: Time_Check
       run: |        
           if [ "$(date +%H)" != "10" ] || [ "$(date +%A)" != "Monday" ]; then
-          exit 1
+          exit 0
           fi
     - name: path for file
       run: ls -R && pwd
@@ -76,7 +76,7 @@ jobs:
     - name: Time_Check
       run: |        
           if [ "$(date +%H)" != "08" ] || [ "$(date +%A)" != "Tuesday" ]; then
-          exit 1
+          exit 0
           fi   
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -99,7 +99,7 @@ jobs:
     - name: Time_Check
       run: |        
           if [ "$(date +%H)" != "12" ] || [ "$(date +%A)" != "Wednesday" ]; then
-          exit 1
+          exit 0
           fi
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -122,7 +122,7 @@ jobs:
     - name: Time_Check
       run: |        
           if [ "$(date +%H)" != "09" ] || [ "$(date +%A)" != "Thursday" ]; then
-          exit 1
+          exit 0
           fi
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -146,7 +146,7 @@ jobs:
     - name: Time_Check
       run: |        
           if [ "$(date +%H)" != "12" ] || [ "$(date +%A)" != "Monday" ]; then
-          exit 1
+          exit 0
           fi
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -169,7 +169,7 @@ jobs:
     - name: Time_Check
       run: |        
           if [ "$(date +%H)" != "10" ] || [ "$(date +%A)" != "Tuesday" ]; then
-          exit 1
+          exit 0
           fi
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -192,7 +192,7 @@ jobs:
     - name: Time_Check
       run: |        
           if [ "$(date +%H)" != "10" ] || [ "$(date +%A)" != "Wednesday" ]; then
-          exit 1
+          exit 0
           fi
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -215,7 +215,7 @@ jobs:
     - name: Time_Check
       run: |        
           if [ "$(date +%H)" != "10" ] || [ "$(date +%A)" != "Thursday" ]; then
-          exit 1
+          exit 0
           fi
     - name: Checkout repository
       uses: actions/checkout@v3
