@@ -57,7 +57,7 @@ jobs:
   run-booking-Monday-Gym:
 
     runs-on: ubuntu-latest
-    if: ${{ needs.setup.outputs.current_hour == '10' }} && {{ steps.get_hour.outputs.current_day == 'Monday' }}
+    if: ${{ date +%H == '10' }} && {{ date +'%A' == 'Monday' }}
     steps:
     - name: path for file
       run: ls -R && pwd
