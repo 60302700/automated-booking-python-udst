@@ -57,7 +57,7 @@ jobs:
   run-booking-Monday-Gym:
 
     runs-on: ubuntu-latest
-    if: ${{ date +%H == '10' }} && {{ date +'%A' == 'Monday' }}
+    if: ${{ date +%H == '10' }} && {{ date +%A == 'Monday' }}
     steps:
     - name: path for file
       run: ls -R && pwd
