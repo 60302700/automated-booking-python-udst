@@ -3,7 +3,7 @@ name: Gym And Pool Booking Automation
 on:
   schedule:
     - cron: '47 3 * * *'
- workflow_dispatch:
+  workflow_dispatch:
 jobs:
   conditional_job:
     runs-on: ubuntu-latest
