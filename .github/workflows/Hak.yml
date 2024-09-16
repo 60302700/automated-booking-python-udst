@@ -48,7 +48,7 @@ jobs:
         pip install --upgrade requests
     - name: Run Gym Booking Sunday
       run: |
-        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
+        echo ${{ secrets.ME_ID }} && python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
 
   # Monday Gym Booking
   run-booking-Monday-Gym:
