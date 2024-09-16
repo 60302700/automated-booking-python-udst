@@ -1,4 +1,4 @@
-name: Gym And Pool Booking Automation
+name: Gym And Pool Booking Automation - 101
 
 on:
   schedule:
@@ -51,7 +51,7 @@ jobs:
     steps:
     - name: Run Gym Booking Sunday
       run: |
-        python /home/runner/work/automated-booking-python-udst/automated-booking-python-udst/gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
+        ls && pwd && python /home/runner/work/automated-booking-python-udst/automated-booking-python-udst/gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
 
   run-booking-Monday-Gym:
     needs: setup
