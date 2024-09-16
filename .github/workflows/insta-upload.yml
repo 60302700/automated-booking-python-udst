@@ -17,6 +17,7 @@ jobs:
     - name: Install dependencies
       run: pip install instagrapi Pillow moviepy
     - name: Run upload script
+      continue-on-error: true
       env:
         USERNAME1: ${{ secrets.USERNAME1 }}
         PASSWORD1: ${{ secrets.PASSWORD1 }}
@@ -24,4 +25,6 @@ jobs:
         USERNAME2: ${{ secrets.USERNAME2 }}
         PASSWORD2: ${{ secrets.PASSWORD2 }}
         SESSION2: ${{ secrets.SESSION2 }}
-      run: python auto-insta-upload.py
+      run: |
+        set -x  # Enable command tracing for debugging
+        python auto-insta-upload.py
