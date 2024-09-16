@@ -49,7 +49,7 @@ jobs:
         
   # Gym Booking Jobs
   run-booking-Sunday-Gym:
-    needs: setup
+
     runs-on: ubuntu-latest
     if: ${{ needs.setup.outputs.current_hour == '09' }} && {{ steps.get_hour.outputs.current_day == 'Sunday' }}
     steps:
@@ -68,7 +68,7 @@ jobs:
       run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 12 --fd True
 
   run-booking-Monday-Gym:
-    needs: setup
+
     runs-on: ubuntu-latest
     if: ${{ needs.setup.outputs.current_hour == '10' }} && {{ steps.get_hour.outputs.current_day == 'Monday' }}
     steps:
@@ -89,7 +89,7 @@ jobs:
       run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 13 --fd True
 
   run-booking-Tuesday-Gym:
-    needs: setup
+
     runs-on: ubuntu-latest
     if: ${{ needs.setup.outputs.current_hour == '08' }} && {{ steps.get_hour.outputs.current_day == 'Tuesday' }}
     steps:   
@@ -108,7 +108,7 @@ jobs:
       run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 11 --fd True
 
   run-booking-Wednesday-Gym:
-    needs: setup
+
     runs-on: ubuntu-latest
     if: ${{ needs.setup.outputs.current_hour == '12' }} && {{ steps.get_hour.outputs.current_day == 'Wednesday' }}
     steps:
@@ -127,7 +127,7 @@ jobs:
       run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 15 --fd True
 
   run-booking-Thursday-Gym:
-    needs: setup
+
     runs-on: ubuntu-latest
     if: ${{ needs.setup.outputs.current_hour == '09' }}  && {{ steps.get_hour.outputs.current_day == 'Thursday' }}
     steps:
@@ -147,7 +147,7 @@ jobs:
 
   # Swimming Booking Jobs
   run-booking-Monday-Swimming:
-    needs: setup
+
     runs-on: ubuntu-latest
     if: ${{ needs.setup.outputs.current_hour == '12' }} && {{ steps.get_hour.outputs.current_day == 'Monday' }}
     steps:
@@ -166,7 +166,7 @@ jobs:
       run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --fn ${{ secrets.ME_FIRST_NAME }} --ln ${{ secrets.ME_LAST_NAME }} --ca 1 --t 15 --fd True
 
   run-booking-Tuesday-Swimming:
-    needs: setup
+
     runs-on: ubuntu-latest
     if: ${{ needs.setup.outputs.current_hour == '10' }} && {{ steps.get_hour.outputs.current_day == 'Tuesday' }}
     steps:
@@ -185,7 +185,7 @@ jobs:
       run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 1 --t 13 --fd True
 
   run-booking-Wednesday-Swimming:
-    needs: setup
+
     runs-on: ubuntu-latest
     if: ${{ needs.setup.outputs.current_hour == '10' }} && {{ steps.get_hour.outputs.current_day == 'Wednesday' }}
     steps:
@@ -204,7 +204,7 @@ jobs:
       run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 1 --t 13 --fd True
 
   run-booking-Thursday-Swimming:
-    needs: setup
+
     runs-on: ubuntu-latest
     if: ${{ needs.setup.outputs.current_hour == '10' }} && {{ steps.get_hour.outputs.current_day == 'Thursday' }}
     steps:
