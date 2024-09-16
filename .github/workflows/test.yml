@@ -11,6 +11,8 @@ on:
     - cron: '0 10 * * 2'  # Tuesday Swimming
     - cron: '0 10 * * 3'  # Wednesday Swimming
     - cron: '0 10 * * 4'  # Thursday Swimming
+  workflow_dispatch: 
+    
 jobs:
   get-hour-day:
     runs-on: ubuntu-latest
