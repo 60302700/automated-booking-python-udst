@@ -51,16 +51,17 @@ jobs:
     steps:
     - name: Run Gym Booking Sunday
       run: |
-        ls && pwd && python /home/runner/work/automated-booking-python-udst/automated-booking-python-udst/gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
+        python /home/runner/work/automated-booking-python-udst/automated-booking-python-udst/gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
 
   run-booking-Monday-Gym:
     needs: setup
     runs-on: ubuntu-latest
     if: ${{ needs.setup.outputs.current_hour == '10' }} && {{ steps.get_hour.outputs.current_day == 'Monday' }}
     steps:
+    - name: path for file
+      run: ls -R && pwd
     - name: Run Gym Booking Monday
-      run: |
-        python /home/runner/work/automated-booking-python-udst/automated-booking-python-udst/gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 13 --fd True
+      run: python /home/runner/work/automated-booking-python-udst/automated-booking-python-udst/gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 13 --fd True
 
   run-booking-Tuesday-Gym:
     needs: setup
