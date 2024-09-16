@@ -24,10 +24,8 @@ jobs:
     - name: Get Current Hour and Day
       id: get_hour
       run:
-        current_hour=$(date +'%H')
-        current_day=$(date +'%A')
-        echo "$current_hour" >> ${{ env.HOUR }}
-        echo "$current_day" >> ${{ env.DAY }}
+        ${{ env.HOUR }} = (date +'%H')
+        ${{ env.DAY }} = (date +'%A')
 
     - name: Echo Environment Variables and Save to Files
       run: |
