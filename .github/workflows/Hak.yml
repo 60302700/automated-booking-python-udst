@@ -2,237 +2,202 @@ name: Gym And Pool Booking Automation
 
 on:
   schedule:
-  #GYM
-    - cron: '0 9 * * 0'  
-    - cron: '18 10 * * 1'  
-    - cron: '0 8 * * 2'  
-    - cron: '0 12 * * 3'  
-    - cron: '0 9 * * 4'
-  #SWIMMING
-    - cron: '0 12 * * 1'
-    - cron: '0 10 * * 2'
-    - cron: '0 10 * * 3'
-    - cron: '0 10 * * 4'
-    
+  # GYM
+    - cron: '0 9 * * 0'  # Sunday Gym
+    - cron: '18 10 * * 1'  # Monday Gym
+    - cron: '0 8 * * 2'  # Tuesday Gym
+    - cron: '0 12 * * 3'  # Wednesday Gym
+    - cron: '0 9 * * 4'  # Thursday Gym
+  # SWIMMING
+    - cron: '0 12 * * 1'  # Monday Swimming
+    - cron: '0 10 * * 2'  # Tuesday Swimming
+    - cron: '0 10 * * 3'  # Wednesday Swimming
+    - cron: '0 10 * * 4'  # Thursday Swimming
+
   workflow_dispatch:
 
 jobs:
+  # Testing job (optional)
   test:
-      runs-on: ubuntu-latest
-      steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-      - name: Test
-        run: echo "hello,world"
-        
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Test
+      run: echo "hello,world"
+
+  # Sunday Gym Booking
   run-booking-Sunday-Gym:
     runs-on: ubuntu-latest
-    if: github.event.schedule == '0 9 * * 0'
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-
     - name: Set up Python 3.x
       uses: actions/setup-python@v4
       with:
         python-version: '3.x'
-
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install --upgrade requests
-
     - name: Run Gym Booking Sunday
       run: |
-        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
+        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
 
+  # Monday Gym Booking
   run-booking-Monday-Gym:
     runs-on: ubuntu-latest
-    if: github.event.schedule == '18 10 * * 1'
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-
     - name: Set up Python 3.x
       uses: actions/setup-python@v4
       with:
         python-version: '3.x'
-
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install --upgrade requests
-
     - name: Run Gym Booking Monday
       run: |
-        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 13 --fd True
-        
-  run-booking-Monday-Swimming:
-      runs-on: ubuntu-latest
-      if: github.event.schedule == '0 12 * * 1'
-  
-      steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-  
-      - name: Set up Python 3.x
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-  
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install --upgrade requests
-  
-      - name: Run Swimming Booking Monday
-        run: |
-          python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --fn ${{ secrets.ME_FIRST_NAME }} --ln ${{ secrets.ME_LAST_NAME }} --category 1 --time 15 --fd True
+        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 13 --fd True
 
+  # Monday Swimming Booking
+  run-booking-Monday-Swimming:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install --upgrade requests
+    - name: Run Swimming Booking Monday
+      run: |
+        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --fn ${{ secrets.ME_FIRST_NAME }} --ln ${{ secrets.ME_LAST_NAME }} --category 1 --time 15 --fd True
+
+  # Tuesday Gym Booking
   run-booking-Tuesday-Gym:
     runs-on: ubuntu-latest
-    if: github.event.schedule == '0 8 * * 2'
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-
     - name: Set up Python 3.x
       uses: actions/setup-python@v4
       with:
         python-version: '3.x'
-
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install --upgrade requests
-
-    - name: Run Gym Booking for User 1 (Evening)
+    - name: Run Gym Booking Tuesday
       run: |
-         python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 11 --fd True
-   
-  run-booking-Tuesday-Swimming:
-      runs-on: ubuntu-latest
-      if: github.event.schedule == '0 10 * * 2'
-  
-      steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-  
-      - name: Set up Python 3.x
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-  
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install --upgrade requests
-          
-      - name: Run Gym Booking for User 1 (Evening)
-        run: |
-           python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 13 --fd True
+        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 11 --fd True
 
+  # Tuesday Swimming Booking
+  run-booking-Tuesday-Swimming:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install --upgrade requests
+    - name: Run Swimming Booking Tuesday
+      run: |
+        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 1 --time 13 --fd True
+
+  # Wednesday Gym Booking
   run-booking-Wednesday-Gym:
     runs-on: ubuntu-latest
-    if: github.event.schedule == '0 12 * * 3'
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-
     - name: Set up Python 3.x
       uses: actions/setup-python@v4
       with:
         python-version: '3.x'
-
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install --upgrade requests
-
-    - name: Run Gym Booking for User 2 (Morning)
+    - name: Run Gym Booking Wednesday
       run: |
-         python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 15 --fd True
-  
+        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 15 --fd True
+
+  # Wednesday Swimming Booking
   run-booking-Wednesday-Swimming:
     runs-on: ubuntu-latest
-    if: github.event.schedule == '0 10 * * 3'
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-
     - name: Set up Python 3.x
       uses: actions/setup-python@v4
       with:
         python-version: '3.x'
-
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install --upgrade requests
-
-    - name: Run Gym Booking for User 2 (Morning)
+    - name: Run Swimming Booking Wednesday
       run: |
-         python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 1 --time 13 --fd True
+        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 1 --time 13 --fd True
 
+  # Thursday Gym Booking
   run-booking-Thursday-Gym:
     runs-on: ubuntu-latest
-    if: github.event.schedule == '0 9 * * 4'
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-
     - name: Set up Python 3.x
       uses: actions/setup-python@v4
       with:
         python-version: '3.x'
-
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install --upgrade requests
-
-    - name: Run Gym Booking for User 2 (Afternoon)
+    - name: Run Gym Booking Thursday
       run: |
-         python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
-  
+        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
+
+  # Thursday Swimming Booking
   run-booking-Thursday-Swimming:
     runs-on: ubuntu-latest
-    if: github.event.schedule == '0 10 * * 4'
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-
     - name: Set up Python 3.x
       uses: actions/setup-python@v4
       with:
         python-version: '3.x'
-
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install --upgrade requests
-
-    - name: Run Swimming Booking for User 2 (Afternoon)
+    - name: Run Swimming Booking Thursday
       run: |
-         python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 1 --time 13 --fd True
+        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 1 --time 13 --fd True
