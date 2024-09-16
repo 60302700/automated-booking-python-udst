@@ -66,7 +66,7 @@ jobs:
         pip install -r requirements.txt
         pip install --upgrade requests
     - name: Run Gym Booking Sunday
-      run: python /home/runner/work/automated-booking-python-udst/automated-booking-python-udst/gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
+      run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
 
   run-booking-Monday-Gym:
     needs: setup
@@ -87,7 +87,7 @@ jobs:
         pip install -r requirements.txt
         pip install --upgrade requests
     - name: Run Gym Booking Monday
-      run: python /home/runner/work/automated-booking-python-udst/automated-booking-python-udst/gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 13 --fd True
+      run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 13 --fd True
 
   run-booking-Tuesday-Gym:
     needs: setup
@@ -106,7 +106,7 @@ jobs:
         pip install -r requirements.txt
         pip install --upgrade requests
     - name: Run Gym Booking Tuesday
-      run: python /home/runner/work/automated-booking-python-udst/automated-booking-python-udst/gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 11 --fd True
+      run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 11 --fd True
 
   run-booking-Wednesday-Gym:
     needs: setup
@@ -125,7 +125,7 @@ jobs:
         pip install -r requirements.txt
         pip install --upgrade requests
     - name: Run Gym Booking Wednesday
-      run: python /home/runner/work/automated-booking-python-udst/automated-booking-python-udst/gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 15 --fd True
+      run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 15 --fd True
 
   run-booking-Thursday-Gym:
     needs: setup
@@ -144,7 +144,7 @@ jobs:
         pip install -r requirements.txt
         pip install --upgrade requests
     - name: Run Gym Booking Thursday 
-      run: python /home/runner/work/automated-booking-python-udst/automated-booking-python-udst/gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
+      run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
 
   # Swimming Booking Jobs
   run-booking-Monday-Swimming:
@@ -164,7 +164,7 @@ jobs:
         pip install -r requirements.txt
         pip install --upgrade requests
     - name: Run Swimming Booking Monday
-      run: python /home/runner/work/automated-booking-python-udst/automated-booking-python-udst/gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --fn ${{ secrets.ME_FIRST_NAME }} --ln ${{ secrets.ME_LAST_NAME }} --category 1 --time 15 --fd True
+      run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --fn ${{ secrets.ME_FIRST_NAME }} --ln ${{ secrets.ME_LAST_NAME }} --category 1 --time 15 --fd True
 
   run-booking-Tuesday-Swimming:
     needs: setup
@@ -183,7 +183,7 @@ jobs:
         pip install -r requirements.txt
         pip install --upgrade requests
     - name: Run Swimming Booking Tuesday
-      run: python /home/runner/work/automated-booking-python-udst/automated-booking-python-udst/gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 1 --time 13 --fd True
+      run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 1 --time 13 --fd True
 
   run-booking-Wednesday-Swimming:
     needs: setup
@@ -202,7 +202,7 @@ jobs:
         pip install -r requirements.txt
         pip install --upgrade requests
     - name: Run Swimming Booking Wednesday
-      run: python /home/runner/work/automated-booking-python-udst/automated-booking-python-udst/gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 1 --time 13 --fd True
+      run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 1 --time 13 --fd True
 
   run-booking-Thursday-Swimming:
     needs: setup
@@ -221,4 +221,4 @@ jobs:
         pip install -r requirements.txt
         pip install --upgrade requests
     - name: Run Swimming Booking Thursday
-      run:  python /home/runner/work/automated-booking-python-udst/automated-booking-python-udst/gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 1 --time 13 --fd True
+      run:  python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 1 --time 13 --fd True
