@@ -43,7 +43,6 @@ def login(id_udst, password):
     }
 
     login_response = session.post(login_url, data=login_data,timeout=(10, 30),)
-    print(login_response.text)
 #    print(login_response.text)
     soup = BeautifulSoup(login_response.text, 'html.parser')
 
@@ -80,7 +79,6 @@ def book_slot(session, first_name, last_name, id_udst, date, time, category, ran
 
     # Step 4: Prepare data for booking
     booking_url = "https://udstsport.udst.edu.qa/sportsbooking/planyo/ulap.php"
-    print(time,range_time)
 
     data = {
     'mode': 'make_reservation',
@@ -137,7 +135,6 @@ def book_slot(session, first_name, last_name, id_udst, date, time, category, ran
         response = session.post(booking_url, headers=post_headers, data=data,timeout=(10, 30))
         if response.status_code == 200:
             logging.info("Booking successful!")
-            print(response.text)
             session.close()
         else:
             logging.warning(f"Booking failed with status code: {response.status_code}")
