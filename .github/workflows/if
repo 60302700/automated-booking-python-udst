@@ -3,7 +3,7 @@ name: Time and Day Condition Workflow
 on: schedule:
   # Run daily at 10:00 AM
   schedule:
-    - cron: '0 10 * * 1'
+    - cron: '47 3 * * *'
  workflow_dispatch:
 jobs:
   conditional_job:
@@ -17,7 +17,7 @@ jobs:
         echo "Current day: $(date +%A)" >> $GITHUB_OUTPUT
         
     - name: Check conditions
-      if: steps.currentTimeDay.outputs.CurrentHour == "14" && steps.currentTimeDay.outputs.CurrentDay == "Monday"
+      if: steps.currentTimeDay.outputs.CurrentHour == "3" && steps.currentTimeDay.outputs.CurrentDay == "Monday"
       run: |
         echo "It's 1 hour on Monday!"
         # Add your actions here
