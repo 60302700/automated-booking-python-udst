@@ -1,7 +1,5 @@
 name: Gym And Pool Booking Automation
 
-  workflow_dispatch:
-
 on:
   schedule:
   # Run daily at 10:00 AM
