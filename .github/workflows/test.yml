@@ -26,8 +26,8 @@ jobs:
       run:
         current_hour=$(date +'%H')
         current_day=$(date +'%A')
-        echo "CURRENT_HOUR=$current_hour" >> ${{ env.HOUR }}
-        echo "CURRENT_DAY=$current_day" >> ${{ env.DAY }}
+        echo "$current_hour" >> ${{ env.HOUR }}
+        echo "$current_day" >> ${{ env.DAY }}
 
     - name: Echo Environment Variables and Save to Files
       run: |
@@ -36,13 +36,8 @@ jobs:
         echo "Current day is ${{ env.DAY }}"
 
         # Save the variables to files
-        echo "${{ env.HOUR }}" > hour.txt
-        echo "${{ env.DAY }}" > day.txt
-
-    - name: Display Contents of Files
-      run: |
-        cat hour.txt
-        cat day.txt
+        echo ${{ env.HOUR }}
+        echo ${{ env.DAY }}
         
   # Gym Booking Jobs
   run-booking-Sunday-Gym:
