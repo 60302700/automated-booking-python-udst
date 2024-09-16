@@ -21,18 +21,6 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-
-    - name: Get Current Hour and Day and Save to Files
-      run: |
-        current_hour=$(date +'%H')
-        current_day=$(date +'%A')
-        echo "$current_hour" > hour.txt
-        echo "$current_day" > day.txt
-
-    - name: Display Contents of Files
-      run: |
-        cat hour.txt
-        cat day.txt
         
   # Gym Booking Jobs
   run-booking-Sunday-Gym:
@@ -42,7 +30,7 @@ jobs:
     - name: Time_Check
       run: |        
           if [ "$(date +%H)" != "09" ] || [ "$(date +%A)" != "Sunday" ]; then
-          exit
+          exit 1
           fi
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -55,7 +43,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install --upgrade requests
-        cat hour.txt
     - name: Run Gym Booking Sunday
       run: |
           python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 12 --fd True
@@ -67,7 +54,7 @@ jobs:
     - name: Time_Check
       run: |        
           if [ "$(date +%H)" != "10" ] || [ "$(date +%A)" != "Monday" ]; then
-          exit
+          exit 1
           fi
     - name: path for file
       run: ls -R && pwd
@@ -92,7 +79,7 @@ jobs:
     - name: Time_Check
       run: |        
           if [ "$(date +%H)" != "08" ] || [ "$(date +%A)" != "Tuesday" ]; then
-          exit
+          exit 1
           fi   
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -115,7 +102,7 @@ jobs:
     - name: Time_Check
       run: |        
           if [ "$(date +%H)" != "12" ] || [ "$(date +%A)" != "Wednesday" ]; then
-          exit
+          exit 1
           fi
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -138,7 +125,7 @@ jobs:
     - name: Time_Check
       run: |        
           if [ "$(date +%H)" != "09" ] || [ "$(date +%A)" != "Thursday" ]; then
-          exit
+          exit 1
           fi
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -162,7 +149,7 @@ jobs:
     - name: Time_Check
       run: |        
           if [ "$(date +%H)" != "12" ] || [ "$(date +%A)" != "Monday" ]; then
-          exit
+          exit 1
           fi
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -185,7 +172,7 @@ jobs:
     - name: Time_Check
       run: |        
           if [ "$(date +%H)" != "10" ] || [ "$(date +%A)" != "Tuesday" ]; then
-          exit
+          exit 1
           fi
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -208,7 +195,7 @@ jobs:
     - name: Time_Check
       run: |        
           if [ "$(date +%H)" != "10" ] || [ "$(date +%A)" != "Wednesday" ]; then
-          exit
+          exit 1
           fi
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -231,7 +218,7 @@ jobs:
     - name: Time_Check
       run: |        
           if [ "$(date +%H)" != "10" ] || [ "$(date +%A)" != "Thursday" ]; then
-          exit
+          exit 1
           fi
     - name: Checkout repository
       uses: actions/checkout@v3
