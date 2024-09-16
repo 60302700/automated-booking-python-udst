@@ -3,7 +3,7 @@ name: Gym And Pool Booking Automation
 on:
   schedule:
     - cron: '0 9 * * 0'  # Sunday Gym
-    - cron: '18 10 * * 1'  # Monday Gym
+    - cron: '0 10 * * 1'  # Monday Gym
     - cron: '0 8 * * 2'  # Tuesday Gym
     - cron: '0 12 * * 3'  # Wednesday Gym
     - cron: '0 9 * * 4'  # Thursday Gym
@@ -15,19 +15,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  # Testing job (optional)
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Test
-      run: echo "hello,world"
 
   # Common setup job
   setup:
@@ -52,7 +39,7 @@ jobs:
         current_hour=$(date +%H)
         echo "::set-output name=current_hour::$current_hour"
     - name: Print Current Hour
-      run: echo "Current hour is ${{ steps.get_hour.outputs.current_hour }}"
+      run: echo "Current hour is ${{ steps.get_hour.outputs.current_hour }}" && ls
 
   # Gym Booking Jobs
   run-booking-Sunday-Gym:
