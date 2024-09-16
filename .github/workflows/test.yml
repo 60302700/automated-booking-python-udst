@@ -66,7 +66,7 @@ jobs:
         pip install -r requirements.txt
         pip install --upgrade requests
     - name: Run Gym Booking Sunday
-      run: python gym.py --pa "5678%Abdulla" --i 60302700 --ln kavilkuth --fn Abdullah --ca 0 --t 12 --fd True
+      run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 12 --fd True
 
   run-booking-Monday-Gym:
     needs: setup
