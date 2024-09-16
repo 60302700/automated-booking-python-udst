@@ -4,7 +4,7 @@ on:
   schedule:
   #GYM
     - cron: '0 9 * * 0'  
-    - cron: '0 10 * * 1'  
+    - cron: '18 10 * * 1'  
     - cron: '0 8 * * 2'  
     - cron: '0 12 * * 3'  
     - cron: '0 9 * * 4'
@@ -55,7 +55,7 @@ jobs:
 
   run-booking-Monday-Gym:
     runs-on: ubuntu-latest
-    if: github.event.schedule == '0 10 * * 1'
+    if: github.event.schedule == '18 10 * * 1'
 
     steps:
     - name: Checkout repository
