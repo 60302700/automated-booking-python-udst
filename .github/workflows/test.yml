@@ -37,8 +37,11 @@ jobs:
   run-booking-Sunday-Gym:
 
     runs-on: ubuntu-latest
-    if: ${{ needs.setup.outputs.current_hour == '09' }} && {{ steps.get_hour.outputs.current_day == 'Sunday' }}
     steps:
+    - name: Time_Check
+      run: |        
+          if [ "$(date +%H)" != "09" ] && [ "$(date +%A)" != "Sunday" ]; then
+            exit 1
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Set up Python 3.x
@@ -53,19 +56,16 @@ jobs:
         cat hour.txt
     - name: Run Gym Booking Sunday
       run: |
-        # Check if current hour is 9 and day is Sunday
-        if [ "$(date +%H)" == "09" ] && [ "$(date +%A)" == "Sunday" ]; then
-          echo "Conditions met. Running Python script..."
           python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 12 --fd True
-        else
-          echo "Conditions not met. Exiting..."
-          exit 1
 
   run-booking-Monday-Gym:
 
     runs-on: ubuntu-latest
-    if: ${{ date +%H == '10' }} && {{ date +%A == 'Monday' }}
     steps:
+    - name: Time_Check
+      run: |        
+          if [ "$(date +%H)" != "09" ] && [ "$(date +%A)" != "Sunday" ]; then
+            exit 1
     - name: path for file
       run: ls -R && pwd
     - name: Checkout repository
@@ -87,6 +87,10 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ needs.setup.outputs.current_hour == '08' }} && {{ steps.get_hour.outputs.current_day == 'Tuesday' }}
     steps:   
+    - name: Time_Check
+      run: |        
+          if [ "$(date +%H)" != "09" ] && [ "$(date +%A)" != "Sunday" ]; then
+            exit 1    
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Set up Python 3.x
@@ -106,6 +110,10 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ needs.setup.outputs.current_hour == '12' }} && {{ steps.get_hour.outputs.current_day == 'Wednesday' }}
     steps:
+    - name: Time_Check
+      run: |        
+          if [ "$(date +%H)" != "09" ] && [ "$(date +%A)" != "Sunday" ]; then
+            exit 1
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Set up Python 3.x
@@ -125,6 +133,10 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ needs.setup.outputs.current_hour == '09' }}  && {{ steps.get_hour.outputs.current_day == 'Thursday' }}
     steps:
+    - name: Time_Check
+      run: |        
+          if [ "$(date +%H)" != "09" ] && [ "$(date +%A)" != "Sunday" ]; then
+            exit 1
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Set up Python 3.x
