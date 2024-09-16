@@ -17,7 +17,7 @@ logging.basicConfig(
 )
 
 def future_day():
-    date = datetime.now() + timedelta(days=6)
+    date = datetime.now() + timedelta(days=7)
     return date.strftime("%B %d %Y")
 
 def get_csrf_token_from_page(session, url):
