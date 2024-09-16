@@ -35,7 +35,7 @@ DAY = get_days()
 def video_upload(USERNAME, PASSWORD, PATH, CAPTION,SESSION):
     Insta = Client()
     Insta.login(USERNAME, PASSWORD)
-    Insta.load_settings(SESSION)
+    Insta.set_settings(SESSION)
     time.sleep(5)
     logging.info(f"Logging in as {Insta.user_id}")
     Insta.clip_upload(PATH, CAPTION)
