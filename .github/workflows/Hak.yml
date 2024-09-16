@@ -12,8 +12,8 @@ jobs:
     - name: Get current time and day
       id: currentTimeDay
       run: |
-        echo "Current hour: $(date +%H)" >> $GITHUB_OUTPUT
-        echo "Current day: $(date +%A)" >> $GITHUB_OUTPUT
+        echo "Current hour: $(date +%H)" >> $CurrentHour
+        echo "Current day: $(date +%A)" >> $CurrentDay
         
     - name: Check conditions
       if: steps.currentTimeDay.outputs.CurrentHour == "3" && steps.currentTimeDay.outputs.CurrentDay == "Monday"
