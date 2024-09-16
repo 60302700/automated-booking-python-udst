@@ -65,7 +65,7 @@ jobs:
     steps:
     - name: Time_Check
       run: |        
-          if [ "$(date +%H)" != "09" ] || [ "$(date +%A)" != "Sunday" ]; then
+          if [ "$(date +%H)" != "10" ] || [ "$(date +%A)" != "Monday" ]; then
           exit 1
           fi
     - name: path for file
@@ -87,11 +87,10 @@ jobs:
   run-booking-Tuesday-Gym:
 
     runs-on: ubuntu-latest
-    if: ${{ needs.setup.outputs.current_hour == '08' }} && {{ steps.get_hour.outputs.current_day == 'Tuesday' }}
     steps:   
     - name: Time_Check
       run: |        
-          if [ "$(date +%H)" != "09" ] || [ "$(date +%A)" != "Sunday" ]; then
+          if [ "$(date +%H)" != "08" ] || [ "$(date +%A)" != "Tuesday" ]; then
           exit 1
           fi   
     - name: Checkout repository
@@ -111,11 +110,10 @@ jobs:
   run-booking-Wednesday-Gym:
 
     runs-on: ubuntu-latest
-    if: ${{ needs.setup.outputs.current_hour == '12' }} && {{ steps.get_hour.outputs.current_day == 'Wednesday' }}
     steps:
     - name: Time_Check
       run: |        
-          if [ "$(date +%H)" != "09" ] || [ "$(date +%A)" != "Sunday" ]; then
+          if [ "$(date +%H)" != "12" ] || [ "$(date +%A)" != "Wednesday" ]; then
           exit 1
           fi
     - name: Checkout repository
@@ -135,11 +133,10 @@ jobs:
   run-booking-Thursday-Gym:
 
     runs-on: ubuntu-latest
-    if: ${{ needs.setup.outputs.current_hour == '09' }}  && {{ steps.get_hour.outputs.current_day == 'Thursday' }}
     steps:
     - name: Time_Check
       run: |        
-          if [ "$(date +%H)" != "09" ] || [ "$(date +%A)" != "Sunday" ]; then
+          if [ "$(date +%H)" != "09" ] || [ "$(date +%A)" != "Thursday" ]; then
           exit 1
           fi
     - name: Checkout repository
@@ -160,11 +157,10 @@ jobs:
   run-booking-Monday-Swimming:
 
     runs-on: ubuntu-latest
-    if: ${{ needs.setup.outputs.current_hour == '12' }} && {{ steps.get_hour.outputs.current_day == 'Monday' }}
     steps:
     - name: Time_Check
       run: |        
-          if [ "$(date +%H)" != "09" ] || [ "$(date +%A)" != "Sunday" ]; then
+          if [ "$(date +%H)" != "12" ] || [ "$(date +%A)" != "Monday" ]; then
           exit 1
           fi
     - name: Checkout repository
@@ -184,11 +180,10 @@ jobs:
   run-booking-Tuesday-Swimming:
 
     runs-on: ubuntu-latest
-    if: ${{ needs.setup.outputs.current_hour == '10' }} && {{ steps.get_hour.outputs.current_day == 'Tuesday' }}
     steps:
     - name: Time_Check
       run: |        
-          if [ "$(date +%H)" != "09" ] || [ "$(date +%A)" != "Sunday" ]; then
+          if [ "$(date +%H)" != "10" ] || [ "$(date +%A)" != "Tuesday" ]; then
           exit 1
           fi
     - name: Checkout repository
@@ -208,11 +203,10 @@ jobs:
   run-booking-Wednesday-Swimming:
 
     runs-on: ubuntu-latest
-    if: ${{ needs.setup.outputs.current_hour == '10' }} && {{ steps.get_hour.outputs.current_day == 'Wednesday' }}
     steps:
     - name: Time_Check
       run: |        
-          if [ "$(date +%H)" != "09" ] || [ "$(date +%A)" != "Sunday" ]; then
+          if [ "$(date +%H)" != "10" ] || [ "$(date +%A)" != "Wednesday" ]; then
           exit 1
           fi
     - name: Checkout repository
@@ -232,11 +226,10 @@ jobs:
   run-booking-Thursday-Swimming:
 
     runs-on: ubuntu-latest
-    if: ${{ needs.setup.outputs.current_hour == '10' }} && {{ steps.get_hour.outputs.current_day == 'Thursday' }}
     steps:
     - name: Time_Check
       run: |        
-          if [ "$(date +%H)" != "09" ] || [ "$(date +%A)" != "Sunday" ]; then
+          if [ "$(date +%H)" != "10" ] || [ "$(date +%A)" != "Thursday" ]; then
           exit 1
           fi
     - name: Checkout repository
