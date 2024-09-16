@@ -52,7 +52,7 @@ jobs:
         I: ${{ secrets.ME_ID }}
         FN: ${{ secrets.ME_FIRST_NAME }}
         LN: ${{ secrets.ME_LAST_NAME }}
-      run: echo ${{ secrets.ME_ID }} && python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
+      run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
 
   # Monday Gym Booking
   run-booking-Monday-Gym:
@@ -70,7 +70,12 @@ jobs:
         pip install -r requirements.txt
         pip install --upgrade requests
     - name: Run Gym Booking Monday
-      run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 13 --fd True
+      env:
+        PA: ${{ secrets.PASS_ME }}
+        I: ${{ secrets.ME_ID }}
+        FN: ${{ secrets.ME_FIRST_NAME }}
+        LN: ${{ secrets.ME_LAST_NAME }}
+      run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
 
   # Monday Swimming Booking
   run-booking-Monday-Swimming:
@@ -88,7 +93,12 @@ jobs:
         pip install -r requirements.txt
         pip install --upgrade requests
     - name: Run Swimming Booking Monday
-      run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --fn ${{ secrets.ME_FIRST_NAME }} --ln ${{ secrets.ME_LAST_NAME }} --category 1 --time 15 --fd True
+      env:
+        PA: ${{ secrets.PASS_ME }}
+        I: ${{ secrets.ME_ID }}
+        FN: ${{ secrets.ME_FIRST_NAME }}
+        LN: ${{ secrets.ME_LAST_NAME }}
+      run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
 
   # Tuesday Gym Booking
   run-booking-Tuesday-Gym:
@@ -106,7 +116,12 @@ jobs:
         pip install -r requirements.txt
         pip install --upgrade requests
     - name: Run Gym Booking Tuesday
-      run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 11 --fd True
+      env:
+        PA: ${{ secrets.PASS_ME }}
+        I: ${{ secrets.ME_ID }}
+        FN: ${{ secrets.ME_FIRST_NAME }}
+        LN: ${{ secrets.ME_LAST_NAME }}
+      run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
 
   # Tuesday Swimming Booking
   run-booking-Tuesday-Swimming:
@@ -124,7 +139,12 @@ jobs:
         pip install -r requirements.txt
         pip install --upgrade requests
     - name: Run Swimming Booking Tuesday
-      run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 1 --time 13 --fd True
+      env:
+        PA: ${{ secrets.PASS_ME }}
+        I: ${{ secrets.ME_ID }}
+        FN: ${{ secrets.ME_FIRST_NAME }}
+        LN: ${{ secrets.ME_LAST_NAME }}
+      run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
 
   # Wednesday Gym Booking
   run-booking-Wednesday-Gym:
@@ -142,7 +162,12 @@ jobs:
         pip install -r requirements.txt
         pip install --upgrade requests
     - name: Run Gym Booking Wednesday
-      run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 15 --fd True
+      env:
+        PA: ${{ secrets.PASS_ME }}
+        I: ${{ secrets.ME_ID }}
+        FN: ${{ secrets.ME_FIRST_NAME }}
+        LN: ${{ secrets.ME_LAST_NAME }}
+      run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
 
   # Wednesday Swimming Booking
   run-booking-Wednesday-Swimming:
@@ -160,8 +185,12 @@ jobs:
         pip install -r requirements.txt
         pip install --upgrade requests
     - name: Run Swimming Booking Wednesday
-      run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 1 --time 13 --fd True
-
+      env:
+        PA: ${{ secrets.PASS_ME }}
+        I: ${{ secrets.ME_ID }}
+        FN: ${{ secrets.ME_FIRST_NAME }}
+        LN: ${{ secrets.ME_LAST_NAME }}
+      run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
   # Thursday Gym Booking
   run-booking-Thursday-Gym:
     runs-on: ubuntu-latest
@@ -178,8 +207,12 @@ jobs:
         pip install -r requirements.txt
         pip install --upgrade requests
     - name: Run Gym Booking Thursday
+      env:
+        PA: ${{ secrets.PASS_ME }}
+        I: ${{ secrets.ME_ID }}
+        FN: ${{ secrets.ME_FIRST_NAME }}
+        LN: ${{ secrets.ME_LAST_NAME }}
       run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
-
   # Thursday Swimming Booking
   run-booking-Thursday-Swimming:
     runs-on: ubuntu-latest
@@ -196,4 +229,9 @@ jobs:
         pip install -r requirements.txt
         pip install --upgrade requests
     - name: Run Swimming Booking Thursday
-      run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 1 --time 13 --fd True
+     env:
+        PA: ${{ secrets.PASS_ME }}
+        I: ${{ secrets.ME_ID }}
+        FN: ${{ secrets.ME_FIRST_NAME }}
+        LN: ${{ secrets.ME_LAST_NAME }}
+      run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ME_ID }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --category 0 --time 12 --fd True
