@@ -2,8 +2,6 @@ name: Gym And Pool Booking Automation
 
 on:
   schedule:
-  # Run daily at 10:00 AM
-  schedule:
     - cron: '47 3 * * *'
  workflow_dispatch:
 jobs:
