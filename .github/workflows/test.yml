@@ -25,10 +25,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Time_Check
-      run: |        
-          if [ "$(date +%H)" != "09" ] || [ "$(date +%A)" != "Sunday" ]; then
-          exit 1
-          fi
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Set up Python 3.x
