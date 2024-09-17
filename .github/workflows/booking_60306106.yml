@@ -69,7 +69,7 @@ jobs:
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
-            python gym.py --pa ${ secrets.PASS_60306106 } --i ${ secrets.ID_60306106 } --ln ${ secrets.LAST_NAME_60306106 } --fn ${ secrets.FIRST_NAME_60306106 } --ca 0 --t 12 --fd True
+            python gym.py --pa ${ secrets.PASS_60306106 } --i ${ secrets.ID_60306106 } --ln ${ secrets.LAST_NAME_60306106 } --fn ${ secrets.FIRST_NAME_60306106 } --ca 0 --t 10.5 --fd True
           else
             exit 0
           fi
