@@ -20,10 +20,14 @@ jobs:
         python-version: '3.x'
     - name: Time_Check
       run: |
+        if [ "$(date +%H)" == "07" ] && [ "$(date +%A)" == "Sunday" ]; then
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install --upgrade requests
           python gym.py --pa ${{ secrets.PASS_60307390 }} --i ${{ secrets.ID_60307390 }} --ln ${{ secrets.LAST_NAME_60307390 }} --fn ${{ secrets.FIRST_NAME_60307390 }} --ca 0 --t 10.5 --fd True
+        else
+          exit 0
+        fi
 
   run-booking-Tuesday-Gym:
     runs-on: ubuntu-latest
