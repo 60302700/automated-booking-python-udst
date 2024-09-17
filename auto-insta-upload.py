@@ -51,7 +51,6 @@ def scheduled_upload():
     CAPTION = f'''DAY {DAY+1} \n #meme #trending #trending #viral #instagram #explorepage #explore #instagood #love #reels #follow #trend #like #photography #india #fyp #instadaily #tiktok #foryou #trendingreels #trendingnow #style #memes #photooftheday #music #reelsinstagram #viralpost #model #insta'''
     video_upload(USERNAME, PASSWORD, PATH, CAPTION,SESSION)
 scheduled_upload()
-'''
 def scheduled_upload_benson():
     time.sleep(10)
     USERNAME = str(os.getenv('USERNAME2'))
@@ -61,4 +60,3 @@ def scheduled_upload_benson():
     global DAY
     CAPTION = f"DAY {DAY+1} \n #meme #trending #trending #viral #instagram #explorepage #explore #instagood #love #reels #follow #trend #like #photography #india #fyp #instadaily #tiktok #foryou #trendingreels #trendingnow #style #memes #photooftheday #music #reelsinstagram #viralpost #model #insta"
     video_upload(USERNAME, PASSWORD, PATH, CAPTION,SESSION)
-'''
