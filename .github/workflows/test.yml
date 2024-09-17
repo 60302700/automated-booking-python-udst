@@ -29,193 +29,174 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: '3.x'
-    - name: Install dependencies
+    - name: Time_Check
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install --upgrade requests
-    - name: Run Gym Booking Sunday
-      run: |
-        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 12 --fd True
+        if [ "$(date +%H)" == "09" ] && [ "$(date +%A)" == "Sunday" ]; then
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install --upgrade requests
+          python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 10.5 --fd True
+        else
+          exit 0
+        fi
 
   run-booking-Monday-Gym:
     runs-on: ubuntu-latest
     steps:
-    - name: Time_Check
-      run: |        
-        if [ "$(date +%H)" != "10" ] || [ "$(date +%A)" != "Monday" ]; then
-          exit 1
-        fi
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Set up Python 3.x
       uses: actions/setup-python@v4
       with:
         python-version: '3.x'
-    - name: Install dependencies
+    - name: Time_Check
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install --upgrade requests
-    - name: Run Gym Booking Monday
-      run: |
-        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 13 --fd True
+        if [ "$(date +%H)" == "10" ] && [ "$(date +%A)" == "Monday" ]; then
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install --upgrade requests
+          python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 10.5 --fd True
+        else
+          exit 0
+        fi
 
   run-booking-Tuesday-Gym:
     runs-on: ubuntu-latest
     steps:
-    - name: Time_Check
-      run: |        
-        if [ "$(date +%H)" != "08" ] || [ "$(date +%A)" != "Tuesday" ]; then
-          exit 1
-        fi   
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Set up Python 3.x
       uses: actions/setup-python@v4
       with:
         python-version: '3.x'
-    - name: Install dependencies
+    - name: Time_Check
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install --upgrade requests
-    - name: Run Gym Booking Tuesday
-      run: |
-        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 11 --fd True
+        if [ "$(date +%H)" == "08" ] && [ "$(date +%A)" == "Tuesday" ]; then
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install --upgrade requests
+          python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 10.5 --fd True
+        else
+          exit 0
+        fi
 
   run-booking-Wednesday-Gym:
     runs-on: ubuntu-latest
     steps:
-    - name: Time_Check
-      run: |        
-        if [ "$(date +%H)" != "12" ] || [ "$(date +%A)" != "Wednesday" ]; then
-          exit 1
-        fi
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Set up Python 3.x
       uses: actions/setup-python@v4
       with:
         python-version: '3.x'
-    - name: Install dependencies
+    - name: Time_Check
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install --upgrade requests
-    - name: Run Gym Booking Wednesday
-      run: |
-        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 15 --fd True
+        if [ "$(date +%H)" == "12" ] && [ "$(date +%A)" == "Wednesday" ]; then
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install --upgrade requests
+          python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 10.5 --fd True
+        else
+          exit 0
+        fi
 
   run-booking-Thursday-Gym:
     runs-on: ubuntu-latest
     steps:
-    - name: Time_Check
-      run: |        
-        if [ "$(date +%H)" != "09" ] || [ "$(date +%A)" != "Thursday" ]; then
-          exit 1
-        fi
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Set up Python 3.x
       uses: actions/setup-python@v4
       with:
         python-version: '3.x'
-    - name: Install dependencies
+    - name: Time_Check
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install --upgrade requests
-    - name: Run Gym Booking Thursday 
-      run: |
-        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 12 --fd True
+        if [ "$(date +%H)" == "09" ] && [ "$(date +%A)" == "Thursday" ]; then
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install --upgrade requests
+          python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 10.5 --fd True
+        else
+          exit 0
+        fi
 
   # Swimming Booking Jobs
   run-booking-Monday-Swimming:
     runs-on: ubuntu-latest
     steps:
-    - name: Time_Check
-      run: |        
-        if [ "$(date +%H)" != "12" ] || [ "$(date +%A)" != "Monday" ]; then
-          exit 1
-        fi
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Set up Python 3.x
       uses: actions/setup-python@v4
       with:
         python-version: '3.x'
-    - name: Install dependencies
+    - name: Time_Check
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install --upgrade requests
-    - name: Run Swimming Booking Monday
-      run: |
-        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --fn ${{ secrets.ME_FIRST_NAME }} --ln ${{ secrets.ME_LAST_NAME }} --ca 1 --t 15 --fd True
+        if [ "$(date +%H)" == "12" ] && [ "$(date +%A)" == "Monday" ]; then
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install --upgrade requests
+          python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 10.5 --fd True
+        else
+          exit 0
+        fi
 
   run-booking-Tuesday-Swimming:
     runs-on: ubuntu-latest
     steps:
-    - name: Time_Check
-      run: |        
-        if [ "$(date +%H)" != "10" ] || [ "$(date +%A)" != "Tuesday" ]; then
-          exit 1
-        fi
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Set up Python 3.x
       uses: actions/setup-python@v4
       with:
         python-version: '3.x'
-    - name: Install dependencies
+    - name: Time_Check
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install --upgrade requests
-    - name: Run Swimming Booking Tuesday
-      run: |
-        python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 1 --t 13 --fd True
+        if [ "$(date +%H)" == "10" ] && [ "$(date +%A)" == "Tuesday" ]; then
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install --upgrade requests
+          python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 10.5 --fd True
+        else
+          exit 0
+        fi
 
   run-booking-Wednesday-Swimming:
     runs-on: ubuntu-latest
     steps:
-    - name: Time_Check
-      run: |        
-        if [ "$(date +%H)" != "10" ] || [ "$(date +%A)" != "Wednesday" ]; then
-          exit 1
-        fi
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Set up Python 3.x
       uses: actions/setup-python@v4
       with:
         python-version: '3.x'
-    - name: Install dependencies
+    - name: Time_Check
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install --upgrade requests
+        if [ "$(date +%H)" == "10" ] && [ "$(date +%A)" == "Wednesday" ]; then
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install --upgrade requests
+          python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 10.5 --fd True
+        else
+          exit 0
+        fi
 
   run-booking-Thursday-Swimming:
-
     runs-on: ubuntu-latest
     steps:
-    - name: Time_Check
-      run: |        
-          if [ "$(date +%H)" != "10" ] || [ "$(date +%A)" != "Thursday" ]; then
-          exit 1
-          fi
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Set up Python 3.x
       uses: actions/setup-python@v4
       with:
         python-version: '3.x'
-    - name: Install dependencies
+    - name: Time_Check
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install --upgrade requests
-    - name: Run Swimming Booking Thursday
-      run:  python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 1 --t 13 --fd True
+        if [ "$(date +%H)" == "10" ] && [ "$(date +%A)" == "Thursday" ]; then
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install --upgrade requests
+          python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 10.5 --fd True
+        else
+          exit 0
+        fi
