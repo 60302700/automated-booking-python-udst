@@ -26,5 +26,5 @@ jobs:
         PASSWORD2: ${{ secrets.PASSWORD2 }}
         SESSION2: ${{ secrets.SESSION2 }}
       run: |
-        set -x  # Enable command tracing for debugging
+        ls
         python auto-insta-upload.py
