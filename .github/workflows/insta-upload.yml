@@ -2,7 +2,7 @@ name: Instagram Video Upload
 
 on:
   schedule:
-    - cron: '32 10 * * *'  # Runs every day at 10:16 AM UTC
+    - cron: '32 10 * * *'  # Runs every day at 10:32 AM UTC
   workflow_dispatch:  # This enables manual triggering of the workflow
 
 jobs:
@@ -16,6 +16,9 @@ jobs:
         python-version: '3.x'
     - name: Install dependencies
       run: pip install instagrapi Pillow moviepy
+    - name: List files in videos directory
+      run: |
+        ls videos/
     - name: Run upload script
       continue-on-error: true
       env:
@@ -26,5 +29,4 @@ jobs:
         PASSWORD2: ${{ secrets.PASSWORD2 }}
         SESSION2: ${{ secrets.SESSION2 }}
       run: |
-        ls
         python auto-insta-upload.py
