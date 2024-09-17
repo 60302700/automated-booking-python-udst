@@ -1,17 +1,7 @@
 from instagrapi import Client
-import logging
 import os
 import time
 import json
-
-logging.basicConfig(
-    filename="Insta.log",
-    encoding="utf-8",
-    filemode="a",
-    format="{asctime} - {levelname} - {message}",
-    style="{",
-    datefmt="%Y-%m-%d %H:%M",
-)
 
 def get_session_dict_from_env(env_var):
     session_str = os.getenv(env_var)
@@ -47,9 +37,9 @@ def scheduled_upload():
     SESSION = get_session_dict_from_env(os.getenv('SESSION1'))
     PATH = "grandpa.mp4"
     global DAY
-    CAPTION = f'''DAY {DAY+1} \n #meme #trending #trending #viral #instagram #explorepage #explore #instagood #love #reels #follow #trend #like #photography #india #fyp #instadaily #tiktok #foryou #trendingreels #trendingnow #style #memes #photooftheday #music #reelsinstagram #viralpost #model #insta'''
+    CAPTION = f'''DAY {DAY} \n #meme #trending #trending #viral #instagram #explorepage #explore #instagood #love #reels #follow #trend #like #photography #india #fyp #instadaily #tiktok #foryou #trendingreels #trendingnow #style #memes #photooftheday #music #reelsinstagram #viralpost #model #insta'''
     video_upload(USERNAME, PASSWORD, PATH, CAPTION,SESSION)
-scheduled_upload()
+
 def scheduled_upload_benson():
     time.sleep(10)
     USERNAME = str(os.getenv('USERNAME2'))
@@ -59,3 +49,5 @@ def scheduled_upload_benson():
     global DAY
     CAPTION = f"DAY {DAY+1} \n #meme #trending #trending #viral #instagram #explorepage #explore #instagood #love #reels #follow #trend #like #photography #india #fyp #instadaily #tiktok #foryou #trendingreels #trendingnow #style #memes #photooftheday #music #reelsinstagram #viralpost #model #insta"
     video_upload(USERNAME, PASSWORD, PATH, CAPTION,SESSION)
+scheduled_upload()
+scheduled_upload_benson()
