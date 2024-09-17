@@ -18,7 +18,7 @@ jobs:
       run: pip install instagrapi Pillow moviepy
     - name: List files in videos directory
       run: |
-        ls videos/
+        ls
     - name: Run upload script
       continue-on-error: true
       env:
