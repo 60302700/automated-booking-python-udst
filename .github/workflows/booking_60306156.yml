@@ -46,7 +46,7 @@ jobs:
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
-            python gym.py --pa ${ secrets.PASS_60306156 } --i ${ secrets.ID_60306156 } --ln ${ secrets.LAST_NAME_60306156 } --fn ${ secrets.FIRST_NAME_60306156 } --ca 0 --t 12 --fd True
+            python gym.py --pa ${{ secrets.PASS_60306156 }} --i ${{ secrets.ID_60306156 }} --ln ${{ secrets.LAST_NAME_60306156 }} --fn ${{ secrets.FIRST_NAME_60306156 }} --ca 0 --t 12 --fd True
           else
             exit 0
           fi
@@ -68,7 +68,7 @@ jobs:
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
-            python gym.py --pa ${ secrets.PASS_60306156 } --i ${ secrets.ID_60306156 } --ln ${ secrets.LAST_NAME_60306156 } --fn ${ secrets.FIRST_NAME_60306156 } --ca 0 --t 10.5 --fd True
+            python gym.py --pa ${{ secrets.PASS_60306156 }} --i ${{ secrets.ID_60306156 }} --ln ${{ secrets.LAST_NAME_60306156 }} --fn ${{ secrets.FIRST_NAME_60306156 }} --ca 0 --t 10.5 --fd True
           else
             exit 0 0
           fi
@@ -90,7 +90,7 @@ jobs:
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
-            python gym.py --pa ${ secrets.PASS_60306156 } --i ${ secrets.ID_60306156 } --ln ${ secrets.LAST_NAME_60306156 } --fn ${ secrets.FIRST_NAME_60306156 } --ca 1 --t 13 --fd True
+            python gym.py --pa ${{ secrets.PASS_60306156 }} --i ${{ secrets.ID_60306156 }} --ln ${{ secrets.LAST_NAME_60306156 }} --fn ${{ secrets.FIRST_NAME_60306156 }} --ca 1 --t 13 --fd True
           else
             exit 0
           fi
