@@ -50,7 +50,7 @@ jobs:
             pip install -r requirements.txt
             pip install --upgrade requests
             python gym.py --pa ${ secrets.PASS_60407589 } --i ${ secrets.ID_60407589 } --ln ${ secrets.LAST_NAME_60407589 } --fn ${ secrets.FIRST_NAME_60407589 } --ca 0 --t 9 --fd True
-          else exit
+          else exit 0
           fi
 
   run-booking-Monday-Gym:
@@ -71,7 +71,7 @@ jobs:
             pip install -r requirements.txt
             pip install --upgrade requests
             python gym.py --pa ${ secrets.PASS_60407589 } --i ${ secrets.ID_60407589 } --ln ${ secrets.LAST_NAME_60407589 } --fn ${ secrets.FIRST_NAME_60407589 } --ca 0 --t 9 --fd True
-          else exit
+          else exit 0
           fi
 
   run-booking-Tuesday-Gym:
@@ -91,4 +91,69 @@ jobs:
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
-            python gym.py --pa ${ secrets.PASS_60407589 } --i ${ secrets.ID_60407589 } --ln ${ secrets.LAST_NAME_60407589 } --fn ${ secrets.FIRST_NAME_604
+            python gym.py --pa ${ secrets.PASS_60407589 } --i ${ secrets.ID_60407589 } --ln ${ secrets.LAST_NAME_60407589 } --fn ${ secrets.FIRST_NAME_60407589 } --ca 0 --t 12 --fd True
+          else exit 0
+          fi
+
+  run-booking-Wednesday-Gym:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Time_Check
+        run: |
+          if [ "$(date +%H)" == "06" ] || [ "$(date +%A)" == "Wednesday" ]; then
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+            pip install --upgrade requests
+            python gym.py --pa ${ secrets.PASS_60407589 } --i ${ secrets.ID_60407589 } --ln ${ secrets.LAST_NAME_60407589 } --fn ${ secrets.FIRST_NAME_60407589 } --ca 0 --t 9 --fd True
+          else exit 0
+          fi
+
+  run-booking-Thursday-Gym:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Time_Check
+        run: |
+          if [ "$(date +%H)" == "06" ] || [ "$(date +%A)" == "Thursday" ]; then
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+            pip install --upgrade requests
+            python gym.py --pa ${ secrets.PASS_60407589 } --i ${ secrets.ID_60407589 } --ln ${ secrets.LAST_NAME_60407589 } --fn ${ secrets.FIRST_NAME_60407589 } --ca 0 --t 9 --fd True
+          else exit 0
+          fi
+
+  run-booking-Wednesday-Swimming:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Time_Check
+        run: |
+          if [ "$(date +%H)" == "10" ] || [ "$(date +%A)" == "Wednesday" ]; then
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+            pip install --upgrade requests
+            python gym.py --pa ${ secrets.PASS_60407589 } --i ${ secrets.ID_60407589 } --ln ${ secrets.LAST_NAME_60407589 } --fn ${ secrets.FIRST_NAME_60407589 } --ca 1 --t 13 --fd True
+          else exit 0
+          fi

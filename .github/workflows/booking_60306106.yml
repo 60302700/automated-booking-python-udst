@@ -49,7 +49,7 @@ jobs:
             pip install --upgrade requests
             python gym.py --pa ${ secrets.PASS_60306106 } --i ${ secrets.ID_60306106 } --ln ${ secrets.LAST_NAME_60306106 } --fn ${ secrets.FIRST_NAME_60306106 } --ca 0 --t 12 --fd True
           else
-            exit
+            exit 0
           fi
 
   run-booking-Tuesday-Gym:
@@ -71,7 +71,7 @@ jobs:
             pip install --upgrade requests
             python gym.py --pa ${ secrets.PASS_60306106 } --i ${ secrets.ID_60306106 } --ln ${ secrets.LAST_NAME_60306106 } --fn ${ secrets.FIRST_NAME_60306106 } --ca 0 --t 12 --fd True
           else
-            exit
+            exit 0
           fi
 
   run-booking-Wednesday-Gym:
@@ -93,7 +93,7 @@ jobs:
             pip install --upgrade requests
             python gym.py --pa ${ secrets.PASS_60306106 } --i ${ secrets.ID_60306106 } --ln ${ secrets.LAST_NAME_60306106 } --fn ${ secrets.FIRST_NAME_60306106 } --ca 0 --t 10.5 --fd True
           else
-            exit
+            exit 0
           fi
 
   run-booking-Wednesday-Swimming:
@@ -115,5 +115,5 @@ jobs:
             pip install --upgrade requests
             python gym.py --pa ${ secrets.PASS_60306106 } --i ${ secrets.ID_60306106 } --ln ${ secrets.LAST_NAME_60306106 } --fn ${ secrets.FIRST_NAME_60306106 } --ca 1 --t 13 --fd True
           else
-            exit
+            exit 0
           fi
