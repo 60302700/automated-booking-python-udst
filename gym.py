@@ -47,7 +47,7 @@ def login(id_udst, password):
     soup = BeautifulSoup(login_response.text, 'html.parser')
 
     # Find the script tag containing the 'login_cs' value
-    script_tag = soup.find('script', text=lambda t: t and 'planyo_login' in t)
+    script_tag = soup.find('script', string=lambda s: s and 'planyo_login' in s)
 
     # Extract the script content
     script_content = script_tag.string
