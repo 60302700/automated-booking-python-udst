@@ -42,7 +42,7 @@ jobs:
 
       - name: Time_Check
         run: |
-          if [ "$(date +%H)" == "09" ] || [ "$(date +%A)" == "Monday" ]; then
+          if [ "$(date +%H)" == "09" ] && [ "$(date +%A)" == "Monday" ]; then
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
@@ -64,7 +64,7 @@ jobs:
 
       - name: Time_Check
         run: |
-          if [ "$(date +%H)" == "07" ] || [ "$(date +%A)" == "Wednesday" ]; then
+          if [ "$(date +%H)" == "07" ] && [ "$(date +%A)" == "Wednesday" ]; then
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
@@ -86,7 +86,7 @@ jobs:
 
       - name: Time_Check
         run: |
-          if [ "$(date +%H)" == "10" ] || [ "$(date +%A)" == "Wednesday" ]; then
+          if [ "$(date +%H)" == "10" ] && [ "$(date +%A)" == "Wednesday" ]; then
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
