@@ -9,7 +9,7 @@ def get_session_dict_from_env(env_var):
         try:
             return json.loads(session_str)  # Convert the JSON string to a dictionary
         except json.JSONDecodeError as e:
-            logging.error(f"Error decoding session data: {e}")
+            print(f"Error decoding session data: {e}")
     return {}
 
 def get_days():
@@ -26,9 +26,9 @@ def video_upload(USERNAME, PASSWORD, PATH, CAPTION,SESSION):
     Insta = Client()
     Insta.login(USERNAME, PASSWORD)
     time.sleep(5)
-    logging.info(f"Logging in as {Insta.user_id}")
+    print(f"Logging in as {Insta.user_id}")
     Insta.clip_upload(PATH, CAPTION)
-    logging.info(f"Video uploaded: {PATH}")
+    print(f"Video uploaded: {PATH}")
 
 def scheduled_upload():
     time.sleep(10)
