@@ -50,7 +50,7 @@ def login(id_udst, password):
     script_tag = soup.find('script', string=lambda s: s and 'planyo_login' in s)
 
     # Extract the script content
-    script_content = script_tag.string
+    script_content = script_tag.text
 
     # Use string manipulation to find and extract the 'login_cs' value
     login_cs_start = script_content.find("planyo_login['login_cs']=\"") + len("planyo_login['login_cs']=\"")
