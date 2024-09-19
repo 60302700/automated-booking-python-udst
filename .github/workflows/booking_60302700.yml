@@ -159,3 +159,19 @@ jobs:
         else
           exit 0
         fi
+
+  run-booking-TEST:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    - name: Time_Check
+      run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install --upgrade requests
+          python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 15 --fd True
