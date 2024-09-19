@@ -43,8 +43,10 @@ def login(id_udst, password):
     }
 
     login_response = session.post(login_url, data=login_data,timeout=(10, 30),)
-#    print(login_response.text)
+    print(login_response.text)
     soup = BeautifulSoup(login_response.text, 'html.parser')
+
+    print(soup)
 
     # Find the script tag containing the 'login_cs' value
     script_tag = soup.find('script', string=lambda s: s and 'planyo_login' in s)
