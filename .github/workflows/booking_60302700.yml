@@ -1,7 +1,6 @@
 name: 60302700-AK
 on:
   schedule:
-    - cron: '0 9 * * 0'  # Sunday Gym
     - cron: '0 10 * * 1'  # Monday Gym
     - cron: '0 8 * * 2'  # Tuesday Gym
     - cron: '0 12 * * 3'  # Wednesday Gym
