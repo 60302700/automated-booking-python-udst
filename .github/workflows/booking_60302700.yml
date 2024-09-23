@@ -7,7 +7,7 @@ on:
     - cron: '0 9 * * 4'  # Thursday Gym
     - cron: '0 12 * * 1'  # Monday Swimming
     - cron: '0 10 * * 2'  # Tuesday Swimming
-    - cron: '0 10 * * 3'  # Wednesday Swimming
+    - cron: '0 12 * * 3'  # Wednesday Swimming
   workflow_dispatch: 
     
 jobs:
@@ -150,7 +150,7 @@ jobs:
         python-version: '3.x'
     - name: Time_Check
       run: |
-        if [ "$(date +%H)" == "10" ] && [ "$(date +%A)" == "Wednesday" ]; then
+        if [ "$(date +%H)" == "12" ] && [ "$(date +%A)" == "Wednesday" ]; then
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install --upgrade requests
