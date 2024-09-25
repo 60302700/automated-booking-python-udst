@@ -69,14 +69,15 @@ jobs:
         python-version: '3.x'
     - name: Time_Check
       run: |
-        if [ "$(date +%H)" == "12" ] && [ "$(date +%A)" == "Wednesday" ]; then
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install --upgrade requests
-          python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 13.5 --fd True
-        else
-          exit 0
-        fi
+        if [ "$(date +%H)" == "12" ] || [ "$(date +%H)" == "13" ]; then
+            if [ "$(date +%A)" == "Wednesday" ]; then
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+            pip install --upgrade requests
+            python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 13.5 --fd True
+          else
+            exit 0
+          fi
 
   run-booking-Thursday-Gym:
     runs-on: ubuntu-latest
