@@ -11,23 +11,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  get-hour-day:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Get Current Hour and Day and Save to Files
-        run: |
-          current_hour=$(date +'%H')
-          current_day=$(date +'%A')
-          echo "$current_hour" > hour.txt
-          echo "$current_day" > day.txt
-
-      - name: Display Contents of Files
-        run: |
-          cat hour.txt
-          cat day.txt
 
   # Gym Booking Jobs
   run-booking-Monday-Gym:
