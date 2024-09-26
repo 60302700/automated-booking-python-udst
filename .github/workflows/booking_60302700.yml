@@ -48,7 +48,7 @@ jobs:
 
 
   run-booking-Tuesday-Gym:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -69,7 +69,7 @@ jobs:
         fi
 
   run-booking-Wednesday-Gym:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -90,7 +90,7 @@ jobs:
          fi
 
   run-booking-Thursday-Gym:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -112,7 +112,7 @@ jobs:
 
   # Swimming Booking Jobs
   run-booking-Monday-Swimming:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -134,7 +134,7 @@ jobs:
         fi
 
   run-booking-Tuesday-Swimming:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -155,7 +155,7 @@ jobs:
         fi
 
   run-booking-Wednesday-Swimming:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
