@@ -11,17 +11,6 @@ on:
   workflow_dispatch: 
     
 jobs:
-  get-hour-day:
-    runs-on: self-hosted
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-    - name: Society
-      shell: bash
-      run: |
-        echo "scoiety"
-      
-
   # Gym Booking Jobs
   run-booking-Monday-Gym:
     runs-on: self-hosted
