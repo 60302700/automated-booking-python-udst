@@ -29,7 +29,7 @@ jobs:
         python-version: '3.x'
     - name: Time_Check
       run: |
-        if [ "$(date +%H)" == "10" ] && [ "$(date +%A)" == "Monday" ]; then
+        if [ "$(date +%H)" >= "10" ] && [ "$(date +%A)" == "Monday" ]; then
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install --upgrade requests
@@ -49,7 +49,7 @@ jobs:
         python-version: '3.x'
     - name: Time_Check
       run: |
-        if [ "$(date +%H)" == "08" ] && [ "$(date +%A)" == "Tuesday" ]; then
+        if [ "$(date +%H)" >= "08" ] && [ "$(date +%A)" == "Tuesday" ]; then
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install --upgrade requests
@@ -69,7 +69,7 @@ jobs:
         python-version: '3.x'
     - name: Time_Check
       run: |
-        if [ "$(date +%H)" == "12" ] || [ "$(date +%H)" == "13" ]; then
+        if [ "$(date +%H)" >= "12" ] || [ "$(date +%H)" == "13" ]; then
             if [ "$(date +%A)" == "Wednesday" ]; then
             python -m pip install --upgrade pip
             pip install -r requirements.txt
@@ -90,7 +90,7 @@ jobs:
         python-version: '3.x'
     - name: Time_Check
       run: |
-        if [ "$(date +%H)" == "09" ] && [ "$(date +%A)" == "Thursday" ]; then
+        if [ "$(date +%H)" >= "09" ] && [ "$(date +%A)" == "Thursday" ]; then
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install --upgrade requests
@@ -111,7 +111,7 @@ jobs:
         python-version: '3.x'
     - name: Time_Check
       run: |
-        if [ "$(date +%H)" == "12" ] && [ "$(date +%A)" == "Monday" ]; then
+        if [ "$(date +%H)" >= "12" ] && [ "$(date +%A)" == "Monday" ]; then
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install --upgrade requests
@@ -131,7 +131,7 @@ jobs:
         python-version: '3.x'
     - name: Time_Check
       run: |
-        if [ "$(date +%H)" == "10" ] && [ "$(date +%A)" == "Tuesday" ]; then
+        if [ "$(date +%H)" >= "10" ] && [ "$(date +%A)" == "Tuesday" ]; then
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install --upgrade requests
@@ -151,7 +151,7 @@ jobs:
         python-version: '3.x'
     - name: Time_Check
       run: |
-        if [ "$(date +%H)" == "12" ] && [ "$(date +%A)" == "Wednesday" ]; then
+        if [ "$(date +%H)" >= "12" ] && [ "$(date +%A)" == "Wednesday" ]; then
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install --upgrade requests
