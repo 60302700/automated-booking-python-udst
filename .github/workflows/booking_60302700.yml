@@ -17,9 +17,8 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Society
-      #shell: bash
+      shell: git-bash
       run: |
-        git-bash
         echo "scoiety"
       
 
