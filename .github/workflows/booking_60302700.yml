@@ -122,7 +122,6 @@ jobs:
         python-version: '3.x'
     - name: Time Check and Run Gym Script
       shell: bash
-      shell: bash
       run: |
         if [ $(date +%H) -ge 12 ] && [ "$(date +%A)" == "Monday" ]; then
           python -m pip install --upgrade pip
