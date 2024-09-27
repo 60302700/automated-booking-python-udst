@@ -26,9 +26,9 @@ jobs:
       - name: Time Check and Run Gym Script
         shell: bash
         run: |
-          if [ $(date +%H) -ge 10 ] && [ "$(date +%A)" == "Monday" ]; then
-            echo $(date +%H)
-            echo $(date +%A)
+          echo $(date +%H)
+          echo $(date +%A)
+          if [ $(date +%H) -ge 11 ] && [ "$(date +%A)" == "Monday" ]; then
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
@@ -51,9 +51,9 @@ jobs:
       - name: Time Check and Run Gym Script
         shell: bash
         run: |
-          if [ $(date +%H) -ge 08 ] && [ "$(date +%A)" == "Tuesday" ]; then
-            echo $(date +%H)
-            echo $(date +%A)
+          echo $(date +%H)
+          echo $(date +%A)
+          if [ $(date +%H) -ge 11 ] && [ "$(date +%A)" == "Tuesday" ]; then
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
@@ -74,9 +74,9 @@ jobs:
       - name: Time Check and Run Gym Script
         shell: bash
         run: |
-          if [ $(date +%H) -ge 12 ] && [ "$(date +%A)" == "Wednesday" ]; then
-            echo $(date +%H)
-            echo $(date +%A)
+          echo $(date +%H)
+          echo $(date +%A)
+          if [ $(date +%H) -ge 13.5 ] && [ "$(date +%A)" == "Wednesday" ]; then
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
@@ -97,9 +97,9 @@ jobs:
       - name: Time Check and Run Gym Script
         shell: bash
         run: |
-          if [ $(date +%H) -ge 09 ] && [ "$(date +%A)" == "Thursday" ]; then
-            echo $(date +%H)
-            echo $(date +%A)
+          echo $(date +%H)
+          echo $(date +%A)
+          if [ $(date +%H) -ge 12 ] && [ "$(date +%A)" == "Thursday" ]; then
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
@@ -121,9 +121,9 @@ jobs:
       - name: Time Check and Run Gym Script
         shell: bash
         run: |
-          if [ $(date +%H) -ge 12 ] && [ "$(date +%A)" == "Monday" ]; then
-            echo $(date +%H)
-            echo $(date +%A)
+          echo $(date +%H)
+          echo $(date +%A)
+          if [ $(date +%H) -ge 15 ] && [ "$(date +%A)" == "Monday" ]; then
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
@@ -144,9 +144,9 @@ jobs:
       - name: Time Check and Run Gym Script
         shell: bash
         run: |
-          if [ $(date +%H) -ge 10 ] && [ "$(date +%A)" == "Tuesday" ]; then
-            echo $(date +%H)
-            echo $(date +%A)
+          echo $(date +%H)
+          echo $(date +%A)
+          if [ $(date +%H) -ge 13 ] && [ "$(date +%A)" == "Tuesday" ]; then
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
@@ -167,9 +167,9 @@ jobs:
       - name: Time Check and Run Gym Script
         shell: bash
         run: |
-          if [ $(date +%H) -ge 12 ] && [ "$(date +%A)" == "Wednesday" ]; then
-            echo $(date +%H)
-            echo $(date +%A)
+          echo $(date +%H)
+          echo $(date +%A)
+          if [ $(date +%H) -ge 15 ] && [ "$(date +%A)" == "Wednesday" ]; then
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
