@@ -14,7 +14,7 @@ jobs:
 
   # Gym Booking Jobs
   run-booking-Monday-Gym:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -24,7 +24,8 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Time_Check
+      - name: Time Check and Run Gym Script
+        shell: bash
         run: |
           if [ "$(date +%H)" == "09" ] && [ "$(date +%A)" == "Monday" ]; then
             python -m pip install --upgrade pip
@@ -36,7 +37,7 @@ jobs:
           fi
 
   run-booking-Tuesday-Gym:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -46,7 +47,8 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Time_Check
+      - name: Time Check and Run Gym Script
+        shell: bash
         run: |
           if [ "$(date +%H)" == "09" ] && [ "$(date +%A)" == "Tuesday" ]; then
             python -m pip install --upgrade pip
@@ -58,7 +60,7 @@ jobs:
           fi
 
   run-booking-Wednesday-Gym:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -68,7 +70,8 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Time_Check
+      - name: Time Check and Run Gym Script
+        shell: bash
         run: |
           if [ "$(date +%H)" == "07" ] && [ "$(date +%A)" == "Wednesday" ]; then
             python -m pip install --upgrade pip
@@ -80,7 +83,7 @@ jobs:
           fi
 
   run-booking-Wednesday-Swimming:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -90,7 +93,8 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Time_Check
+      - name: Time Check and Run Gym Script
+        shell: bash
         run: |
           if [ "$(date +%H)" == "10" ] && [ "$(date +%A)" == "Wednesday" ]; then
             python -m pip install --upgrade pip
@@ -101,7 +105,7 @@ jobs:
             exit 0
           fi
   run-test:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -111,7 +115,8 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Time_Check
+      - name: Time Check and Run Gym Script
+        shell: bash
         run: |
             python -m pip install --upgrade pip
             pip install -r requirements.txt
