@@ -13,7 +13,7 @@ on:
 jobs:
   # Gym Booking Jobs
   run-booking-Monday-Gym:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -24,7 +24,7 @@ jobs:
           python-version: '3.x'
 
       - name: Time Check and Run Gym Script
-        shell: bash
+        #shell: bash
         run: |
           echo "Current Hour: $(date +%H)"
           echo "Current Day: $(date +%A)"
@@ -40,7 +40,7 @@ jobs:
           fi
 
   run-booking-Tuesday-Gym:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -51,7 +51,7 @@ jobs:
           python-version: '3.x'
 
       - name: Time Check and Run Gym Script
-        shell: bash
+        #shell: bash
         run: |
           echo "Current Hour: $(date +%H)"
           echo "Current Day: $(date +%A)"
@@ -70,7 +70,7 @@ jobs:
           fi
 
   run-booking-Wednesday-Gym:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -81,7 +81,7 @@ jobs:
           python-version: '3.x'
 
       - name: Time Check and Run Gym Script
-        shell: bash
+        #shell: bash
         run: |
           echo "Current Hour: $(date +%H)"
           echo "Current Day: $(date +%A)"
@@ -100,7 +100,7 @@ jobs:
           fi
 
   run-booking-Thursday-Gym:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -111,7 +111,7 @@ jobs:
           python-version: '3.x'
 
       - name: Time Check and Run Gym Script
-        shell: bash
+        #shell: bash
         run: |
           echo "Current Hour: $(date +%H)"
           echo "Current Day: $(date +%A)"
@@ -128,7 +128,7 @@ jobs:
 
   # Swimming Booking Jobs
   run-booking-Monday-Swimming:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -139,7 +139,7 @@ jobs:
           python-version: '3.x'
 
       - name: Time Check and Run Swimming Script
-        shell: bash
+        #shell: bash
         run: |
           echo "Current Hour: $(date +%H)"
           echo "Current Day: $(date +%A)"
@@ -155,7 +155,7 @@ jobs:
           fi
 
   run-booking-Tuesday-Swimming:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -166,7 +166,7 @@ jobs:
           python-version: '3.x'
 
       - name: Time Check and Run Swimming Script
-        shell: bash
+        #shell: bash
         run: |
           echo "Current Hour: $(date +%H)"
           echo "Current Day: $(date +%A)"
@@ -182,7 +182,7 @@ jobs:
           fi
 
   run-booking-Wednesday-Swimming:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -193,7 +193,7 @@ jobs:
           python-version: '3.x'
 
       - name: Time Check and Run Swimming Script
-        shell: bash
+        #shell: bash
         run: |
           echo "Current Hour: $(date +%H)"
           echo "Current Day: $(date +%A)"
@@ -209,7 +209,7 @@ jobs:
           fi
 
   Test:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -220,7 +220,7 @@ jobs:
           python-version: '3.x'
 
       - name: Time Check and Run Test Script
-        shell: bash
+        #shell: bash
         run: |
           echo "Current Hour: $(date +%H)"
           echo "Current Day: $(date +%A)"
