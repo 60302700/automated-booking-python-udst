@@ -44,19 +44,14 @@ def login(id_udst, password):
     }
 
     login_response = session.post(login_url, data=login_data,timeout=(10, 30),)
-    print(login_response.text)
     soup = BeautifulSoup(login_response.text, 'html.parser')
-
-    print(soup)
-
     # Find the script tag containing the 'login_cs' value
     script_tag = soup.find('script', string=lambda s: s and 'planyo_login' in s)
     # Extract the script content
     try:
         script_content = script_tag.text
     except Expection as e:
-        print(e)
-        print('Login_CS not found, login not succesfull')
+        print(e,'Login_CS not found, login not succesfull')
 
     # Use string manipulation to find and extract the 'login_cs' value
     login_cs_start = script_content.find("planyo_login['login_cs']=\"") + len("planyo_login['login_cs']=\"")
