@@ -24,7 +24,7 @@ jobs:
           python-version: '3.x'
       
       - name: Time Check and Run Gym Script
-        shell: bash
+        shell: pwsh
         run: |
           echo $(date +%H)
           echo $(date +%A)
@@ -49,16 +49,24 @@ jobs:
         with:
           python-version: '3.x'
       - name: Time Check and Run Gym Script
-        shell: bash
+        shell: pwsh
         run: |
-
-          echo $(date +%H)
-          echo $(date +%A)
-          if [ $(date +%H) -ge 08 ] && [ "$(date +%A)" == "Tuesday" ]; then
+          echo "Current Hour: $(date +%H)"
+          echo "Current Day: $(date +%A)"
+          
+          # Get the current hour and day
+          current_hour=$(date +%H)
+          current_day=$(date +%A)
+          
+          # Check if current hour is greater than or equal to 10 and today is Monday
+          if [ "$current_hour" -ge 10 ] && [ "$current_day" == "Monday" ]; then
+            echo "Executing actions: It's after 10 AM and it's Monday."
+            python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
             python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 10.5 --fd True
           else
+            echo "Conditions not met. Exiting."
             exit 0
           fi
 
@@ -72,18 +80,24 @@ jobs:
         with:
           python-version: '3.x'
       - name: Time Check and Run Gym Script
-        shell: bash
+        shell: pwsh
         run: |
-
-
-          echo $(date +%H)
-          echo $(date +%A)
-          if [ $(date +%H) -ge 12 ] && [ "$(date +%A)" == "Wednesday" ]; then
+          echo "Current Hour: $(date +%H)"
+          echo "Current Day: $(date +%A)"
+          
+          # Get the current hour and day
+          current_hour=$(date +%H)
+          current_day=$(date +%A)
+          
+          # Check if current hour is greater than or equal to 10 and today is Monday
+          if [ "$current_hour" -ge 10 ] && [ "$current_day" == "Monday" ]; then
+            echo "Executing actions: It's after 10 AM and it's Monday."
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
-            python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 13.5 --fd True
+            python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 10.5 --fd True
           else
+            echo "Conditions not met. Exiting."
             exit 0
           fi
 
@@ -97,7 +111,7 @@ jobs:
         with:
           python-version: '3.x'
       - name: Time Check and Run Gym Script
-        shell: bash
+        shell: pwsh
         run: |
 
           echo $(date +%H)
@@ -122,17 +136,24 @@ jobs:
         with:
           python-version: '3.x'
       - name: Time Check and Run Gym Script
-        shell: bash
+        shell: pwsh
         run: |
-
-          echo $(date +%H)
-          echo $(date +%A)
-          if [ $(date +%H) -ge 12 ] && [ "$(date +%A)" == "Monday" ]; then
+          echo "Current Hour: $(date +%H)"
+          echo "Current Day: $(date +%A)"
+          
+          # Get the current hour and day
+          current_hour=$(date +%H)
+          current_day=$(date +%A)
+          
+          # Check if current hour is greater than or equal to 10 and today is Monday
+          if [ "$current_hour" -ge 10 ] && [ "$current_day" == "Monday" ]; then
+            echo "Executing actions: It's after 10 AM and it's Monday."
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
-            python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 15 --fd True
+            python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 10.5 --fd True
           else
+            echo "Conditions not met. Exiting."
             exit 0
           fi
 
@@ -146,17 +167,24 @@ jobs:
         with:
           python-version: '3.x'
       - name: Time Check and Run Gym Script
-        shell: bash
+        shell: pwsh
         run: |
-
-          echo $(date +%H)
-          echo $(date +%A)
-          if [ $(date +%H) -ge 10 ] && [ "$(date +%A)" == "Tuesday" ]; then
+          echo "Current Hour: $(date +%H)"
+          echo "Current Day: $(date +%A)"
+          
+          # Get the current hour and day
+          current_hour=$(date +%H)
+          current_day=$(date +%A)
+          
+          # Check if current hour is greater than or equal to 10 and today is Monday
+          if [ "$current_hour" -ge 10 ] && [ "$current_day" == "Monday" ]; then
+            echo "Executing actions: It's after 10 AM and it's Monday."
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
-            python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 13 --fd True
+            python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 10.5 --fd True
           else
+            echo "Conditions not met. Exiting."
             exit 0
           fi
 
@@ -170,17 +198,24 @@ jobs:
         with:
           python-version: '3.x'
       - name: Time Check and Run Gym Script
-        shell: bash
+        shell: pwsh
         run: |
-
-          echo $(date +%H)
-          echo $(date +%A)
-          if [ $(date +%H) -ge 12 ] && [ "$(date +%A)" == "Wednesday" ]; then
+          echo "Current Hour: $(date +%H)"
+          echo "Current Day: $(date +%A)"
+          
+          # Get the current hour and day
+          current_hour=$(date +%H)
+          current_day=$(date +%A)
+          
+          # Check if current hour is greater than or equal to 10 and today is Monday
+          if [ "$current_hour" -ge 10 ] && [ "$current_day" == "Monday" ]; then
+            echo "Executing actions: It's after 10 AM and it's Monday."
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
-            python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 15 --fd True
+            python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 10.5 --fd True
           else
+            echo "Conditions not met. Exiting."
             exit 0
           fi
     
@@ -194,7 +229,7 @@ jobs:
           with:
             python-version: '3.x'
         - name: Time Check and Run Gym Script
-          shell: bash
+          shell: pwsh
           run: |
             echo $(date +%H)
             echo $(date +%A)
@@ -210,7 +245,7 @@ jobs:
    runs-on: self-hosted
    steps:
       - name: Check if running in GitHub Actions
-        shell: bash
+        shell: pwsh
         run: |
           if [ "$GITHUB_ACTIONS" == "true" ]; then
             echo "Running inside GitHub Actions in bash"
