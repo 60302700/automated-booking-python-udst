@@ -8,8 +8,8 @@ on:
     - cron: '0 12 * * 1'  # Monday Swimming
     - cron: '0 10 * * 2'  # Tuesday Swimming
     - cron: '0 12 * * 3'  # Wednesday Swimming
-  workflow_dispatch: 
-    
+  workflow_dispatch:
+
 jobs:
   # Gym Booking Jobs
   run-booking-Monday-Gym:
@@ -17,26 +17,26 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      
+
       - name: Set up Python 3.x
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
-      
+
       - name: Time Check and Run Gym Script
-        shell: pwsh
+        shell: bash
         run: |
-          echo $(date +%H)
-          echo $(date +%A)
+          echo "Current Hour: $(date +%H)"
+          echo "Current Day: $(date +%A)"
+          
           if [ $(date +%H) -ge 10 ] && [ "$(date +%A)" == "Monday" ]; then
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
             python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 10.5 --fd True
           else
+            echo "Conditions not met. Exiting."
             exit 0
-            echo $(date +%H)
-            echo $(date +%A)
           fi
 
   run-booking-Tuesday-Gym:
@@ -44,23 +44,22 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
       - name: Set up Python 3.x
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
+
       - name: Time Check and Run Gym Script
-        shell: pwsh
+        shell: bash
         run: |
           echo "Current Hour: $(date +%H)"
           echo "Current Day: $(date +%A)"
           
-          # Get the current hour and day
           current_hour=$(date +%H)
           current_day=$(date +%A)
-          
-          # Check if current hour is greater than or equal to 10 and today is Monday
-          if [ "$current_hour" -ge 10 ] && [ "$current_day" == "Monday" ]; then
-            echo "Executing actions: It's after 10 AM and it's Monday."
+
+          if [ "$current_hour" -ge 8 ] && [ "$current_day" == "Tuesday" ]; then
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
@@ -75,23 +74,22 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
       - name: Set up Python 3.x
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
+
       - name: Time Check and Run Gym Script
-        shell: pwsh
+        shell: bash
         run: |
           echo "Current Hour: $(date +%H)"
           echo "Current Day: $(date +%A)"
           
-          # Get the current hour and day
           current_hour=$(date +%H)
           current_day=$(date +%A)
-          
-          # Check if current hour is greater than or equal to 10 and today is Monday
-          if [ "$current_hour" -ge 10 ] && [ "$current_day" == "Monday" ]; then
-            echo "Executing actions: It's after 10 AM and it's Monday."
+
+          if [ "$current_hour" -ge 12 ] && [ "$current_day" == "Wednesday" ]; then
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
@@ -106,22 +104,25 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
       - name: Set up Python 3.x
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
-      - name: Time Check and Run Gym Script
-        shell: pwsh
-        run: |
 
-          echo $(date +%H)
-          echo $(date +%A)
-          if [ $(date +%H) -ge 09 ] && [ "$(date +%A)" == "Thursday" ]; then
+      - name: Time Check and Run Gym Script
+        shell: bash
+        run: |
+          echo "Current Hour: $(date +%H)"
+          echo "Current Day: $(date +%A)"
+          
+          if [ $(date +%H) -ge 9 ] && [ "$(date +%A)" == "Thursday" ]; then
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
             python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 12 --fd True
           else
+            echo "Conditions not met. Exiting."
             exit 0
           fi
 
@@ -131,23 +132,19 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
       - name: Set up Python 3.x
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
-      - name: Time Check and Run Gym Script
-        shell: pwsh
+
+      - name: Time Check and Run Swimming Script
+        shell: bash
         run: |
           echo "Current Hour: $(date +%H)"
           echo "Current Day: $(date +%A)"
           
-          # Get the current hour and day
-          current_hour=$(date +%H)
-          current_day=$(date +%A)
-          
-          # Check if current hour is greater than or equal to 10 and today is Monday
-          if [ "$current_hour" -ge 10 ] && [ "$current_day" == "Monday" ]; then
-            echo "Executing actions: It's after 10 AM and it's Monday."
+          if [ $(date +%H) -ge 12 ] && [ "$(date +%A)" == "Monday" ]; then
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
@@ -162,23 +159,19 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
       - name: Set up Python 3.x
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
-      - name: Time Check and Run Gym Script
-        shell: pwsh
+
+      - name: Time Check and Run Swimming Script
+        shell: bash
         run: |
           echo "Current Hour: $(date +%H)"
           echo "Current Day: $(date +%A)"
           
-          # Get the current hour and day
-          current_hour=$(date +%H)
-          current_day=$(date +%A)
-          
-          # Check if current hour is greater than or equal to 10 and today is Monday
-          if [ "$current_hour" -ge 10 ] && [ "$current_day" == "Monday" ]; then
-            echo "Executing actions: It's after 10 AM and it's Monday."
+          if [ $(date +%H) -ge 10 ] && [ "$(date +%A)" == "Tuesday" ]; then
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
@@ -193,23 +186,19 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
       - name: Set up Python 3.x
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
-      - name: Time Check and Run Gym Script
-        shell: pwsh
+
+      - name: Time Check and Run Swimming Script
+        shell: bash
         run: |
           echo "Current Hour: $(date +%H)"
           echo "Current Day: $(date +%A)"
           
-          # Get the current hour and day
-          current_hour=$(date +%H)
-          current_day=$(date +%A)
-          
-          # Check if current hour is greater than or equal to 10 and today is Monday
-          if [ "$current_hour" -ge 10 ] && [ "$current_day" == "Monday" ]; then
-            echo "Executing actions: It's after 10 AM and it's Monday."
+          if [ $(date +%H) -ge 12 ] && [ "$(date +%A)" == "Wednesday" ]; then
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
@@ -218,38 +207,27 @@ jobs:
             echo "Conditions not met. Exiting."
             exit 0
           fi
-    
-  Test:
-      runs-on: self-hosted
-      steps:
-        - name: Checkout repository
-          uses: actions/checkout@v3
-        - name: Set up Python 3.x
-          uses: actions/setup-python@v4
-          with:
-            python-version: '3.x'
-        - name: Time Check and Run Gym Script
-          shell: pwsh
-          run: |
-            echo $(date +%H)
-            echo $(date +%A)
-            if [ "A" == "A"]; then
-              python -m pip install --upgrade pip
-              pip install -r requirements.txt
-              pip install --upgrade requests
-              python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 15 --fd True
-            else
-              exit 0
-            fi
-  Run-on-Bash:
-   runs-on: self-hosted
-   steps:
-      - name: Check if running in GitHub Actions
-        shell: pwsh
-        run: |
-          if [ "$GITHUB_ACTIONS" == "true" ]; then
-            echo "Running inside GitHub Actions in bash"
-          else
-            echo "Not running inside GitHub Actions"
-          fi
 
+  Test:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Time Check and Run Test Script
+        shell: bash
+        run: |
+          echo "Current Hour: $(date +%H)"
+          echo "Current Day: $(date +%A)"
+          
+          if [ "A" == "A" ]; then
+            echo "Test condition met. Exiting."
+          else
+            echo "Test condition not met. Exiting."
+            exit 0
+          fi
