@@ -27,12 +27,16 @@ jobs:
         shell: bash
         run: |
           if [ $(date +%H) -ge 10 ] && [ "$(date +%A)" == "Monday" ]; then
-            python -m pip install --upgrade pip
+            echo $(date +%H)
+            echo $(date +%A)
+          python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install --upgrade requests
             python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 10.5 --fd True
           else
             exit 0
+            echo $(date +%H)
+            echo $(date +%A)
           fi
 
 
@@ -49,6 +53,8 @@ jobs:
       shell: bash
       run: |
         if [ $(date +%H) -ge 08 ] && [ "$(date +%A)" == "Tuesday" ]; then
+	  echo $(date +%H)
+          echo $(date +%A)
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install --upgrade requests
@@ -70,6 +76,8 @@ jobs:
       shell: bash
       run: |
         if [ $(date +%H) -ge 12 ] && [ "$(date +%A)" == "Wednesday" ]; then
+	  echo $(date +%H)
+          echo $(date +%A)
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install --upgrade requests
@@ -91,6 +99,8 @@ jobs:
       shell: bash
       run: |
         if [ $(date +%H) -ge 09 ] && [ "$(date +%A)" == "Thursday" ]; then
+	  echo $(date +%H)
+          echo $(date +%A)
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install --upgrade requests
@@ -113,6 +123,8 @@ jobs:
       shell: bash
       run: |
         if [ $(date +%H) -ge 12 ] && [ "$(date +%A)" == "Monday" ]; then
+	  echo $(date +%H)
+          echo $(date +%A)
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install --upgrade requests
@@ -134,6 +146,8 @@ jobs:
       shell: bash
       run: |
         if [ $(date +%H) -ge 10 ] && [ "$(date +%A)" == "Tuesday" ]; then
+	  echo $(date +%H)
+          echo $(date +%A)
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install --upgrade requests
@@ -155,6 +169,8 @@ jobs:
       shell: bash
       run: |
         if [ $(date +%H) -ge 12 ] && [ "$(date +%A)" == "Wednesday" ]; then
+	  echo $(date +%H)
+          echo $(date +%A)
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install --upgrade requests
