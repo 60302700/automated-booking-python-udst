@@ -4,6 +4,7 @@ import argparse
 import logging
 from bs4 import BeautifulSoup
 import random
+import json
 
 
 # Set up logging
@@ -50,11 +51,12 @@ def login(id_udst, password):
 
     # Find the script tag containing the 'login_cs' value
     script_tag = soup.find('script', string=lambda s: s and 'planyo_login' in s)
-    print(script_tag.text)
-    print('[[[')
-    print(script_tag.string)
     # Extract the script content
-    script_content = script_tag.text
+    try:
+        script_content = script_tag.text
+    except Expection as e:
+        print(e)
+        print('Login_CS not found, login not succesfull')
 
     # Use string manipulation to find and extract the 'login_cs' value
     login_cs_start = script_content.find("planyo_login['login_cs']=\"") + len("planyo_login['login_cs']=\"")
@@ -140,6 +142,9 @@ def book_slot(session, first_name, last_name, id_udst, date, time, category, ran
         if response.status_code == 200:
             logging.info("Booking successful!")
             print(response.text)
+            Data = json.loads(response.text)
+            user_text = BeautifulSoup(Data['data']['user_text'],'html parser')
+            print(user_text.get_text())
         else:
             logging.warning(f"Booking failed with status code: {response.status_code}")
             logging.debug(response.text)
