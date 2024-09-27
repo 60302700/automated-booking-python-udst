@@ -206,3 +206,15 @@ jobs:
             else
               exit 0
             fi
+  Run-on-Bash:
+   runs-on: self-hosted
+   steps:
+      - name: Check if running in GitHub Actions
+        shell: bash
+        run: |
+          if [ "$GITHUB_ACTIONS" == "true" ]; then
+            echo "Running inside GitHub Actions in bash"
+          else
+            echo "Not running inside GitHub Actions"
+          fi
+
