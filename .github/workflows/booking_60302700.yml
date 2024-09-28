@@ -222,12 +222,5 @@ jobs:
       - name: Time Check and Run Test Script
         #shell: bash
         run: |
-          echo "Current Hour: $(date +%H)"
-          echo "Current Day: $(date +%A)"
+          dir
           
-          if [ "A" == "A" ]; then
-            echo "Test condition met. Exiting."
-          else
-            echo "Test condition not met. Exiting."
-            exit 0
-          fi
