@@ -1,0 +1,20 @@
+name: Conditional Check Example
+
+on:
+  workflow_dispatch: # Trigger this manually for testing
+  schedule:
+    - cron: '0 * * * *'  # Runs every hour, change as needed
+
+jobs:
+  check-date-and-time:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Day and Time
+        id: get_datetime
+        run: |
+          echo "current_day=$(date +'%A')" >> $GITHUB_ENV
+          echo "current_hour=$(date +'%H')" >> $GITHUB_ENV
+
+      - name: Conditional Check
+        if: ${{ env.current_day == 'Monday' && env.current_hour >= 9 && env.current_hour <= 17 }}
+        run: echo "This runs only on Monday between 9 AM and 5 PM"
