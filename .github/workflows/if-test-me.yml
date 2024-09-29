@@ -1,0 +1,73 @@
+name: 60302700-AK
+on:
+  schedule:
+    - cron: '0 10 * * 1'  # Monday Gym
+    - cron: '0 8 * * 2'   # Tuesday Gym
+    - cron: '0 12 * * 3'  # Wednesday Gym
+    - cron: '0 9 * * 4'   # Thursday Gym
+    - cron: '0 12 * * 1'  # Monday Swimming
+    - cron: '0 10 * * 2'  # Tuesday Swimming
+    - cron: '0 12 * * 3'  # Wednesday Swimming
+  workflow_dispatch:
+
+jobs:
+  Automated-Booking:
+    runs-on: ubuntu-latest
+    steps:
+    
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Get Day and Time
+        id: get_datetime
+        run: |
+          echo "current_day=$(date +'%A')" >> $GITHUB_ENV
+          echo "current_hour=$(date +'%H')" >> $GITHUB_ENV
+
+      - name: Conditional Check
+        if: ${{ env.current_day == 'Monday' && env.current_hour >= 9 && env.current_hour <= 17 }}
+        run: echo "This runs only on Monday between 9 AM and 5 PM"
+
+      - name: Monday-Gym
+        #shell: bash
+        if: ${{ env.current_day == 'Monday' && env.current_hour >= 9 && env.current_hour <= 17 }}
+        run:python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 10.5 --fd True
+        
+      - name: Tuesday-Gym
+        #shell: bash
+        if: ${{ env.current_day == 'Monday' && env.current_hour >= 9 && env.current_hour <= 17 }}
+        run:python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 10.5 --fd True
+        
+      - name: Wednesday-Gym
+        #shell: bash
+        if: ${{ env.current_day == 'Monday' && env.current_hour >= 9 && env.current_hour <= 17 }}
+        run:python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 10.5 --fd True
+        
+      - name: Thursday-Gym
+        #shell: bash
+        if: ${{ env.current_day == 'Monday' && env.current_hour >= 9 && env.current_hour <= 17 }}
+        run:python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 10.5 --fd True
+      
+      - name: Monday-Swimming
+        #shell: bash
+        if: ${{ env.current_day == 'Monday' && env.current_hour >= 9 && env.current_hour <= 17 }}
+        run:python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 1 --t 10.5 --fd True
+
+      - name: Tuesday-Swimming
+        #shell: bash
+        if: ${{ env.current_day == 'Monday' && env.current_hour >= 9 && env.current_hour <= 17 }}
+        run:python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 1 --t 10.5 --fd True
+
+      - name: Wednesday-Swimming
+        #shell: bash
+        if: ${{ env.current_day == 'Monday' && env.current_hour >= 9 && env.current_hour <= 17 }}
+        run:python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 1 --t 10.5 --fd True
+
+      - name: Thursday-Swimming
+        #shell: bash
+        if: ${{ env.current_day == 'Monday' && env.current_hour >= 9 && env.current_hour <= 17 }}
+        run:python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 1 --t 10.5 --fd True
