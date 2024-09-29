@@ -30,8 +30,8 @@ jobs:
 
       - name: Date And Time
         run: |
-          echo $env.current_day
-          echo $env.current_hour
+          echo ${{ env.current_day }}
+          echo ${{ env.current_hour }}
 
       - name: Monday-Gym
         #shell: bash
