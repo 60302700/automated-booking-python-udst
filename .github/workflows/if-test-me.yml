@@ -1,4 +1,4 @@
-name: 60302700-AK
+name: 60302700-IF-Test
 on:
   schedule:
     - cron: '0 10 * * 1'  # Monday Gym
