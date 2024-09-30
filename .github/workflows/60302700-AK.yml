@@ -30,7 +30,7 @@ jobs:
           echo "current_hour=$(date +'%H')" >> $GITHUB_ENV
       
       - name: python depentencies installation
-        shell: cmd
+        #shell: bash
         run: |
           pip install -r requirements.txt
           
