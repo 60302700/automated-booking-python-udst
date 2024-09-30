@@ -22,11 +22,17 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
+    
       - name: Get Day and Time
         id: get_datetime
         run: |
           echo "current_day=$(date +'%A')" >> $GITHUB_ENV
           echo "current_hour=$(date +'%H')" >> $GITHUB_ENV
+      
+      - name: python depentencies installation
+        shell: cmd
+        run: |
+          pip install requests BeautifulSoup4
 
       - name: Date And Time
         run: |
