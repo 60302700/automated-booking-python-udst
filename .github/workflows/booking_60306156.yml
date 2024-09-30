@@ -34,16 +34,16 @@ jobs:
 
       - name: Monday-Gym
         #shell: bash
-        if: ${ env.current_day == 'Monday' && env.current_hour >= 9 && env.current_hour <= 17 }
-        run: python gym.py --pa ${ secrets.PASS_60306156 } --i ${ secrets.ID_60306156 } --ln ${ secrets.LAST_NAME_60306156 } --fn ${ secrets.FIRST_NAME_60306156 } --ca 0 --t 12 --fd True
+        if: ${{ env.current_day == 'Monday' && env.current_hour >= 9 && env.current_hour <= 17 }}
+        run: python gym.py --pa ${{ secrets.PASS_60306156 }} --i ${{ secrets.ID_60306156 }} --ln ${{ secrets.LAST_NAME_60306156 }} --fn ${{ secrets.FIRST_NAME_60306156 }} --ca 0 --t 12 --fd True
     
       - name: Wednesday-Gym
         #shell: bash
-        if: ${ env.current_day == 'Wednesday' && env.current_hour >= 9 && env.current_hour <= 17 }
-        run: python gym.py --pa ${ secrets.PASS_60306156 } --i ${ secrets.ID_60306156 } --ln ${ secrets.LAST_NAME_60306156 } --fn ${ secrets.FIRST_NAME_60306156 } --ca 0 --t 10.5 --fd True
+        if: ${{ env.current_day == 'Wednesday' && env.current_hour >= 9 && env.current_hour <= 17 }}
+        run: python gym.py --pa ${{ secrets.PASS_60306156 }} --i ${{ secrets.ID_60306156 }} --ln ${{ secrets.LAST_NAME_60306156 }} --fn ${{ secrets.FIRST_NAME_60306156 }} --ca 0 --t 10.5 --fd True
     
       - name: Wednesday-Swimming
         #shell: bash
-        if: ${ env.current_day == 'Wednesday' && env.current_hour >= 9 && env.current_hour <= 17 }
-        run: python gym.py --pa ${ secrets.PASS_60306156 } --i ${ secrets.ID_60306156 } --ln ${ secrets.LAST_NAME_60306156 } --fn ${ secrets.FIRST_NAME_60306156 } --ca 1 --t 13 --fd True
+        if: ${{ env.current_day == 'Wednesday' && env.current_hour >= 9 && env.current_hour <= 17 }}
+        run: python gym.py --pa ${{ secrets.PASS_60306156 }} --i ${{ secrets.ID_60306156 }} --ln ${{ secrets.LAST_NAME_60306156 }} --fn ${{ secrets.FIRST_NAME_60306156 }} --ca 1 --t 13 --fd True
     
