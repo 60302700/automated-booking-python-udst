@@ -1,37 +1,36 @@
 name: 60306106 - SM
 
 on:
-	schedule:
-	#GYM
-		- cron: '0 9 * * 1'		#Monday
-		- cron: '0 9 * * 2'		#Tuesday
-		- cron: '30 7 * * 3'		#Wednesday
-	#SWIMMING
-		- cron: '0 10 * * 3'		#Wednesday
-	workflow_dispatch: 
-
+  schedule:
+    - cron: '0 9 * * 1'     # Monday
+    - cron: '0 9 * * 2'     # Tuesday
+    - cron: '30 7 * * 3'    # Wednesday
+    - cron: '0 10 * * 3'    # Wednesday
+  workflow_dispatch:
 jobs:
 	Automated-Booking:
 		runs-on: ubuntu-latest
 		steps:
 		
-			- name: Checkout repository
-				uses: actions/checkout@v3
-			
-			- name: Set up Python 3.x
-				uses: actions/setup-python@v4
-				with:
-			    python-version: '3.x'
-			- name: Get Day and Time
-				id: get_datetime
-				run: |
-					echo "current_day=$(date +'%A')" >> $GITHUB_ENV
-					echo "current_hour=$(date +'%H')" >> $GITHUB_ENV
-			
-			- name: Date And Time
-				run: |
-					echo $env.current_day
-					echo $env.current_hour
+		- name: Checkout repository
+		  uses: actions/checkout@v3
+    
+		- name: Set up Python 3.x
+		  uses: actions/setup-python@v4
+		  with:
+		    python-version: '3.x'
+		
+		- name: Get Day and Time
+		  id: get_datetime
+		  run: |
+		    echo "current_day=$(date +'%A')" >> $GITHUB_ENV
+		    echo "current_hour=$(date +'%H')" >> $GITHUB_ENV
+		
+		- name: Date And Time
+		  run: |
+		    echo ${{ env.current_day }}
+		    echo ${{ env.current_hour }}
+
 
 			- name: Monday-Gym
 				#shell: bash
