@@ -8,47 +8,47 @@ on:
     - cron: '0 10 * * 3'    # Wednesday
   workflow_dispatch:
 jobs:
-	Automated-Booking:
-		runs-on: ubuntu-latest
-		steps:
-		
-		- name: Checkout repository
-		  uses: actions/checkout@v3
+  Automated-Booking:
+    runs-on: ubuntu-latest
+    steps:
     
-		- name: Set up Python 3.x
-		  uses: actions/setup-python@v4
-		  with:
-		    python-version: '3.x'
-		
-		- name: Get Day and Time
-		  id: get_datetime
-		  run: |
-		    echo "current_day=$(date +'%A')" >> $GITHUB_ENV
-		    echo "current_hour=$(date +'%H')" >> $GITHUB_ENV
-		
-		- name: Date And Time
-		  run: |
-		    echo ${{ env.current_day }}
-		    echo ${{ env.current_hour }}
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    
+    - name: Get Day and Time
+      id: get_datetime
+      run: |
+        echo "current_day=$(date +'%A')" >> $GITHUB_ENV
+        echo "current_hour=$(date +'%H')" >> $GITHUB_ENV
+    
+    - name: Date And Time
+      run: |
+        echo ${{ env.current_day }}
+        echo ${{ env.current_hour }}
 
 
-			- name: Monday-Gym
-				#shell: bash
-				if: ${ env.current_day == 'Monday' && env.current_hour >= 9 && env.current_hour <= 17 }
-				run: python gym.py --pa ${ secrets.PASS_60306106 } --i ${ secrets.ID_60306106 } --ln ${ secrets.LAST_NAME_60306106 } --fn ${ secrets.FIRST_NAME_60306106 } --ca 0 --t 12 --fd True
+      - name: Monday-Gym
+        #shell: bash
+        if: ${ env.current_day == 'Monday' && env.current_hour >= 9 && env.current_hour <= 17 }
+        run: python gym.py --pa ${ secrets.PASS_60306106 } --i ${ secrets.ID_60306106 } --ln ${ secrets.LAST_NAME_60306106 } --fn ${ secrets.FIRST_NAME_60306106 } --ca 0 --t 12 --fd True
     
-			- name: Tuesday-Gym
-				#shell: bash
-				if: ${ env.current_day == 'Tuesday' && env.current_hour >= 9 && env.current_hour <= 17 }
-				run: python gym.py --pa ${ secrets.PASS_60306106 } --i ${ secrets.ID_60306106 } --ln ${ secrets.LAST_NAME_60306106 } --fn ${ secrets.FIRST_NAME_60306106 } --ca 0 --t 12 --fd True
+      - name: Tuesday-Gym
+        #shell: bash
+        if: ${ env.current_day == 'Tuesday' && env.current_hour >= 9 && env.current_hour <= 17 }
+        run: python gym.py --pa ${ secrets.PASS_60306106 } --i ${ secrets.ID_60306106 } --ln ${ secrets.LAST_NAME_60306106 } --fn ${ secrets.FIRST_NAME_60306106 } --ca 0 --t 12 --fd True
     
-			- name: Wednesday-Gym
-				#shell: bash
-				if: ${ env.current_day == 'Wednesday' && env.current_hour >= 9 && env.current_hour <= 17 }
-				run: python gym.py --pa ${ secrets.PASS_60306106 } --i ${ secrets.ID_60306106 } --ln ${ secrets.LAST_NAME_60306106 } --fn ${ secrets.FIRST_NAME_60306106 } --ca 0 --t 10.5 --fd True
+      - name: Wednesday-Gym
+        #shell: bash
+        if: ${ env.current_day == 'Wednesday' && env.current_hour >= 9 && env.current_hour <= 17 }
+        run: python gym.py --pa ${ secrets.PASS_60306106 } --i ${ secrets.ID_60306106 } --ln ${ secrets.LAST_NAME_60306106 } --fn ${ secrets.FIRST_NAME_60306106 } --ca 0 --t 10.5 --fd True
     
-			- name: Wednesday-Swimming
-				#shell: bash
-				if: ${ env.current_day == 'Wednesday' && env.current_hour >= 9 && env.current_hour <= 17 }
-				run: python gym.py --pa ${ secrets.PASS_60306106 } --i ${ secrets.ID_60306106 } --ln ${ secrets.LAST_NAME_60306106 } --fn ${ secrets.FIRST_NAME_60306106 } --ca 1 --t 13 --fd True
+      - name: Wednesday-Swimming
+        #shell: bash
+        if: ${ env.current_day == 'Wednesday' && env.current_hour >= 9 && env.current_hour <= 17 }
+        run: python gym.py --pa ${ secrets.PASS_60306106 } --i ${ secrets.ID_60306106 } --ln ${ secrets.LAST_NAME_60306106 } --fn ${ secrets.FIRST_NAME_60306106 } --ca 1 --t 13 --fd True
     
