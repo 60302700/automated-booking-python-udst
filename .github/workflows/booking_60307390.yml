@@ -1,90 +1,55 @@
-name: 60307390 - GR
-#society
+name: 60307390 - GS
+
 on:
-  schedule:
-    - cron: '30 7 * * 0'    # Sun
-    - cron: '30 7 * * 2'    # Tues
-    - cron: '30 7 * * 4'    # Thurs
-    - cron: '0 10 * * 3'    # Wednes
-  workflow_dispatch: 
+	schedule:
+	#GYM
+		- cron: '30 7 * * 0'		#Sunday
+		- cron: '30 7 * * 2'		#Tuesday
+		- cron: '30 7 * * 4'		#Thursday
+	#SWIMMING
+		- cron: '0 10 * * 3'		#Wednesday
+	workflow_dispatch: 
 
 jobs:
-  run-booking-Sunday-Gym:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-    - name: Set up Python 3.x
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.x'
-    - name: Time_Check
-      run: |
-        if [ "$(date +%H)" == "07" ] && [ "$(date +%A)" == "Sunday" ]; then
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install --upgrade requests
-          python gym.py --pa ${{ secrets.PASS_60307390 }} --i ${{ secrets.ID_60307390 }} --ln ${{ secrets.LAST_NAME_60307390 }} --fn ${{ secrets.FIRST_NAME_60307390 }} --ca 0 --t 10.5 --fd True
-        else
-          exit 0
-        fi
+	Automated-Booking:
+		runs-on: ubuntu-latest
+		steps:
+		
+			- name: Checkout repository
+				uses: actions/checkout@v3
+			
+			- name: Set up Python 3.x
+				uses: actions/setup-python@v4
+				with:
+			    python-version: '3.x'
+			- name: Get Day and Time
+				id: get_datetime
+				run: |
+					echo "current_day=$(date +'%A')" >> $GITHUB_ENV
+					echo "current_hour=$(date +'%H')" >> $GITHUB_ENV
+			
+			- name: Date And Time
+				run: |
+					echo $env.current_day
+					echo $env.current_hour
 
-  run-booking-Tuesday-Gym:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-    - name: Set up Python 3.x
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.x'
-    - name: Time_Check
-      run: |
-        if [ "$(date +%H)" == "07" ] && [ "$(date +%A)" == "Tuesday" ]; then
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install --upgrade requests
-          python gym.py --pa ${{ secrets.PASS_60307390 }} --i ${{ secrets.ID_60307390 }} --ln ${{ secrets.LAST_NAME_60307390 }} --fn ${{ secrets.FIRST_NAME_60307390 }} --ca 0 --t 10.5 --fd True
-        else
-          exit 0
-        fi
-
-  run-booking-Thursday-Gym:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-    - name: Set up Python 3.x
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.x'
-    - name: Time_Check
-      run: |
-        if [ "$(date +%H)" == "07" ] && [ "$(date +%A)" == "Thursday" ]; then
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install --upgrade requests
-          python gym.py --pa ${{ secrets.PASS_60307390 }} --i ${{ secrets.ID_60307390 }} --ln ${{ secrets.LAST_NAME_60307390 }} --fn ${{ secrets.FIRST_NAME_60307390 }} --ca 0 --t 10.5 --fd True
-        else
-          exit 0
-        fi
-
-  run-booking-Wednesday-Swimming:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-    - name: Set up Python 3.x
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.x'
-    - name: Time_Check
-      run: |
-        if [ "$(date +%H)" == "10" ] && [ "$(date +%A)" == "Wednesday" ]; then
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install --upgrade requests
-          python gym.py --pa ${{ secrets.PASS_60307390 }} --i ${{ secrets.ID_60307390 }} --ln ${{ secrets.LAST_NAME_60307390 }} --fn ${{ secrets.FIRST_NAME_60307390 }} --ca 1 --t 13 --fd True
-        else
-          exit 0
-        fi
+			- name: Sunday-Gym
+				#shell: bash
+				if: ${ env.current_day == 'Sunday' && env.current_hour >= 9 && env.current_hour <= 17 }
+				run: python gym.py --pa ${ secrets.PASS_60307390 } --i ${ secrets.ID_60307390 } --ln ${ secrets.LAST_NAME_60307390 } --fn ${ secrets.FIRST_NAME_60307390 } --ca 0 --t 10.5 --fd True
+    
+			- name: Tuesday-Gym
+				#shell: bash
+				if: ${ env.current_day == 'Tuesday' && env.current_hour >= 9 && env.current_hour <= 17 }
+				run: python gym.py --pa ${ secrets.PASS_60307390 } --i ${ secrets.ID_60307390 } --ln ${ secrets.LAST_NAME_60307390 } --fn ${ secrets.FIRST_NAME_60307390 } --ca 0 --t 10.5 --fd True
+    
+			- name: Thursday-Gym
+				#shell: bash
+				if: ${ env.current_day == 'Thursday' && env.current_hour >= 9 && env.current_hour <= 17 }
+				run: python gym.py --pa ${ secrets.PASS_60307390 } --i ${ secrets.ID_60307390 } --ln ${ secrets.LAST_NAME_60307390 } --fn ${ secrets.FIRST_NAME_60307390 } --ca 0 --t 10.5 --fd True
+    
+			- name: Wednesday-Swimming
+				#shell: bash
+				if: ${ env.current_day == 'Wednesday' && env.current_hour >= 9 && env.current_hour <= 17 }
+				run: python gym.py --pa ${ secrets.PASS_60307390 } --i ${ secrets.ID_60307390 } --ln ${ secrets.LAST_NAME_60307390 } --fn ${ secrets.FIRST_NAME_60307390 } --ca 1 --t 13 --fd True
+    
