@@ -139,9 +139,9 @@ def book_slot(session, first_name, last_name, id_udst, date, time, category, ran
             print(response.text)
             Data = json.loads(response.text)
             if Data['data']['user_text']:
-                user_text = BeautifulSoup(Data['data']['user_text'],'html parser')
+                user_text = BeautifulSoup(Data['data']['user_text'],'html.parser')
             else:
-                user_text = BeautifulSoup(Data['response_message'],'html parser')
+                user_text = Data['response_message'].split('<script')[0].strip()
             print(user_text.get_text())
         else:
             logging.warning(f"Booking failed with status code: {response.status_code}")
