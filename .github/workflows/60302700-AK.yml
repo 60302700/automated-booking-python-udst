@@ -1,4 +1,4 @@
-name: 60302700-AK-01
+name: 60302700-AK
 on:
   schedule:
     - cron: '30 10 * * 1'  # Monday Gym Qatar -3 = UTC
