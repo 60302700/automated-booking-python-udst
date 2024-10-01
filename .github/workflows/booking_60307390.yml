@@ -22,11 +22,25 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
+      
       - name: Get Day and Time
         id: get_datetime
+        shell: powershell
         run: |
-          echo "current_day=$(date +'%A')" >> $GITHUB_ENV
-          echo "current_hour=$(date +'%H')" >> $GITHUB_ENV
+          $current_hour = Get-Date -Format 'HH'
+          $current_day = Get-Date -Format 'dddd'
+          echo "::set-output name=current_hour::$current_hour"
+          echo "::set-output name=current_day::$current_day"
+      
+      - name: Date And Time
+        run: |
+          echo "Current Day: ${{ steps.get_datetime.outputs.current_day }}"
+          echo "Current Hour: ${{ steps.get_datetime.outputs.current_hour }}"
+      
+      - name: python depentencies installation
+        shell: cmd
+        run: |
+          pip install -r requirements.txt
       
       - name: Date And Time
         run: |
@@ -34,22 +48,22 @@ jobs:
           echo $env.current_hour
 
       - name: Sunday-Gym
-        #shell: bash
-        if: ${{ env.current_day == 'Sunday' && env.current_hour >= 10}}
+        shell: powershell
+        if: ${{steps.get_datetime.outputs.current_day == 'Sunday' && steps.get_datetime.outputs.current_hour >= 10}}
         run: python gym.py --pa ${{ secrets.PASS_60307390 }} --i ${{ secrets.ID_60307390 }} --ln ${{ secrets.LAST_NAME_60307390 }} --fn ${{ secrets.FIRST_NAME_60307390 }} --ca 0 --t 10.5 --fd True
     
       - name: Tuesday-Gym
-        #shell: bash
-        if: ${{ env.current_day == 'Tuesday' && env.current_hour >= 10}}
+        shell: powershell
+        if: ${{steps.get_datetime.outputs.current_day == 'Tuesday' && steps.get_datetime.outputs.current_hour >= 10}}
         run: python gym.py --pa ${{ secrets.PASS_60307390 }} --i ${{ secrets.ID_60307390 }} --ln ${{ secrets.LAST_NAME_60307390 }} --fn ${{ secrets.FIRST_NAME_60307390 }} --ca 0 --t 10.5 --fd True
     
       - name: Thursday-Gym
-        #shell: bash
-        if: ${{ env.current_day == 'Thursday' && env.current_hour >= 10}}
+        shell: powershell
+        if: ${{steps.get_datetime.outputs.current_day == 'Thursday' && steps.get_datetime.outputs.current_hour >= 10}}
         run: python gym.py --pa ${{ secrets.PASS_60307390 }} --i ${{ secrets.ID_60307390 }} --ln ${{ secrets.LAST_NAME_60307390 }} --fn ${{ secrets.FIRST_NAME_60307390 }} --ca 0 --t 10.5 --fd True
     
       - name: Wednesday-Swimming
-        #shell: bash
-        if: ${{ env.current_day == 'Wednesday' && env.current_hour >= 13}}
+        shell: powershell
+        if: ${{steps.get_datetime.outputs.current_day == 'Wednesday' && steps.get_datetime.outputs.current_hour >= 13}}
         run: python gym.py --pa ${{ secrets.PASS_60307390 }} --i ${{ secrets.ID_60307390 }} --ln ${{ secrets.LAST_NAME_60307390 }} --fn ${{ secrets.FIRST_NAME_60307390 }} --ca 1 --t 13 --fd True
     
