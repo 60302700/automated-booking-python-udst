@@ -27,8 +27,9 @@ jobs:
         id: get_datetime
         shell: pwsh
         run: |
-          Get-Date -format "HH" >> $GITHUB_ENV
-          Get-Date -format "dd" >> $GITHUB_ENV
+          echo "current_hour=$(Get-Date -Format 'HH')" >> $GITHUB_ENV
+          echo "current_day=$(Get-Date -Format 'dd')" >> $GITHUB_ENV
+
       
       - name: python depentencies installation
         shell: cmd
