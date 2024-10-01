@@ -34,8 +34,8 @@ jobs:
 
       - name: Date And Time
         run: |
-          echo "Current Day: ${{ env.current_day }}"
-          echo "Current Hour: ${{ env.current_hour }}"
+          echo "Current Day: $current_day"
+          echo "Current Hour: $current_hour"
 
       
       - name: python depentencies installation
@@ -43,10 +43,6 @@ jobs:
         run: |
           pip install -r requirements.txt
           
-      - name: Date And Time
-        run: |
-          echo ${{ env.current_day }}
-          echo ${{ env.current_hour }}
 
       - name: Monday-Gym
         shell: cmd
