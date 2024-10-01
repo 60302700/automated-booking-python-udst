@@ -34,8 +34,8 @@ jobs:
 
       - name: Date And Time
         run: |
-          echo "Current Day: $current_day"
-          echo "Current Hour: $current_hour"
+          echo "Current Day: ${{ env.current_day}}"
+          echo "Current Hour: ${{ env.current_hour }}"
 
       
       - name: python depentencies installation
