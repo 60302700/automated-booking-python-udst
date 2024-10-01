@@ -30,7 +30,7 @@ jobs:
           echo "current_hour=$(date +'%H')" >> $GITHUB_ENV
       
       - name: python depentencies installation
-        #shell: bash
+        shell: cmd
         run: |
           pip install -r requirements.txt
           
@@ -40,36 +40,36 @@ jobs:
           echo ${{ env.current_hour }}
 
       - name: Monday-Gym
-        #shell: bash
+        shell: cmd
         if: ${{ env.current_day == 'Monday' && env.current_hour >= 13 }}
         run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 13.5 --fd True
         
       - name: Tuesday-Gym
-        #shell: bash
+        shell: cmd
         if: ${{ env.current_day == 'Tuesday' && env.current_hour >= 10 }}
         run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 10.5 --fd True
         
       - name: Wednesday-Gym
-        #shell: bash
+        shell: cmd
         if: ${{ env.current_day == 'Wednesday' && env.current_hour >= 10 }}
         run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 10.5 --fd True
         
       - name: Thursday-Gym
-        #shell: bash
+        shell: cmd
         if: ${{ env.current_day == 'Thursday' && env.current_hour >= 12 }}
         run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 12 --fd True
       
       - name: Monday-Swimming
-        #shell: bash
+        shell: cmd
         if: ${{ env.current_day == 'Monday' && env.current_hour >= 15 }}
         run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 1 --t 15 --fd True
 
       - name: Tuesday-Swimming
-        #shell: bash
+        shell: cmd
         if: ${{ env.current_day == 'Tuesday' && env.current_hour >= 12 }}
         run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 1 --t 12 --fd True
 
       - name: Wednesday-Swimming
-        #shell: bash
+        shell: cmd
         if: ${{ env.current_day == 'Wednesday' && env.current_hour >= 13 }}
         run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 1 --t 13 --fd True
