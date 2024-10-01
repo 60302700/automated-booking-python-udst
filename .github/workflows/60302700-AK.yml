@@ -27,8 +27,8 @@ jobs:
         id: get_datetime
         shell: powershell
         run: |
-           echo "current_hour=$(Get-Date -Format 'HH')" >> $GITHUB_ENV
-           echo "current_day=$(Get-Date -Format 'dd')" >> $GITHUB_ENV
+           "current_hour=$(Get-Date -Format 'HH')" | Out-File -FilePath $GITHUB_ENV -Append
+           "current_day=$(Get-Date -Format 'dd')" | Out-File -FilePath $GITHUB_ENV -Append
 
       
       - name: python depentencies installation
