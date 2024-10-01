@@ -25,6 +25,7 @@ jobs:
     
       - name: Get Day and Time
         id: get_datetime
+        shell: cmd
         run: |
           echo "current_day=$(date +'%A')" >> $GITHUB_ENV
           echo "current_hour=$(date +'%H')" >> $GITHUB_ENV
