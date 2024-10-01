@@ -28,7 +28,12 @@ jobs:
         shell: powershell
         run: |
            "current_hour=$(Get-Date -Format 'HH')" | Out-File -FilePath $GITHUB_ENV -Append
-           "current_day=$(Get-Date -Format 'dd')" | Out-File -FilePath $GITHUB_ENV -Append
+           "current_day=$(Get-Date -Format 'dddd')" | Out-File -FilePath $GITHUB_ENV -Append  # Use 'dddd' for full day name
+
+      - name: Date And Time
+        run: |
+          echo "Current Day: ${{ env.current_day }}"
+          echo "Current Hour: ${{ env.current_hour }}"
 
       
       - name: python depentencies installation
