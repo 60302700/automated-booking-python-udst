@@ -27,8 +27,10 @@ jobs:
         id: get_datetime
         shell: powershell
         run: |
-           "current_hour=$(Get-Date -Format 'HH')" | Out-File -FilePath $GITHUB_ENV -Append
-           "current_day=$(Get-Date -Format 'dddd')" | Out-File -FilePath $GITHUB_ENV -Append  # Use 'dddd' for full day name
+           $current_hour= Get-Date -Format 'HH'
+           $current_day = Get-Date -Format 'dddd'
+           echo "current_hour=$current_hour" >> $GITHUB_EN
+           echo "current_day=$current_day" >> $GITHUB_ENV
 
       - name: Date And Time
         run: |
