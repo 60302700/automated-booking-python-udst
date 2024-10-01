@@ -25,10 +25,10 @@ jobs:
     
       - name: Get Day and Time
         id: get_datetime
-        shell: cmd
+        shell: pwsh
         run: |
-          echo "current_day=$(date +'%A')" >> $GITHUB_ENV
-          echo "current_hour=$(date +'%H')" >> $GITHUB_ENV
+          Get-Date -format "HH" >> $GITHUB_ENV
+          Get-Date -format "dd" >> $GITHUB_ENV
       
       - name: python depentencies installation
         shell: cmd
