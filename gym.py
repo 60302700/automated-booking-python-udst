@@ -50,7 +50,7 @@ def login(id_udst, password):
     # Extract the script content
     try:
         script_content = script_tag.text
-    except Expection as e:
+    except Exception as e:
         print(e,'Login_CS not found, login not succesfull')
 
     # Use string manipulation to find and extract the 'login_cs' value
