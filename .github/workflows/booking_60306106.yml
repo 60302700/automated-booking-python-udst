@@ -46,7 +46,7 @@ jobs:
       run: python gym.py --pa ${{ secrets.PASS_60306106 }} --i ${{ secrets.ID_60306106 }} --ln ${{ secrets.LAST_NAME_60306106 }} --fn ${{ secrets.FIRST_NAME_60306106 }} --ca 0 --t 12 --fd True
     
     - name: Wednesday-Gym
-      shell: powershell
+      shell: cmd
       if: ${{ steps.get_datetime.outputs.current_day == 'Wednesday' && steps.get_datetime.outputs.current_hour >= 10 && steps.get_datetime.outputs.current_hour <= 11}}
       run: python gym.py --pa ${{ secrets.PASS_60306106 }} --i ${{ secrets.ID_60306106 }} --ln ${{ secrets.LAST_NAME_60306106 }} --fn ${{ secrets.FIRST_NAME_60306106 }} --ca 0 --t 10.5 --fd True
     
