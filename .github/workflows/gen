@@ -1,0 +1,46 @@
+def time_to_cron(hr,min,day):
+	D = {'Sunday':0,'Monday':1,'Tuesday':2,'Wednesday':3,'Thursday':4}
+	day = D[day.capitalize()]
+	return f'{min} {hr} * * {D}'
+	return None
+
+
+def add_res():
+	return None
+
+def error_handle(v,s,t,f='h'):
+	while True:
+		try:
+			if type(f) = str:
+				v = input(s)
+			elif type(f) = int:
+				v = int(input(s))
+		except:
+			print(f'Please enter a {t}')
+	return v
+
+def get_time():
+	hr = error_handle(hr,'Please Enter Hour','Hour',1)
+	min = error_handle(hr,'Please Enter Min','Hour',2)
+	day = error_handle(hr,'Please Enter Day','Hour')
+	time_to_cron(hr,min,day)
+
+output = ''''''
+
+times = None
+time = ''
+
+name = ''
+
+name = error_handle(name,'Enter Your Name Or Id','Id Or Name')
+
+
+output += f'name: {name}'
+
+
+
+while type(times) != str:
+	try:
+		times = input('How many times in a week do you go to both gyum and pool: ')
+	except:
+		print('Please Enter A Number')
