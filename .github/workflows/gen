@@ -2,7 +2,6 @@ def time_to_cron(hr,min,day):
 	D = {'Sunday':0,'Monday':1,'Tuesday':2,'Wednesday':3,'Thursday':4}
 	day = D[day.capitalize()]
 	return f'{min} {hr} * * {D}'
-	return None
 
 
 def add_res():
@@ -23,7 +22,8 @@ def get_time():
 	hr = error_handle(hr,'Please Enter Hour','Hour',1)
 	min = error_handle(hr,'Please Enter Min','Hour',2)
 	day = error_handle(hr,'Please Enter Day','Hour')
-	time_to_cron(hr,min,day)
+	cron = time_to_cron(hr,min,day)
+	return cron
 
 output = ''''''
 
@@ -44,3 +44,36 @@ while type(times) != str:
 		times = input('How many times in a week do you go to both gyum and pool: ')
 	except:
 		print('Please Enter A Number')
+
+output += '''on:/n  schedule:'''
+for i in times:
+	cron = get_time()
+	output += f"    - cron: '{cron}'"
+output += '''jobs:
+  Automated-Booking:
+    runs-on: self-hosted
+    steps:
+    
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+    
+      - name: Get Day and Time
+        id: get_datetime
+        shell: powershell
+        run: |
+          $current_hour = Get-Date -Format 'HH'
+          $current_day = Get-Date -Format 'dddd'
+          echo "::set-output name=current_hour::$current_hour"
+          echo "::set-output name=current_day::$current_day"
+      
+      - name: Date And Time
+        run: |
+          echo "Current Day: ${{ steps.get_datetime.outputs.current_day }}"
+          echo "Current Hour: ${{ steps.get_datetime.outputs.current_hour }}"'''
+
+print(output)
