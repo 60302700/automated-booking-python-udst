@@ -35,16 +35,16 @@ jobs:
           echo "Current Hour: ${{ steps.get_datetime.outputs.current_hour }}"
       - name: Sunday-Gym
         shell: powershell
-        if: ${ steps.get_datetime.outputs.current_day == 'Sunday' && steps.get_datetime.outputs.current_hour >= 9 && steps.get_datetime.outputs.current_hour <= 10 }
+        if: ${{ steps.get_datetime.outputs.current_day == 'Sunday' && steps.get_datetime.outputs.current_hour >= 9 && steps.get_datetime.outputs.current_hour <= 10 }}
         run: python gym.py --pa ${ secrets.PASS_60307375 } --i ${ secrets.ID_60307375 } --ln ${ secrets.LAST_NAME_60307375 } --fn ${ secrets.ME_FIRST_60307375 } --ca 0 --t 13.5 --fd True
 
       - name: Monday-Gym
         shell: powershell
-        if: ${ steps.get_datetime.outputs.current_day == 'Monday' && steps.get_datetime.outputs.current_hour >= 9 && steps.get_datetime.outputs.current_hour <= 10 }
+        if: ${{ steps.get_datetime.outputs.current_day == 'Monday' && steps.get_datetime.outputs.current_hour >= 9 && steps.get_datetime.outputs.current_hour <= 10 }}
         run: python gym.py --pa ${ secrets.PASS_60307375 } --i ${ secrets.ID_60307375 } --ln ${ secrets.LAST_NAME_60307375 } --fn ${ secrets.ME_FIRST_60307375 } --ca 0 --t 13.5 --fd True
 
       - name: Tuesday-Gym
         shell: powershell
-        if: ${ steps.get_datetime.outputs.current_day == 'Tuesday' && steps.get_datetime.outputs.current_hour >= 7 && steps.get_datetime.outputs.current_hour <= 8 }
+        if: ${{ steps.get_datetime.outputs.current_day == 'Tuesday' && steps.get_datetime.outputs.current_hour >= 7 && steps.get_datetime.outputs.current_hour <= 8 }}
         run: python gym.py --pa ${ secrets.PASS_60307375 } --i ${ secrets.ID_60307375 } --ln ${ secrets.LAST_NAME_60307375 } --fn ${ secrets.ME_FIRST_60307375 } --ca 0 --t 13.5 --fd True
 
