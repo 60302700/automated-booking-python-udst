@@ -1,9 +1,12 @@
-name: 60307375
+name: 60307375-SA
 on:
   schedule:
     - cron: '0 6 * * 0'
     - cron: '0 6 * * 1'
     - cron: '30 4 * * 2'
+
+  workflow_dispatch:
+
 jobs:
   Automated-Booking:
     runs-on: self-hosted
