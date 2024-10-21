@@ -43,7 +43,6 @@ jobs:
         shell: cmd
         run: |
           pip install -r requirements.txt
-          pip install requests
           
 
       - name: Monday-Gym
