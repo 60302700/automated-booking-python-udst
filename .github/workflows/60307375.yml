@@ -33,6 +33,12 @@ jobs:
         run: |
           echo "Current Day: ${{ steps.get_datetime.outputs.current_day }}"
           echo "Current Hour: ${{ steps.get_datetime.outputs.current_hour }}"
+      
+      - name: python depentencies installation
+        shell: cmd
+        run: |
+          pip install -r requirements.txt
+    
       - name: Sunday-Gym
         shell: powershell
         if: ${{ steps.get_datetime.outputs.current_day == 'Sunday' && steps.get_datetime.outputs.current_hour >= 9 && steps.get_datetime.outputs.current_hour <= 10 }}
