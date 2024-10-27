@@ -48,12 +48,8 @@ def login(id_udst, password):
     # Find the script tag containing the 'login_cs' value
     script_tag = soup.find('script', string=lambda s: s and 'planyo_login' in s)
     # Extract the script content
-    script_content = script_tag.text
     try:
-        if script_content == None:
-            print('Not Loged In')
-        else:
-            pass
+        script_content = script_tag.text
     except Exception as e:
         print(e)
         
