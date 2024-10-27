@@ -52,7 +52,8 @@ def login(id_udst, password):
         script_content = script_tag.text
     except Exception as e:
         print(e)
-        
+        print('Most likely a passowrd issue')
+        exit()        
 
     # Use string manipulation to find and extract the 'login_cs' value
     login_cs_start = script_content.find("planyo_login['login_cs']=\"") + len("planyo_login['login_cs']=\"")
