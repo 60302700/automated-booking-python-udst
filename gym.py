@@ -17,11 +17,12 @@ logging.basicConfig(
     ]
 )
 
-def future_day():
-    date = datetime.now() + timedelta(days=7)
+def future_day(day):
+    date = datetime.now() + timedelta(days=day)
     return date.strftime("%B %d %Y")
 
 def get_time_for_gaming(time):
+    # End-time for gaming is 6 hours ahead, and is capped at 21
     adjusted_time = time + 6 
     if adjusted_time > 21: adjusted_time = 21
     if adjusted_time % 1 == 0:
@@ -185,9 +186,9 @@ parser.add_argument('--ln', type=str, help='Last Name')
 parser.add_argument('--i', required=True, type=str, help='User ID for login')
 parser.add_argument('--ca', type=int, required=True, help='Category index')
 parser.add_argument('--t',type=str,required=True,help="Time In 24 hrs format , 12:30 = 12.5")
-parser.add_argument('--fd',type=bool,help="7 days ahead booking")
+parser.add_argument('--fd',type=int,help="7 days ahead booking")
 parser.add_argument('--d',type=str,help="set the day and date")
-
+parser.add_argument('--duration', type=str, help="Add custom duration to booking")
 
 # Parse the arguments
 args = parser.parse_args()
@@ -198,9 +199,16 @@ session, login_cs = login(id_udst=args.i, password=args.pa)
 category = ['178388', '178795', '235824']
 range_time = ['1.5', '1', '2']
 
-# Example of how to calculate the date and time
+if args.duration is not None:
+    # If custom duration is provided
+    range_time_chosen = args.duration
+else:
+    # Otherwise use category-default timings
+    range_time_chosen = range_time[args.ca]
+
+#Example of how to calculate the date and time
 if not args.fd:
-    book_slot(session=session, first_name=args.fn, last_name=args.ln, id_udst=args.i, date=args.d, time=args.t, category=category[args.ca], range_time=range_time[args.ca], login_cs=login_cs)
+    book_slot(session=session, first_name=args.fn, last_name=args.ln, id_udst=args.i, date=args.d, time=args.t, category=category[args.ca], range_time=range_time_chosen, login_cs=login_cs)
 else:
     date = future_day()
-    book_slot(session=session, first_name=args.fn, last_name=args.ln, id_udst=args.i, date=date, time=args.t, category=category[args.ca], range_time=range_time[args.ca], login_cs=login_cs)
+    book_slot(session=session, first_name=args.fn, last_name=args.ln, id_udst=args.i, date=date, time=args.t, category=category[args.ca], range_time=range_time_chosen, login_cs=login_cs)
