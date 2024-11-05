@@ -21,6 +21,14 @@ def future_day():
     date = datetime.now() + timedelta(days=7)
     return date.strftime("%B %d %Y")
 
+def get_time_for_gaming(time):
+    adjusted_time = time + 6 
+    if adjusted_time > 21: adjusted_time = 21
+    if adjusted_time % 1 == 0:
+        return str(int(adjusted_time))
+    return str(float(adjusted_time))
+
+
 def get_csrf_token_from_page(session, url):
     """Extract CSRF token from a given page URL."""
     response = session.get(url,timeout=(10, 30),verify=True)
@@ -84,34 +92,47 @@ def book_slot(session, first_name, last_name, id_udst, date, time, category, ran
     booking_url = "https://udstsport.udst.edu.qa/sportsbooking/planyo/ulap.php"
 
     data = {
-    'mode': 'make_reservation',
-    'site_id': '56012',
-    'resource_id': category,
-    'one_date': date,
-    'start_time': time,  # Assuming this is in hours (7.5 = 7:30 AM)
-    'end_time': time,  # Should this be the same as the start time? Might need adjustment
-    'time_mode': 'part_day',
-    'rental_time_fixed_value': range_time,  # 1.5-hour rental
-    'quantity': '1',
-    'first': first_name,
-    'last': last_name,
-    'email': f'{id_udst}@udst.edu.qa',
-    'verify_data': 'true',
-    'granulation': '15',
-    'is_night': '0',
-    'first_working_hour': '6',  # 6 AM
-    'last_working_hour': '20',  # 8 PM
-    'submitted': 'true',
-    'feedback_url':f'https://udstsport.udst.edu.qa/booking?ppp_upcoming_av_day_choices=7,15,30&ppp_res_period=1725861600-1725866999&planyo_lang=EN&mode=reserve&prefill=true&one_date={date}&start_date={date}&start_time={time}&resource_id={category}',
-    'ulap_url': 'https://www.planyo.com/rest/planyo-reservations.php',
-    'language': 'en',
-    'plugin_mode': '10',
-    'dynm': '1',
-    'login_cs': login_cs,  # Your session token
-    'login_email': f'{id_udst}@udst.edu.qa',
-    'ppp_upcoming_av_day_choices': '7,15,30',
-    'ppp_res_period': '1725861600-1725866999',  # Reservation period in Unix time
-    'user_agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36'}
+        'mode': 'make_reservation',
+        'site_id': '56012',
+        'resource_id': category,
+        'one_date': date,
+        'start_time': time,  # Assuming this is in hours (7.5 = 7:30 AM)
+        'end_time': time,  # Should this be the same as the start time? Might need adjustment
+        'time_mode': 'part_day',
+        #! SEE COMMENT BELOW: 'rental_time_fixed_value': range_time,  # 1.5-hour rental
+        'quantity': '1',
+        'first': first_name,
+        'last': last_name,
+        'email': f'{id_udst}@udst.edu.qa',
+        'verify_data': 'true',
+        'granulation': '15',
+        'is_night': '0',
+        'first_working_hour': '6',  # 6 AM
+        'last_working_hour': '20',  # 8 PM
+        'submitted': 'true',
+        'feedback_url':f'https://udstsport.udst.edu.qa/booking?ppp_upcoming_av_day_choices=7,15,30&ppp_res_period=1725861600-1725866999&planyo_lang=EN&mode=reserve&prefill=true&one_date={date}&start_date={date}&start_time={time}&resource_id={category}',
+        'ulap_url': 'https://www.planyo.com/rest/planyo-reservations.php',
+        'language': 'en',
+        'plugin_mode': '10',
+        'dynm': '1',
+        'login_cs': login_cs,  # Your session token
+        'login_email': f'{id_udst}@udst.edu.qa',
+        'ppp_upcoming_av_day_choices': '7,15,30',
+        'ppp_res_period': '1725861600-1725866999',  # Reservation period in Unix time
+        'user_agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36'
+    }
+
+    if category == '235824':    # FOR GAMING BOOKING
+        data['rental_time_value'] = range_time 
+        data['rental_duration_text'] = f"{range_time} Hour Booking"
+        data['granulation'] = '60'
+        data['first_working_hour'] = '7'
+        data['last_working_hour'] = '22'
+        data['end_time'] = get_time_for_gaming(time)
+    else:
+        # DEFAULT VALUE FOR OTHER BOOKINGS
+        data['rental_time_fixed_value'] = range_time
+
     # Step 5: Prepare headers for the booking request
     post_headers = {
         'Host': 'udstsport.udst.edu.qa',
@@ -174,8 +195,8 @@ args = parser.parse_args()
 # Login using the parsed arguments
 session, login_cs = login(id_udst=args.i, password=args.pa)
 
-category = ['178388', '178795']
-range_time = ['1.5', '1']
+category = ['178388', '178795', '235824']
+range_time = ['1.5', '1', '2']
 
 # Example of how to calculate the date and time
 if not args.fd:
