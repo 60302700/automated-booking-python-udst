@@ -123,12 +123,12 @@ def book_slot(session, first_name, last_name, id_udst, date, time, category, ran
         'user_agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36'
     }
 
-    if category == '235824':    # FOR GAMING BOOKING
+    if category == '235845' or category == '235824':    # FOR GAMING BOOKING
         data['rental_time_value'] = range_time 
         data['rental_duration_text'] = f"{range_time} Hour Booking"
         data['granulation'] = '60'
         data['first_working_hour'] = '7'
-        data['last_working_hour'] = '22'
+        data['last_working_hour'] = '19'    # from 22 -> 19
         data['end_time'] = get_time_for_gaming(time)
     else:
         # DEFAULT VALUE FOR OTHER BOOKINGS
@@ -196,7 +196,8 @@ args = parser.parse_args()
 # Login using the parsed arguments
 session, login_cs = login(id_udst=args.i, password=args.pa)
 
-category = ['178388', '178795', '235824']
+# GYM, SWIMMING, HIGH-END, STANDARD GAMING (in order)
+category = ['178388', '178795', '235825','235824']
 range_time = ['1.5', '1', '2']
 
 if args.duration is not None:
