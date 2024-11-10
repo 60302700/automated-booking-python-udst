@@ -196,7 +196,7 @@ args = parser.parse_args()
 # Login using the parsed arguments
 session, login_cs = login(id_udst=args.i, password=args.pa)
 
-# GYM, SWIMMING, HIGH-END, STANDARD GAMING (in order)
+# GYM, SWIMMING, STANDARD, HIGH-END GAMING (in order)
 category = ['178388', '178795', '235825','235824']
 range_time = ['1.5', '1', '2']
 
