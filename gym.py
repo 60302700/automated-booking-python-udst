@@ -129,6 +129,7 @@ def book_slot(session, first_name, last_name, id_udst, date, time, category, ran
         data['granulation'] = '60'
         data['first_working_hour'] = '7'
         data['last_working_hour'] = '19'    # from 22 -> 19
+        data['feedback_url'] = 'https://udstsport.udst.edu.qa/booking'
         #data['end_time'] = get_time_for_gaming(time)
     else:
         # DEFAULT VALUE FOR OTHER BOOKINGS
