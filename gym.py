@@ -98,7 +98,7 @@ def book_slot(session, first_name, last_name, id_udst, date, time, category, ran
         'resource_id': category,
         'one_date': date,
         'start_time': time,  # Assuming this is in hours (7.5 = 7:30 AM)
-        #'end_time': time,  # Should this be the same as the start time? Might need adjustment
+        'end_time': time,  # Should this be the same as the start time? Might need adjustment
         'time_mode': 'part_day',
         #! SEE COMMENT BELOW: 'rental_time_fixed_value': range_time,  # 1.5-hour rental
         'quantity': '1',
@@ -129,7 +129,7 @@ def book_slot(session, first_name, last_name, id_udst, date, time, category, ran
         data['granulation'] = '60'
         data['first_working_hour'] = '7'
         data['last_working_hour'] = '19'    # from 22 -> 19
-        #data['end_time'] = get_time_for_gaming(time)
+        data['end_time'] = get_time_for_gaming(time)
     else:
         # DEFAULT VALUE FOR OTHER BOOKINGS
         data['rental_time_fixed_value'] = range_time
