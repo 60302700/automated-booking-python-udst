@@ -212,5 +212,5 @@ else:
 if not args.fd:
     book_slot(session=session, first_name=args.fn, last_name=args.ln, id_udst=args.i, date=args.d, time=args.t, category=category[args.ca], range_time=range_time_chosen, login_cs=login_cs)
 else:
-    date = future_day()
+    date = future_day(args.fd)
     book_slot(session=session, first_name=args.fn, last_name=args.ln, id_udst=args.i, date=date, time=args.t, category=category[args.ca], range_time=range_time_chosen, login_cs=login_cs)
