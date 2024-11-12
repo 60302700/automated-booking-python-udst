@@ -79,7 +79,3 @@ jobs:
         shell: powershell
         if: ${{ steps.get_datetime.outputs.current_day == 'Wednesday' && steps.get_datetime.outputs.current_hour >= 13 && steps.get_datetime.outputs.current_hour <= 14 }}
         run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 1 --t 13 --fd 7
-      
-      - name: Test
-        shell: powershell
-        run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 1 --t 13 --fd 7
