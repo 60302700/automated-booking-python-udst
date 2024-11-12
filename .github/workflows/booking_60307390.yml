@@ -9,9 +9,9 @@ on:
   #SWIMMING
     - cron: '0 10 * * 3'    #Wednesday
   #GAMING-STANDARD
-    - cron: '0 12 * * 2'    #Tuesday
+    - cron: '0 12 * * 0'    #Tuesday
   #GAMING-HIGH-END
-    - cron: '0 13 * * 2'    #Tuesday
+    - cron: '0 13 * * 0'    #Tuesday
   workflow_dispatch: 
 
 jobs:
