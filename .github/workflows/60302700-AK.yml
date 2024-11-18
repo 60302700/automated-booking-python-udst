@@ -4,7 +4,7 @@ on:
     - cron: '30 10 * * 1'  # Monday Gym Qatar -3 = UTC
     - cron: '30 7 * * 2'   # Tuesday Gym
     - cron: '30 7 * * 3'  # Wednesday Gym
-    - cron: '0 7 * * 4'   # Thursday Gym
+    - cron: '0 9 * * 4'   # Thursday Gym
     - cron: '0 12 * * 1'  # Monday Swimming
     - cron: '0 9 * * 2'  # Tuesday Swimming
     - cron: '0 10 * * 3'  # Wednesday Swimming
