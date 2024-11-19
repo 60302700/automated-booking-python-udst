@@ -56,4 +56,4 @@ jobs:
 
       - name: Test
         shell: powershell
-        run: python gym.py --pa $SAJJAD_PASSWORD --i ${{ secrets.ID_60307375 }} --ln ${{ secrets.LAST_NAME_60307375 }} --fn ${{ secrets.ME_FIRST_60307375 }} --ca 0 --t 13.5 --fd 7
+        run: python gym.py --pa ${{ env.SAJJAD_PASSWORD }} --i ${{ secrets.ID_60307375 }} --ln ${{ secrets.LAST_NAME_60307375 }} --fn ${{ secrets.ME_FIRST_60307375 }} --ca 0 --t 13.5 --fd 7
