@@ -98,7 +98,7 @@ def book_slot(session, first_name, last_name, id_udst, date, time, category, ran
         'resource_id': category,
         'one_date': date,
         'start_time': time,  # Assuming this is in hours (7.5 = 7:30 AM)
-        #'end_time': time,  # Should this be the same as the start time? Might need adjustment
+        'end_time': time,  # Should this be the same as the start time? Might need adjustment
         'time_mode': 'part_day',
         #! SEE COMMENT BELOW: 'rental_time_fixed_value': range_time,  # 1.5-hour rental
         'quantity': '1',
@@ -123,7 +123,7 @@ def book_slot(session, first_name, last_name, id_udst, date, time, category, ran
         'user_agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36'
     }
 
-    if category == '235845' or category == '235824':    # FOR GAMING BOOKING
+    if category in ['235824','235845']:    # FOR GAMING BOOKING
         data['rental_time_value'] = range_time 
         data['rental_duration_text'] = f"{range_time} Hour Booking"
         data['granulation'] = '60'
@@ -155,6 +155,60 @@ def book_slot(session, first_name, last_name, id_udst, date, time, category, ran
         'Connection': 'keep-alive',
         'X-CSRF-Token': booking_csrf_token,
     }
+
+    # Headers For Only Guest List
+    headers = {
+        "accept": "application/json, text/plain, */*",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-US,en;q=0.9",
+        "cache-control": "no-cache",
+        "connection": "keep-alive",
+        'Referer': 'https://udstsport.udst.edu.qa/',
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-origin",
+    }
+
+    #Testing Guest Lists For Futsal Or Padel Or Other Sports
+
+    # Sooner Going to change it into a format where it gonna try to book for both the ground
+    # if the one of them aint workin then it tries for the next one
+    if category in ['209258','209259']:
+        students = session.get("https://udstsport.udst.edu.qa/guest-list",headers=headers)
+        print("---")
+        student = students.json()
+        st_no = 1 #guest_no for loop below
+        # Based On The Requests they have options for staff student faculty alumini and public
+        data['rental_prop_Count_Guest_Staff'] = 0
+        data['rental_prop_Count_Guest_Student'] = 0
+        data['rental_prop_Count_Guest_Faculty'] = 0
+        data['rental_prop_Count_Guest_Alumni'] = 0
+        data['rental_prop_Count_Guest_Public'] = 0
+        for info in student:
+            data[f'rental_prop_Guest_name_{st_no}'] = info['name']
+            data[f'rental_prop_Guest_email_{st_no}'] = info['email']
+            data[f'rental_prop_CNA_Q_ID_{st_no}'] = info['cnaq_id']
+            data[f'rental_prop_National_ID_{st_no}'] = info['national_id']
+            data[f'rental_prop_Guest_ID_{st_no}'] = info['id']
+            data[f'rental_prop_Guest_category_{st_no}'] = info['category']
+
+            if info['category'] == 'Student':
+                data['rental_prop_Count_Guest_Student'] += 1
+            if info['category'] == 'Alumini':
+                data['rental_prop_Count_Guest_Alumni'] += 1
+            if info['category'] == 'Public':
+                data['rental_prop_Count_Guest_Public'] += 1
+            if info['category'] == 'Staff':
+                data['rental_prop_Count_Guest_Staff'] += 1
+            if info['category'] == 'Faculty':
+                data['rental_prop_Count_Guest_Faculty'] += 1
+            
+            st_no += 1
+
+    data['rental_prop_Please_specify_the_sporting_code_'] = 'Futsal'
+    #Data Testing
+    for i in data:
+        print(f'{i} : {data[i]}')
 
     try:
         # Step 6: Send the booking request
@@ -198,9 +252,12 @@ args = parser.parse_args()
 session, login_cs = login(id_udst=args.i, password=args.pa)
 
 # GYM, SWIMMING, STANDARD, HIGH-END GAMING (in order)
-category = ['178388', '178795', '235825','235824']
+category = ['178388', '178795', '235825','235824','209258','209259']
 range_time = ['1.5', '1', '2']
-
+'''
+cats = [0:('178388','1.5'),1:('178795','1'),2:('235825',2),3:('235824',),]
+#need to complete this to make it better
+'''
 if args.duration is not None:
     # If custom duration is provided
     range_time_chosen = args.duration
