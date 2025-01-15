@@ -257,14 +257,14 @@ session, login_cs = login(id_udst=args.i, password=args.pa)
 category = ['178388', '178795', '235825','235824','209258','209259']
 range_time = ['1.5', '1', '2']
 
-cats = [
-        ('178388','1.5'),
-        ('178795','1'),
-        ('235825','2'),
-        ('235824',),
-        ('209258', 1),
-        ('209259', 1)
-    ]
+category_ids = [
+        ('178388','1.5'),   # Gym
+        ('178795','1'),     # Swimming
+        ('235825','2'),     # Gaming Standard
+        ('235824', '2'),    # Gaming High-End
+        ('209258', '1'),    # MPH Court 1
+        ('209259', '1')     # MPH Court 2
+]
 
 if args.duration is not None:
     # If custom duration is provided
