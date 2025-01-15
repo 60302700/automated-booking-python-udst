@@ -256,10 +256,16 @@ session, login_cs = login(id_udst=args.i, password=args.pa)
 # GYM, SWIMMING, STANDARD, HIGH-END GAMING (in order)
 category = ['178388', '178795', '235825','235824','209258','209259']
 range_time = ['1.5', '1', '2']
-'''
-cats = ["Gym":('178388','1.5'),"":('178795','1'),2:('235825',2),3:('235824',),]
-#need to complete this to make it better
-'''
+
+cats = [
+        ('178388','1.5'),
+        ('178795','1'),
+        ('235825','2'),
+        ('235824',),
+        ('209258', 1),
+        ('209259', 1)
+    ]
+
 if args.duration is not None:
     # If custom duration is provided
     range_time_chosen = args.duration
