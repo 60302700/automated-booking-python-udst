@@ -8,7 +8,7 @@ on:
     - cron: '30 13 * * 3'
 jobs:
   Automated-Booking:
-    runs-on: self-hosted
+    runs-on: windows-latest
     steps:
     
       - name: Checkout repository
