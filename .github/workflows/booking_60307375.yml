@@ -1,1 +1,53 @@
+name: 60307375
+on:
+  schedule:
+    - cron: '30 13 * * 0'
+    - cron: '30 13 * * 1'
+    - cron: '30 13 * * 2'
+    - cron: '30 13 * * 3'
+jobs:
+  Automated-Booking:
+    runs-on: self-hosted
+    steps:
+    
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+    
+      - name: Get Day and Time
+        id: get_datetime
+        shell: powershell
+        run: |
+          $current_hour = Get-Date -Format 'HH'
+          $current_day = Get-Date -Format 'dddd'
+          echo "::set-output name=current_hour::$current_hour"
+          echo "::set-output name=current_day::$current_day"
+      
+      - name: Date And Time
+        run: |
+          echo "Current Day: ${{ steps.get_datetime.outputs.current_day }}"
+          echo "Current Hour: ${{ steps.get_datetime.outputs.current_hour }}"
+      - name: Sunday-Gym
+        shell: powershell
+        if: ${ steps.get_datetime.outputs.current_day == 'Sunday' && steps.get_datetime.outputs.current_hour >= 13 && steps.get_datetime.outputs.current_hour <= 14 }
+        run: python gym.py --pa ${ secrets.PASS_60307375 } --i ${ secrets.ID_60307375 } --ln ${ secrets.LAST_NAME_60307375 } --fn ${ secrets.ME_FIRST_60307375 } --ca 0 --t 13.5 --fd 7
+
+      - name: Monday-Gym
+        shell: powershell
+        if: ${ steps.get_datetime.outputs.current_day == 'Monday' && steps.get_datetime.outputs.current_hour >= 13 && steps.get_datetime.outputs.current_hour <= 14 }
+        run: python gym.py --pa ${ secrets.PASS_60307375 } --i ${ secrets.ID_60307375 } --ln ${ secrets.LAST_NAME_60307375 } --fn ${ secrets.ME_FIRST_60307375 } --ca 0 --t 13.5 --fd 7
+
+      - name: Tuesday-Gym
+        shell: powershell
+        if: ${ steps.get_datetime.outputs.current_day == 'Tuesday' && steps.get_datetime.outputs.current_hour >= 13 && steps.get_datetime.outputs.current_hour <= 14 }
+        run: python gym.py --pa ${ secrets.PASS_60307375 } --i ${ secrets.ID_60307375 } --ln ${ secrets.LAST_NAME_60307375 } --fn ${ secrets.ME_FIRST_60307375 } --ca 0 --t 13.5 --fd 7
+
+      - name: Wednesday-Gym
+        shell: powershell
+        if: ${ steps.get_datetime.outputs.current_day == 'Wednesday' && steps.get_datetime.outputs.current_hour >= 13 && steps.get_datetime.outputs.current_hour <= 14 }
+        run: python gym.py --pa ${ secrets.PASS_60307375 } --i ${ secrets.ID_60307375 } --ln ${ secrets.LAST_NAME_60307375 } --fn ${ secrets.ME_FIRST_60307375 } --ca 0 --t 13.5 --fd 7
 
