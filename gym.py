@@ -81,7 +81,7 @@ def login(id_udst, password):
         logging.error(f"Login failed with status code: {login_response.status_code}")
         return None
 
-def book_slot(session, first_name, last_name, id_udst, date, time, category, range_time, login_cs):
+def book_slot(session, first_name, last_name, id_udst, date, time, category, range_time, login_cs, sport = 'Futsal'):
     """Make a booking using the authenticated session and necessary data."""
     logging.info(f"Booking for {first_name} {last_name} ({id_udst}) on {date} at {time}")
 
@@ -205,28 +205,29 @@ def book_slot(session, first_name, last_name, id_udst, date, time, category, ran
             
             st_no += 1
 
-    data['rental_prop_Please_specify_the_sporting_code_'] = 'Futsal'
+        data['rental_prop_Please_specify_the_sporting_code_'] = sport
     #Data Testing
     for i in data:
         print(f'{i} : {data[i]}')
-
-    try:
-        # Step 6: Send the booking request
-        response = session.post(booking_url, headers=post_headers, data=data,timeout=(10, 30))
-        if response.status_code == 200:
-            logging.info("Booking successful!")
-            Data = json.loads(response.text)
-            if 'data' in Data.keys():
-                user_text = BeautifulSoup(Data['data']['user_text'],'html.parser')
-                user_text = user_text.get_text()
+    for times in range(3):
+        try:
+            # Step 6: Send the booking request
+            response = session.post(booking_url, headers=post_headers, data=data,timeout=(10, 30))
+            if response.status_code == 200:
+                logging.info("Booking successful!")
+                Data = json.loads(response.text)
+                if 'data' in Data.keys():
+                    user_text = BeautifulSoup(Data['data']['user_text'],'html.parser')
+                    user_text = user_text.get_text()
+                else:
+                    user_text = Data['response_message'].split('<script')[0].strip()
+                print(user_text)
+                break
             else:
-                user_text = Data['response_message'].split('<script')[0].strip()
-            print(user_text)
-        else:
-            logging.warning(f"Booking failed with status code: {response.status_code}")
-            logging.debug(response.text)
-    except requests.RequestException as e:
-        logging.error(f"Request failed: {e}")
+                logging.warning(f"Booking failed with status code: {response.status_code}")
+                logging.debug(response.text)
+        except requests.RequestException as e:
+            logging.error(f"Request failed: {e} trying again {times}")
 
 
 #Main
@@ -244,6 +245,7 @@ parser.add_argument('--t',type=str,required=True,help="Time In 24 hrs format , 1
 parser.add_argument('--fd',type=int,help="7 days ahead booking")
 parser.add_argument('--d',type=str,help="set the day and date")
 parser.add_argument('--duration', type=str, help="Add custom duration to booking")
+parser.add_argument('--s', type=str, help="For The Sport To Be Selected At The Court")
 
 # Parse the arguments
 args = parser.parse_args()
@@ -255,7 +257,7 @@ session, login_cs = login(id_udst=args.i, password=args.pa)
 category = ['178388', '178795', '235825','235824','209258','209259']
 range_time = ['1.5', '1', '2']
 '''
-cats = [0:('178388','1.5'),1:('178795','1'),2:('235825',2),3:('235824',),]
+cats = ["Gym":('178388','1.5'),"":('178795','1'),2:('235825',2),3:('235824',),]
 #need to complete this to make it better
 '''
 if args.duration is not None:
