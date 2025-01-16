@@ -158,7 +158,6 @@ def add_guests_to_data(session: requests.Session, data: dict) -> dict:
     print("-"*15)
     student = students.json()
     student_count = 1 #guest_no for loop below
-
     for info in student:
         data[f'rental_prop_Guest_name_{student_count}'] = info['name']
         data[f'rental_prop_Guest_email_{student_count}'] = info['email']
@@ -171,9 +170,8 @@ def add_guests_to_data(session: requests.Session, data: dict) -> dict:
 
         if count_guest_key not in data:
             data[count_guest_key] = 0
-        else:
-            data[count_guest_key] += 1
 
+        data[count_guest_key] += 1
         student_count += 1
 
     return data
