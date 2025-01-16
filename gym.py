@@ -5,6 +5,7 @@ import logging
 from bs4 import BeautifulSoup
 import random
 import json
+from sport_types import SportType
 
 
 # Set up logging
@@ -24,7 +25,8 @@ def future_day(day):
 def get_time_for_gaming(time):
     # End-time for gaming is 6 hours ahead, and is capped at 21
     adjusted_time = time + 6 
-    if adjusted_time > 21: adjusted_time = 21
+    if adjusted_time > 21:
+        adjusted_time = 21
     if adjusted_time % 1 == 0:
         return str(int(adjusted_time))
     return str(float(adjusted_time))
@@ -81,16 +83,150 @@ def login(id_udst, password):
         logging.error(f"Login failed with status code: {login_response.status_code}")
         return None
 
-def book_slot(session, first_name, last_name, id_udst, date, time, category, range_time, login_cs, sport = 'Futsal'):
+def post_booking_request(session: requests.Session, data: dict, headers: dict) -> requests.Response:
+    # Step 4: Prepare data for booking
+    booking_url = "https://udstsport.udst.edu.qa/sportsbooking/planyo/ulap.php"
+
+    # Step 6: Send the booking request
+    response = session.post(booking_url, headers=headers, data=data,timeout=(10, 30))
+    if response.status_code == 200:
+        logging.info("Booking successful!")
+        Data = json.loads(response.text)
+        if 'data' in Data.keys():
+            user_text = BeautifulSoup(Data['data']['user_text'],'html.parser')
+            user_text = user_text.get_text()
+        else:
+            user_text = Data['response_message'].split('<script')[0].strip()
+        print(user_text)
+    else:
+        logging.warning(f"Booking failed with status code: {response.status_code}")
+        logging.debug(response.text)
+
+    return response
+
+def book_gym(session: requests.Session, data: dict, post_headers: dict):
+    # post_headers['Content-Length'] = str(len(data)); Can use if needed.
+
+    for times in range(3):
+        try:
+            response = post_booking_request(session, data=data, headers=post_headers)
+            if response.status_code == 200:
+                break
+        except requests.RequestException as e:
+            logging.error(f"Request failed for {times+1} tries: {e} trying again")
+
+def book_gaming(session: requests.Session, data: dict, post_headers: dict):
+    del data['rental_time_fixed_value'] # delete rental_time_fixed_value as gaming booking data does not have this
+    data['rental_time_value'] = range_time 
+    data['rental_duration_text'] = f"{range_time} Hour Booking"
+    data['granulation'] = '60'
+    data['first_working_hour'] = '7'
+    data['last_working_hour'] = '19'    # from 22 -> 19
+    data['feedback_url'] = 'https://udstsport.udst.edu.qa/booking'
+    # data['end_time'] = get_time_for_gaming(time)
+
+    post_headers['Content-Length'] = str(len(data))
+
+    for times in range(3):
+        try:
+            response = post_booking_request(session, data=data, headers=post_headers)
+            if response.status_code == 200:
+                break
+        except requests.RequestException as e:
+            logging.error(f"Request failed for {times+1} tries: {e} trying again")
+
+def add_guests_to_data(session: requests.Session, data: dict) -> dict:
+    # Headers For Only Guest List
+    guest_request_headers = {
+        "accept": "application/json, text/plain, */*",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-US,en;q=0.9",
+        "cache-control": "no-cache",
+        "connection": "keep-alive",
+        'Referer': 'https://udstsport.udst.edu.qa/',
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-origin",
+    }
+
+    # Testing Guest Lists For Futsal Or Padel Or Other Sports
+
+    # Sooner Going to change it into a format where it gonna try to book for both the ground
+    # if the one of them aint workin then it tries for the next one
+
+    students = session.get("https://udstsport.udst.edu.qa/guest-list",headers=guest_request_headers)
+    print("-"*15)
+    student = students.json()
+    student_count = 1 #guest_no for loop below
+
+    for info in student:
+        data[f'rental_prop_Guest_name_{student_count}'] = info['name']
+        data[f'rental_prop_Guest_email_{student_count}'] = info['email']
+        data[f'rental_prop_CNA_Q_ID_{student_count}'] = info['cnaq_id']
+        data[f'rental_prop_National_ID_{student_count}'] = info['national_id']
+        data[f'rental_prop_Guest_ID_{student_count}'] = info['id']
+        data[f'rental_prop_Guest_category_{student_count}'] = info['category']
+
+        count_guest_key = f"rental_prop_Count_Guest_{ info['category'].capitalize() }"
+
+        if count_guest_key not in data:
+            data[count_guest_key] = 0
+        else:
+            data[count_guest_key] += 1
+
+        student_count += 1
+
+    return data
+
+
+def book_multi_purpose(session: requests.Session, data: dict, post_headers: dict, sport: str = "Futsal"):
+    data['rental_prop_Please_specify_the_sporting_code_'] = sport
+    # data['rental_prop_Sporting_Code'] = sport [ONLY FOR MULTI-SPORT HALL in B18]
+
+    # TODO: Booking random sports 
+
+    #! Review: Is this useful? (Since we already book on time, and only Futsal has this feature)
+    alternate_booking = False
+    alternate_courts_list = [('209258','209259')]
+    if sport == "Futsal":
+        alternate_booking = True
+        court_options = alternate_courts_list[0]
+
+        alternative_court = court_options[0]
+        if court_options[0] == data['resource_id']:
+            alternative_court = court_options[1]
+
+    # dictionaries are passed by reference, so they are mutable by functions. you can choose to omit
+    # the `data =` if you think it looks clearer
+    data = add_guests_to_data(session, data=data)
+
+    # TODO: Think of some better ways to do this (to me)
+    post_headers['Content-Length'] = str(len(data))
+
+    #! Note: To detect when cannot rent resource, response will have a response code of 4. Can use this
+    # The reason I'm repeating this code is to enable customization of booking for alternative courts when booking a sport
+    for times in range(3):
+        try:
+            response = post_booking_request(data=data, headers=post_headers)
+            response_json = response.json()
+            # If we allow for alternative booking AND we get an error signifying spot is taken...
+            if alternate_booking and response.status_code == 200 and response_json['response_code'] == 4:
+                print(f"Slot is already booked for {sport}. Trying with alternative court.")
+                data['resource_id'] = alternative_court 
+            elif response.status_code == 200:
+                break
+        except requests.RequestException as e:
+            logging.error(f"Request failed for {times+1} tries: {e} trying again")
+        except requests.JSONDecodeError as e:
+            logging.error(f"Encountered JSONDecodeError. Please check submission data. {e}")
+
+def book_slot(session, first_name, last_name, id_udst, date, time, category, range_time, login_cs, sport: str = "Futsal"):
     """Make a booking using the authenticated session and necessary data."""
     logging.info(f"Booking for {first_name} {last_name} ({id_udst}) on {date} at {time}")
 
     # Step 3: Navigate to the booking page to extract the CSRF token
     booking_page_url = "https://udstsport.udst.edu.qa/booking"
     booking_csrf_token = get_csrf_token_from_page(session, booking_page_url)
-
-    # Step 4: Prepare data for booking
-    booking_url = "https://udstsport.udst.edu.qa/sportsbooking/planyo/ulap.php"
 
     data = {
         'mode': 'make_reservation',
@@ -105,6 +241,7 @@ def book_slot(session, first_name, last_name, id_udst, date, time, category, ran
         'first': first_name,
         'last': last_name,
         'email': f'{id_udst}@udst.edu.qa',
+        'rental_time_fixed_value': range_time,
         'verify_data': 'true',
         'granulation': '15',
         'is_night': '0',
@@ -122,18 +259,6 @@ def book_slot(session, first_name, last_name, id_udst, date, time, category, ran
         'ppp_res_period': '1725861600-1725866999',  # Reservation period in Unix time
         'user_agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36'
     }
-
-    if category in ['235824','235845']:    # FOR GAMING BOOKING
-        data['rental_time_value'] = range_time 
-        data['rental_duration_text'] = f"{range_time} Hour Booking"
-        data['granulation'] = '60'
-        data['first_working_hour'] = '7'
-        data['last_working_hour'] = '19'    # from 22 -> 19
-        data['feedback_url'] = 'https://udstsport.udst.edu.qa/booking'
-        #data['end_time'] = get_time_for_gaming(time)
-    else:
-        # DEFAULT VALUE FOR OTHER BOOKINGS
-        data['rental_time_fixed_value'] = range_time
 
     # Step 5: Prepare headers for the booking request
     post_headers = {
@@ -156,78 +281,16 @@ def book_slot(session, first_name, last_name, id_udst, date, time, category, ran
         'X-CSRF-Token': booking_csrf_token,
     }
 
-    # Headers For Only Guest List
-    headers = {
-        "accept": "application/json, text/plain, */*",
-        "accept-encoding": "gzip, deflate, br, zstd",
-        "accept-language": "en-US,en;q=0.9",
-        "cache-control": "no-cache",
-        "connection": "keep-alive",
-        'Referer': 'https://udstsport.udst.edu.qa/',
-        "sec-fetch-dest": "empty",
-        "sec-fetch-mode": "cors",
-        "sec-fetch-site": "same-origin",
-    }
+    if category in {'235824','235845'}:    # FOR GAMING BOOKING
+        book_gaming(session, data, post_headers)
+    elif category in {'209258','209259'}:
+        book_multi_purpose(session, data, post_headers, sport)
+    else:
+        book_gym(session, data, post_headers)
 
-    #Testing Guest Lists For Futsal Or Padel Or Other Sports
-
-    # Sooner Going to change it into a format where it gonna try to book for both the ground
-    # if the one of them aint workin then it tries for the next one
-    if category in ['209258','209259']:
-        students = session.get("https://udstsport.udst.edu.qa/guest-list",headers=headers)
-        print("---")
-        student = students.json()
-        st_no = 1 #guest_no for loop below
-        # Based On The Requests they have options for staff student faculty alumini and public
-        data['rental_prop_Count_Guest_Staff'] = 0
-        data['rental_prop_Count_Guest_Student'] = 0
-        data['rental_prop_Count_Guest_Faculty'] = 0
-        data['rental_prop_Count_Guest_Alumni'] = 0
-        data['rental_prop_Count_Guest_Public'] = 0
-        for info in student:
-            data[f'rental_prop_Guest_name_{st_no}'] = info['name']
-            data[f'rental_prop_Guest_email_{st_no}'] = info['email']
-            data[f'rental_prop_CNA_Q_ID_{st_no}'] = info['cnaq_id']
-            data[f'rental_prop_National_ID_{st_no}'] = info['national_id']
-            data[f'rental_prop_Guest_ID_{st_no}'] = info['id']
-            data[f'rental_prop_Guest_category_{st_no}'] = info['category']
-
-            if info['category'] == 'Student':
-                data['rental_prop_Count_Guest_Student'] += 1
-            if info['category'] == 'Alumini':
-                data['rental_prop_Count_Guest_Alumni'] += 1
-            if info['category'] == 'Public':
-                data['rental_prop_Count_Guest_Public'] += 1
-            if info['category'] == 'Staff':
-                data['rental_prop_Count_Guest_Staff'] += 1
-            if info['category'] == 'Faculty':
-                data['rental_prop_Count_Guest_Faculty'] += 1
-            
-            st_no += 1
-
-        data['rental_prop_Please_specify_the_sporting_code_'] = sport
     #Data Testing
     for i in data:
         print(f'{i} : {data[i]}')
-    for times in range(3):
-        try:
-            # Step 6: Send the booking request
-            response = session.post(booking_url, headers=post_headers, data=data,timeout=(10, 30))
-            if response.status_code == 200:
-                logging.info("Booking successful!")
-                Data = json.loads(response.text)
-                if 'data' in Data.keys():
-                    user_text = BeautifulSoup(Data['data']['user_text'],'html.parser')
-                    user_text = user_text.get_text()
-                else:
-                    user_text = Data['response_message'].split('<script')[0].strip()
-                print(user_text)
-                break
-            else:
-                logging.warning(f"Booking failed with status code: {response.status_code}")
-                logging.debug(response.text)
-        except requests.RequestException as e:
-            logging.error(f"Request failed: {e} trying again {times}")
 
 
 #Main
@@ -271,7 +334,20 @@ if args.duration is not None:
     range_time_chosen = args.duration
 else:
     # Otherwise use category-default timings
-    range_time_chosen = range_time[args.ca]
+    # range_time_chosen = range_time[args.ca]
+    range_time_chosen = category_ids[args.ca][1]
+
+if args.s:
+    # Experimenting with enums. Could add later? (Due to repetition)
+    if args.s.upper() not in SportType:
+        print("Invalid sport type. Reverting to Futsal")
+        # sport = SportType.FUTSAL
+        sport = "Futsal"
+    else:
+        # sport = SportType[args.s]
+        sport = args.s
+else:
+    sport = "Futsal" 
 
 #Example of how to calculate the date and time
 if not args.fd:
