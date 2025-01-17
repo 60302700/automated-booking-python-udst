@@ -22,7 +22,7 @@ def future_day(day):
     date = datetime.now() + timedelta(days=day)
     return date.strftime("%B %d %Y")
 
-def get_time_for_gaming(time):
+def format_time_for_gaming(time: float) -> str:
     # End-time for gaming is 6 hours ahead, and is capped at 21
     adjusted_time = time + 6 
     if adjusted_time > 21:
@@ -125,7 +125,7 @@ def book_gaming(session: requests.Session, data: dict, post_headers: dict):
     data['first_working_hour'] = '7'
     data['last_working_hour'] = '19'    # from 22 -> 19
     data['feedback_url'] = 'https://udstsport.udst.edu.qa/booking'
-    # data['end_time'] = get_time_for_gaming(time)
+    # data['end_time'] = format_time_for_gaming(time)
 
     post_headers['Content-Length'] = str(len(data))
 
@@ -187,7 +187,7 @@ def book_multi_purpose(session: requests.Session, data: dict, post_headers: dict
     alternate_courts_list = [('209258','209259')]
     if sport == "Futsal":
         alternate_booking = True
-        court_options = alternate_courts_list[0]        # To be replaced with its specific index
+        court_options = alternate_courts_list[0]        # To be replaced with a sport's specific index
         alternative_court = court_options[0]
         if alternative_court == data['resource_id']:
             alternative_court = court_options[1]
@@ -203,15 +203,18 @@ def book_multi_purpose(session: requests.Session, data: dict, post_headers: dict
     # The reason I'm repeating this code is to enable customization of booking for alternative courts when booking a sport
     for times in range(3):
         response = post_booking_request(data=data, headers=post_headers)
-        response_json = response.json()
-        # If we allow for alternative booking AND we get an error signifying spot is taken...
-        if alternate_booking and response.status_code == 200 and response_json['response_code'] == 4:
-            print(f"Slot is already booked for {sport}. Trying with alternative court.")
-            data['resource_id'] = alternative_court 
-        elif response.status_code == 200:
-            break
-        else:
-            print(f"Response returned status code {response.status_code}")
+        try:
+            response_json = response.json()
+            # If we allow for alternative booking AND we get an error signifying spot is taken...
+            if alternate_booking and response.status_code == 200 and response_json['response_code'] == 4:
+                print(f"Slot is already booked for {sport}. Trying with alternative court.")
+                data['resource_id'] = alternative_court 
+            elif response.status_code == 200:
+                break
+            else:
+                print(f"Response returned status code {response.status_code}")
+        except requests.JSONDecodeError as e:
+            logging.error(f"Encountered JSONDecodeError. Please check submission data. {e}")
 
 def book_slot(session, first_name, last_name, id_udst, date, time, category, range_time, login_cs, sport: str = "Futsal"):
     """Make a booking using the authenticated session and necessary data."""
