@@ -88,19 +88,24 @@ def post_booking_request(session: requests.Session, data: dict, headers: dict) -
     booking_url = "https://udstsport.udst.edu.qa/sportsbooking/planyo/ulap.php"
 
     # Step 6: Send the booking request
-    response = session.post(booking_url, headers=headers, data=data,timeout=(10, 30))
-    if response.status_code == 200:
-        logging.info("Booking successful!")
-        Data = json.loads(response.text)
-        if 'data' in Data.keys():
-            user_text = BeautifulSoup(Data['data']['user_text'],'html.parser')
-            user_text = user_text.get_text()
+    try:
+        response = session.post(booking_url, headers=headers, data=data,timeout=(10, 30))
+        if response.status_code == 200:
+            logging.info("Booking successful!")
+            Data = json.loads(response.text)
+            if 'data' in Data.keys():
+                user_text = BeautifulSoup(Data['data']['user_text'],'html.parser')
+                user_text = user_text.get_text()
+            else:
+                user_text = Data['response_message'].split('<script')[0].strip()
+            print(user_text)
         else:
-            user_text = Data['response_message'].split('<script')[0].strip()
-        print(user_text)
-    else:
-        logging.warning(f"Booking failed with status code: {response.status_code}")
-        logging.debug(response.text)
+            logging.warning(f"Booking failed with status code: {response.status_code}")
+            logging.debug(response.text)
+    except requests.JSONDecodeError as e:
+        logging.error(f"Encountered JSONDecodeError. Please check submission data. {e}")
+    except requests.RequestException as e:
+        logging.error(f"Request failed for unknown reason: {e}")
 
     return response
 
@@ -108,12 +113,9 @@ def book_gym(session: requests.Session, data: dict, post_headers: dict):
     # post_headers['Content-Length'] = str(len(data)); Can use if needed.
 
     for times in range(3):
-        try:
-            response = post_booking_request(session, data=data, headers=post_headers)
-            if response.status_code == 200:
-                break
-        except requests.RequestException as e:
-            logging.error(f"Request failed for {times+1} tries: {e} trying again")
+        response = post_booking_request(session, data=data, headers=post_headers)
+        if response.status_code == 200:
+            break
 
 def book_gaming(session: requests.Session, data: dict, post_headers: dict):
     del data['rental_time_fixed_value'] # delete rental_time_fixed_value as gaming booking data does not have this
@@ -128,12 +130,9 @@ def book_gaming(session: requests.Session, data: dict, post_headers: dict):
     post_headers['Content-Length'] = str(len(data))
 
     for times in range(3):
-        try:
-            response = post_booking_request(session, data=data, headers=post_headers)
-            if response.status_code == 200:
-                break
-        except requests.RequestException as e:
-            logging.error(f"Request failed for {times+1} tries: {e} trying again")
+        response = post_booking_request(session, data=data, headers=post_headers)
+        if response.status_code == 200:
+            break
 
 def add_guests_to_data(session: requests.Session, data: dict) -> dict:
     # Headers For Only Guest List
@@ -188,10 +187,9 @@ def book_multi_purpose(session: requests.Session, data: dict, post_headers: dict
     alternate_courts_list = [('209258','209259')]
     if sport == "Futsal":
         alternate_booking = True
-        court_options = alternate_courts_list[0]
-
+        court_options = alternate_courts_list[0]        # To be replaced with its specific index
         alternative_court = court_options[0]
-        if court_options[0] == data['resource_id']:
+        if alternative_court == data['resource_id']:
             alternative_court = court_options[1]
 
     # dictionaries are passed by reference, so they are mutable by functions. you can choose to omit
@@ -204,19 +202,16 @@ def book_multi_purpose(session: requests.Session, data: dict, post_headers: dict
     #! Note: To detect when cannot rent resource, response will have a response code of 4. Can use this
     # The reason I'm repeating this code is to enable customization of booking for alternative courts when booking a sport
     for times in range(3):
-        try:
-            response = post_booking_request(data=data, headers=post_headers)
-            response_json = response.json()
-            # If we allow for alternative booking AND we get an error signifying spot is taken...
-            if alternate_booking and response.status_code == 200 and response_json['response_code'] == 4:
-                print(f"Slot is already booked for {sport}. Trying with alternative court.")
-                data['resource_id'] = alternative_court 
-            elif response.status_code == 200:
-                break
-        except requests.RequestException as e:
-            logging.error(f"Request failed for {times+1} tries: {e} trying again")
-        except requests.JSONDecodeError as e:
-            logging.error(f"Encountered JSONDecodeError. Please check submission data. {e}")
+        response = post_booking_request(data=data, headers=post_headers)
+        response_json = response.json()
+        # If we allow for alternative booking AND we get an error signifying spot is taken...
+        if alternate_booking and response.status_code == 200 and response_json['response_code'] == 4:
+            print(f"Slot is already booked for {sport}. Trying with alternative court.")
+            data['resource_id'] = alternative_court 
+        elif response.status_code == 200:
+            break
+        else:
+            print(f"Response returned status code {response.status_code}")
 
 def book_slot(session, first_name, last_name, id_udst, date, time, category, range_time, login_cs, sport: str = "Futsal"):
     """Make a booking using the authenticated session and necessary data."""
