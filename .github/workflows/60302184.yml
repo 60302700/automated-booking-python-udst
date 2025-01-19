@@ -1,5 +1,6 @@
 name: 60302184-Sumanth
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 12 * * 0'
     - cron: '0 12 * * 1'
@@ -20,7 +21,7 @@ jobs:
     
       - name: Install required modules
         run: pip install -r requirements.txt
-		
+
       - name: Get Day and Time
         id: get_datetime
         shell: powershell
