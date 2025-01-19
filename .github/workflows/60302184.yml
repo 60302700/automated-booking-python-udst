@@ -52,6 +52,6 @@ jobs:
 
       - name: Tuesday-Gym
         shell: powershell
-        if: ${{ steps.get_datetime.outputs.current_day == 'Tuesday' && steps.get_datetime.outputs.current_hour >= 9 && steps.get_datetime.outputs.current_hour <= 10 }}
+        #if: ${{ steps.get_datetime.outputs.current_day == 'Tuesday' && steps.get_datetime.outputs.current_hour >= 9 && steps.get_datetime.outputs.current_hour <= 10 }}
         run: python gym.py --pa ${{ secrets.PASS_60302184 }} --i ${{ secrets.ID_60302184 }} --ln ${{ secrets.LAST_NAME_60302184 }} --fn ${{ secrets.ME_FIRST_60302184 }} --ca 0 --t 13.5 --fd 7
 
