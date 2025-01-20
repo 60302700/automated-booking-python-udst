@@ -36,6 +36,7 @@ jobs:
         run: echo "Running on ${{ runner.os }}"
       
       - name: Date And Time
+        if: ${{ runner.os }} == 'Windows'
         run: |
           echo "Current Day: ${{ steps.get_datetime.outputs.current_day }}"
           echo "Current Hour: ${{ steps.get_datetime.outputs.current_hour }}"
