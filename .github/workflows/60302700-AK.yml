@@ -22,9 +22,19 @@ jobs:
       
       - name: Install required modules
         run: pip install -r requirements.txt
-    
+     
       - name: Get Day and Time
         id: get_datetime
+        shell: bash
+        run: |
+          current_hour=$(date +'%H')
+          current_day=$(date +'%A')
+          echo "current_hour=$current_hour" >> "$GITHUB_ENV"
+          echo "current_day=$current_day" >> "$GITHUB_ENV"
+     
+      - name: Get Day and Time
+        if: ${{ runner.os }} == 'Windows'
+        id: get_datetime_win
         shell: powershell
         run: |
           $current_hour = Get-Date -Format 'HH'
@@ -36,7 +46,6 @@ jobs:
         run: echo "Running on ${{ runner.os }}"
       
       - name: Date And Time
-        if: ${{ runner.os }} == 'Windows'
         run: |
           echo "Current Day: ${{ steps.get_datetime.outputs.current_day }}"
           echo "Current Hour: ${{ steps.get_datetime.outputs.current_hour }}"
