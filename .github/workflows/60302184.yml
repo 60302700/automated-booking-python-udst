@@ -38,20 +38,20 @@ jobs:
       - name: Sunday-Gym
         shell: powershell
         if: ${{ steps.get_datetime.outputs.current_day == 'Sunday' && steps.get_datetime.outputs.current_hour >= 12 && steps.get_datetime.outputs.current_hour <= 13 }}
-        run: python gym.py --pa ${{ secrets.PASS_60302184 }} --i ${{ secrets.ID_60302184 }} --ln ${{ secrets.LAST_NAME_60302184 }} --fn ${{ secrets.ME_FIRST_60302184 }} --ca 0 --t 13.5 --fd 7
+        run: python gym.py --pa ${{ secrets.PASS_60302184 }} --i ${{ secrets.ID_60302184 }} --ln ${{ secrets.LAST_NAME_60302184 }} --fn ${{ secrets.ME_FIRST_60302184 }} --ca 0 --t 12 --fd 7
 
       - name: Monday-Gym
         shell: powershell
         if: ${{ steps.get_datetime.outputs.current_day == 'Monday' && steps.get_datetime.outputs.current_hour >= 12 && steps.get_datetime.outputs.current_hour <= 13 }}
-        run: python gym.py --pa ${{ secrets.PASS_60302184 }} --i ${{ secrets.ID_60302184 }} --ln ${{ secrets.LAST_NAME_60302184 }} --fn ${{ secrets.ME_FIRST_60302184 }} --ca 0 --t 13.5 --fd 7
+        run: python gym.py --pa ${{ secrets.PASS_60302184 }} --i ${{ secrets.ID_60302184 }} --ln ${{ secrets.LAST_NAME_60302184 }} --fn ${{ secrets.ME_FIRST_60302184 }} --ca 0 --t 12 --fd 7
 
       - name: Wednesday-Gym
         shell: powershell
         if: ${{ steps.get_datetime.outputs.current_day == 'Wednesday' && steps.get_datetime.outputs.current_hour >= 12 && steps.get_datetime.outputs.current_hour <= 13 }}
-        run: python gym.py --pa ${{ secrets.PASS_60302184 }} --i ${{ secrets.ID_60302184 }} --ln ${{ secrets.LAST_NAME_60302184 }} --fn ${{ secrets.ME_FIRST_60302184 }} --ca 0 --t 13.5 --fd 7
+        run: python gym.py --pa ${{ secrets.PASS_60302184 }} --i ${{ secrets.ID_60302184 }} --ln ${{ secrets.LAST_NAME_60302184 }} --fn ${{ secrets.ME_FIRST_60302184 }} --ca 0 --t 12 --fd 7
 
       - name: Tuesday-Gym
         shell: powershell
-        #if: ${{ steps.get_datetime.outputs.current_day == 'Tuesday' && steps.get_datetime.outputs.current_hour >= 9 && steps.get_datetime.outputs.current_hour <= 10 }}
-        run: python gym.py --pa ${{ secrets.PASS_60302184 }} --i ${{ secrets.ID_60302184 }} --ln ${{ secrets.LAST_NAME_60302184 }} --fn ${{ secrets.ME_FIRST_60302184 }} --ca 0 --t 13.5 --fd 7
+        if: ${{ steps.get_datetime.outputs.current_day == 'Tuesday' && steps.get_datetime.outputs.current_hour >= 9 && steps.get_datetime.outputs.current_hour <= 10 }}
+        run: python gym.py --pa ${{ secrets.PASS_60302184 }} --i ${{ secrets.ID_60302184 }} --ln ${{ secrets.LAST_NAME_60302184 }} --fn ${{ secrets.ME_FIRST_60302184 }} --ca 0 --t 9 --fd 7
 
