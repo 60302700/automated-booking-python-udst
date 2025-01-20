@@ -32,6 +32,9 @@ jobs:
           echo "::set-output name=current_hour::$current_hour"
           echo "::set-output name=current_day::$current_day"
       
+      - name: Print OS Type
+        run: echo "Running on ${{ runner.os }}"
+      
       - name: Date And Time
         run: |
           echo "Current Day: ${{ steps.get_datetime.outputs.current_day }}"
