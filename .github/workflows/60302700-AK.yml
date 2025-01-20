@@ -9,7 +9,7 @@ on:
     - cron: '0 11 * * 3'
 jobs:
   Automated-Booking:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
     
       - name: Checkout repository
