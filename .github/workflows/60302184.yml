@@ -35,6 +35,7 @@ jobs:
         run: |
           echo "Current Day: ${{ steps.get_datetime.outputs.current_day }}"
           echo "Current Hour: ${{ steps.get_datetime.outputs.current_hour }}"
+      
       - name: Sunday-Gym
         shell: powershell
         if: ${{ steps.get_datetime.outputs.current_day == 'Sunday' && steps.get_datetime.outputs.current_hour >= 12 && steps.get_datetime.outputs.current_hour <= 13 }}
