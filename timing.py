@@ -13,7 +13,7 @@ def get_time_day():
 
 
 def set_values(hour,day):
-    os.environ['Hour'] = hour
+    os.environ['Hour'] = str(hour)
     os.environ['Day'] = day
     with open(os.getenv('GITHUB_ENV'), 'a') as env_file:
         env_file.write(f'Hour={os.environ['Hour']}\n')
