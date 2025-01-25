@@ -31,6 +31,7 @@ jobs:
           $current_day = Get-Date -Format 'dddd'
           echo "::set-output name=current_hour::$current_hour"
           echo "::set-output name=current_day::$current_day"
+          python timing.py
       
       - name: Print OS Type
         run: echo "Running on ${{ runner.os }}"
@@ -39,6 +40,8 @@ jobs:
         run: |
           echo "Current Day: ${{ steps.get_datetime.outputs.current_day }}"
           echo "Current Hour: ${{ steps.get_datetime.outputs.current_hour }}"
+          echo ${{ env.Hour }}
+          echo ${{ env.Day }}
       - name: Sunday-Gym
         shell: powershell
         if: ${{ steps.get_datetime.outputs.current_day == 'Sunday' && steps.get_datetime.outputs.current_hour >= 9 && steps.get_datetime.outputs.current_hour <= 10 }}
