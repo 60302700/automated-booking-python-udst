@@ -7,7 +7,7 @@ on:
 
 jobs:
   check-date-and-time:
-    runs-on: ubuntu-latest
+    runs-on: ARM
     steps:
       - name: Get Day and Time
         id: get_datetime
