@@ -202,7 +202,7 @@ def book_multi_purpose(session: requests.Session, data: dict, post_headers: dict
     #! Note: To detect when cannot rent resource, response will have a response code of 4. Can use this
     # The reason I'm repeating this code is to enable customization of booking for alternative courts when booking a sport
     for times in range(3):
-        response = post_booking_request(session, data=data, headers=post_headers)
+        response = post_booking_request(session,data=data, headers=post_headers)
         try:
             response_json = response.json()
             # If we allow for alternative booking AND we get an error signifying spot is taken...
