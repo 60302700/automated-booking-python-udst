@@ -1,0 +1,44 @@
+name: 60302700
+on:
+  schedule:
+    - cron: '30 10 * * 1'
+    - cron: '0 8 * * 3'
+    - cron: '0 8 * * 4'
+jobs:
+  Automated-Booking:
+    runs-on: self-hosted
+    steps:
+    
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      
+      -name: Install required modules
+       run: pip install -r requirements.txt
+
+      - name: Getting Current Date And Time
+        id: get_datetime_win
+        run: python timing.py
+      
+      - name: Date And Time
+        run: |
+          echo "Current Hour ${{ env.Hour }}"
+          echo "Current Day ${{ env.Day }}"
+      - name: Monday-Gym
+        shell: powershell
+        if: ${ env.Day == 'Monday' && env.Hour >= 10 && env.Hour <= 11 }
+        run: python gym.py --pa ${ secrets.PASS_60302700 } --i ${ secrets.ID_60302700 } --ln ${ secrets.LAST_NAME_60302700 } --fn ${ secrets.ME_FIRST_60302700 } --ca 0 --t 13.5 --fd 7
+
+      - name: Wednesday-Gym
+        shell: powershell
+        if: ${ env.Day == 'Wednesday' && env.Hour >= 8 && env.Hour <= 9 }
+        run: python gym.py --pa ${ secrets.PASS_60302700 } --i ${ secrets.ID_60302700 } --ln ${ secrets.LAST_NAME_60302700 } --fn ${ secrets.ME_FIRST_60302700 } --ca 0 --t 13.5 --fd 7
+
+      - name: Thursday-Gym
+        shell: powershell
+        if: ${ env.Day == 'Thursday' && env.Hour >= 8 && env.Hour <= 9 }
+        run: python gym.py --pa ${ secrets.PASS_60302700 } --i ${ secrets.ID_60302700 } --ln ${ secrets.LAST_NAME_60302700 } --fn ${ secrets.ME_FIRST_60302700 } --ca 0 --t 13.5 --fd 7
