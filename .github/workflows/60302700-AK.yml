@@ -32,14 +32,14 @@ jobs:
       - name: Monday-Gym
         shell: powershell
         if: ${{ env.Day == 'Tuesday' && env.Hour >= 15 && env.Hour <= 14 }}
-        run: python gym.py --pa ${ secrets.PASS_60302700 } --i ${ secrets.ID_60302700 } --ln ${ secrets.LAST_NAME_60302700 } --fn ${ secrets.ME_FIRST_60302700 } --ca 0 --t 13.5 --fd 7
+        run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 13.5 --fd 7
 
       - name: Wednesday-Gym
         shell: powershell
         if: ${{ env.Day == 'Wednesday' && env.Hour >= 8 && env.Hour <= 9 }}
-        run: python gym.py --pa ${ secrets.PASS_60302700 } --i ${ secrets.ID_60302700 } --ln ${ secrets.LAST_NAME_60302700 } --fn ${ secrets.ME_FIRST_60302700 } --ca 0 --t 13.5 --fd 7
+        run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 13.5 --fd 7
 
       - name: Thursday-Gym
         shell: powershell
         if: ${{ env.Day == 'Thursday' && env.Hour >= 8 && env.Hour <= 9 }}
-        run: python gym.py --pa ${ secrets.PASS_60302700 } --i ${ secrets.ID_60302700 } --ln ${ secrets.LAST_NAME_60302700 } --fn ${ secrets.ME_FIRST_60302700 } --ca 0 --t 13.5 --fd 7
+        run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 13.5 --fd 7
