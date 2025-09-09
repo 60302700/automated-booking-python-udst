@@ -31,7 +31,7 @@ jobs:
           echo "Current Day ${{ env.Day }}"
       - name: Monday-Gym
         shell: powershell
-        if: ${{ env.Day == 'Tuesday' && env.Hour >= 15 && env.Hour <= 14 }}
+        if: ${{ env.Day == 'Tuesday' && env.Hour >= 15 && env.Hour <= 16 }}
         run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 13.5 --fd 7
 
       - name: Wednesday-Gym
