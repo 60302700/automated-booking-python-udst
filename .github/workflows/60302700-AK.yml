@@ -1,5 +1,6 @@
 name: 60302700_AK_I
 on:
+  workflow_dispatch:
   schedule:
     - cron: '30 10 * * 1'
     - cron: '0 8 * * 3'
