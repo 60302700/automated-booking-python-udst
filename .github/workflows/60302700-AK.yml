@@ -16,9 +16,9 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
-      
-      -name: Install required modules
-       run: pip install -r requirements.txt
+
+      - name: Req Installation
+        run: pip install -r requirements.txt
 
       - name: Getting Current Date And Time
         id: get_datetime_win
