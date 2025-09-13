@@ -18,4 +18,3 @@ jobs:
       - name: Conditional Check
         if: ${{ env.current_day == 'Saturday' && env.current_hour >= 9 && env.current_hour <= 20 }}
         run: echo "This runs only on Monday between 9 AM and 5 PM"
-'''
