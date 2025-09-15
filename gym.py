@@ -158,12 +158,12 @@ def add_guests_to_data(session: requests.Session, data: dict) -> dict:
     student = students.json()
     student_count = 1 #guest_no for loop below
     for info in student:
-        data[f'rental_prop_Guest_name_{student_count}'] = info['name']
-        data[f'rental_prop_Guest_email_{student_count}'] = info['email']
-        data[f'rental_prop_CNA_Q_ID_{student_count}'] = info['cnaq_id']
-        data[f'rental_prop_National_ID_{student_count}'] = info['national_id']
-        data[f'rental_prop_Guest_ID_{student_count}'] = info['id']
-        data[f'rental_prop_Guest_category_{student_count}'] = info['category']
+        data[f'rental_prop_Guest_name_{student_count}'] = info.get('name')
+        data[f'rental_prop_Guest_email_{student_count}'] = info.get('email')
+        data[f'rental_prop_CNA_Q_ID_{student_count}'] = info.get('cnaq_id')
+        data[f'rental_prop_National_ID_{student_count}'] = info.get('national_id')
+        data[f'rental_prop_Guest_ID_{student_count}'] = info.get('id')
+        data[f'rental_prop_Guest_category_{student_count}'] = info.get('category')
 
         count_guest_key = f"rental_prop_Count_Guest_{ info['category'].capitalize() }"
 
