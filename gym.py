@@ -230,7 +230,7 @@ def book_slot(session, first_name, last_name, id_udst, date, time, category, ran
         'resource_id': category,
         'one_date': date,
         'start_time': time,  # Assuming this is in hours (7.5 = 7:30 AM)
-        'end_time': time,  # Should this be the same as the start time? Might need adjustment
+        'end_time': (time+range_time),  # Should this be the same as the start time? Might need adjustment
         'time_mode': 'part_day',
         #! SEE COMMENT BELOW: 'rental_time_fixed_value': range_time,  # 1.5-hour rental
         'quantity': '1',
@@ -239,10 +239,10 @@ def book_slot(session, first_name, last_name, id_udst, date, time, category, ran
         'email': f'{id_udst}@udst.edu.qa',
         'rental_time_fixed_value': range_time,
         'verify_data': 'true',
-        'granulation': '15',
+        'granulation': '60',
         'is_night': '0',
-        'first_working_hour': '6',  # 6 AM
-        'last_working_hour': '20',  # 8 PM
+        'first_working_hour': '7',  # 6 AM
+        'last_working_hour': '23',  # 8 PM
         'submitted': 'true',
         'feedback_url':f'https://udstsport.udst.edu.qa/booking?ppp_upcoming_av_day_choices=7,15,30&ppp_res_period=1725861600-1725866999&planyo_lang=EN&mode=reserve&prefill=true&one_date={date}&start_date={date}&start_time={time}&resource_id={category}',
         'ulap_url': 'https://www.planyo.com/rest/planyo-reservations.php',
