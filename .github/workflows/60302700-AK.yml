@@ -32,7 +32,7 @@ jobs:
       - name: Monday-Gym
         shell: powershell
         if: ${{ env.Day == 'Monday' }}
-        run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 11 --fd 7
+        run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 2 --t 11 --fd 7
 #was 13.5 gym on mon
       - name: Wednesday-Gym
         shell: powershell
