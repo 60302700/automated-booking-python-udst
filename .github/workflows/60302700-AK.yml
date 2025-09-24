@@ -37,7 +37,7 @@ jobs:
 
       - name: Wednesday-Gym
         shell: powershell
-        if: ${{ env.Day == 'Wednesday' && env.Hour >= 10 && env.Hour <= 11 }}
+        if: ${{ env.Day == 'Wednesday' }}
         run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 0 --t 13.5 --fd 7
 
       - name: Thursday-Gym
