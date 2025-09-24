@@ -6,7 +6,7 @@ on:
     - cron: '30 10 * * 0'
     - cron: '0 10 * * 1'
     - cron: '30 5 * * 2'
-    - cron: '0 11 * * 3'
+    - cron: '0 8 * * 3'
 jobs:
   Automated-Booking:
     runs-on: windows-latest
@@ -55,5 +55,5 @@ jobs:
 
       - name: Wednesday-pool
         #shell: powershell
-        if: ${{ env.Day == 'Wednesghday' && env.Hour >= 11 && env.Hour <= 12 }}
+        if: ${{ env.Day == 'Wednesday'}}
         run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 1 --t 11 --fd 7
