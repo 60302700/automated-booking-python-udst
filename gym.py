@@ -230,7 +230,7 @@ def book_slot(session, first_name, last_name, id_udst, date, time, category, ran
         'resource_id': category,
         'one_date': date,
         'start_time': time,  # Assuming this is in hours (7.5 = 7:30 AM)
-        'end_time': int(time)+int(range_time),  # Should this be the same as the start time? Might need adjustment
+        'end_time': float(time)+float(range_time),  # Should this be the same as the start time? Might need adjustment
         'time_mode': 'part_day',
         #! SEE COMMENT BELOW: 'rental_time_fixed_value': range_time,  # 1.5-hour rental
         'quantity': '1',
