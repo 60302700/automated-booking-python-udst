@@ -5,7 +5,7 @@ import logging
 from bs4 import BeautifulSoup
 import random
 import json
-from sport_types import SportType
+#from sport_types import SportType
 
 
 # Set up logging
@@ -108,6 +108,64 @@ def post_booking_request(session: requests.Session, data: dict, headers: dict) -
         logging.error(f"Request failed for unknown reason: {e}")
 
     return response
+
+def get_DB(session,login_cs,udst_email):
+    payload = {
+    "mode": "upcoming_availability_search",
+    "output": "json",
+    "site_id": "56012",
+    "sort_fields": "prop_res_sort_order",
+    "sort": "prop_res_sort_order",
+    "ppp_current_page": "1",
+    "ppp_results_per_page": "200",
+    "upcoming-until-dates": "2025-09-16_2025-10-16",
+    "prop_res_client": "UDST Community",
+    "prop_res_gender": "",
+    "prop_res_indoor_or_outdoor": "none",
+    "extra_search_fields": "client,gender,indoor_or_outdoor,",
+    "ppp_hidden_fields": "prop_res_client",
+    "submitted": "true",
+    "feedback_url": "https://udstsport.udst.edu.qa/booking?ppp_upcoming_av_fixed_days=30&mode=upcoming_availability&extra_search_fields=prop_res_gender%2Cprop_res_client%2Cprop_res_indoor_or_outdoor&prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client",
+    "ulap_url": "https://www.planyo.com/rest/planyo-reservations.php",
+    "language": "EN",
+    "plugin_mode": "0",
+    "dynm": "0",
+    "login_cs": login_cs,
+    "login_email": udst_email,
+    "ppp_upcoming_av_fixed_days": "30",
+    "ppp_upcoming_av_day_choices": "7,15,30",
+    "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+}
+    headers = {
+    "Accept": "application/json, text/javascript, */*; q=0.01",
+    "Accept-Encoding": "gzip, deflate, br, zstd",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Cache-Control": "no-cache",
+    "Connection": "keep-alive",
+    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+    "Origin": "https://udstsport.udst.edu.qa",
+    "Pragma": "no-cache",
+    "Referer": "https://udstsport.udst.edu.qa/booking?ppp_upcoming_av_fixed_days=30&mode=upcoming_availability&extra_search_fields=prop_res_gender%2Cprop_res_client%2Cprop_res_indoor_or_outdoor&prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client",
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
+    "x-csrf-token": get_csrf_token_from_page(session,"https://udstsport.udst.edu.qa/booking"),
+    "X-Requested-With": "XMLHttpRequest",
+    "sec-ch-ua": '"Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"',
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": '"Linux"',
+}
+    data = BeautifulSoup(session.post("https://udstsport.udst.edu.qa/sportsbooking/planyo/ulap.php",data=payload,headers=headers).json()['data']['code'],"html.parser").find_all(class_="wi-search-results__card-body")
+    rental_time = session.post("https://www.planyo.com/fetch-data.php?&id=56012&with_resources=1")
+    rental_time = rental_time.json()["resources"]
+    Database = {}
+    for index in range(len(data)):
+        name = data[index].find("a").text.replace("\r\n","").replace("\n","").strip()
+        resource_id = dict(map(lambda x:x.split("="),data[index].find_all("a")[0].get("href").split("&")))['resource_id']
+        rental_time_max = rental_time[resource_id]["max_rental_time"]
+        if float(rental_time_max) < 12:
+         Database[name] = {"id":resource_id,"rental_time":rental_time_max}
+    
+    return Database
+
 
 def book_gym(session: requests.Session, data: dict, post_headers: dict):
     # post_headers['Content-Length'] = str(len(data)); Can use if needed.
@@ -299,12 +357,13 @@ parser.add_argument('--pa', required=True, type=str, help='Password')
 parser.add_argument('--fn', type=str, help='First Name')
 parser.add_argument('--ln', type=str, help='Last Name')
 parser.add_argument('--i', required=True, type=str, help='User ID for login')
-parser.add_argument('--ca', type=int, required=True, help='Category index')
+parser.add_argument('--ca', type=str, required=True, help='Category index')
 parser.add_argument('--t',type=str,required=True,help="Time In 24 hrs format , 12:30 = 12.5")
 parser.add_argument('--fd',type=int,help="7 days ahead booking")
 parser.add_argument('--d',type=str,help="set the day and date")
 parser.add_argument('--duration', type=str, help="Add custom duration to booking")
 parser.add_argument('--s', type=str, help="For The Sport To Be Selected At The Court")
+parser.add_argument('--list', type=str, help="Listing Options")
 
 # Parse the arguments
 args = parser.parse_args()
@@ -313,12 +372,12 @@ args = parser.parse_args()
 session, login_cs = login(id_udst=args.i, password=args.pa)
 
 # GYM, SWIMMING, STANDARD, HIGH-END GAMING (in order)
-category = ['178388', '178795', '235825','235824','209258','209259']
+category = ['178388', '244923', '235825','235824','209258','209259']
 range_time = ['1.5', '1', '2']
 
 category_ids = [
-        ('244933','1.5'),   # Gym
-        ('178795','1'),     # Swimming
+        ('178388','1.5'),   # Gym
+        ('244934','1'),     # Swimming
         ('235825','2'),     # Gaming Standard
         ('235824', '2'),    # Gaming High-End
         ('209258', '1'),    # MPH Court 1
@@ -328,10 +387,6 @@ category_ids = [
 if args.duration is not None:
     # If custom duration is provided
     range_time_chosen = args.duration
-else:
-    # Otherwise use category-default timings
-    # range_time_chosen = range_time[args.ca]
-    range_time_chosen = category_ids[args.ca][1]
 
 if args.s:
     # Experimenting with enums. Could add later? (Due to repetition)
@@ -345,9 +400,19 @@ if args.s:
 else:
     sport = "Futsal" 
 
+Database = get_DB(session,login_cs,f'{id}@udst.edu.qa')
+#{"facility" : {id,rental duration}}
+
+facility = Database.get(args.ca)
+rental_time = facility.get("rental_time")
+id = facility.get("id")
+
+if args.list:
+    for k in ['Turf Football Pitch', '8- Lane Running Track (Event Park)', 'Multi-Sport Hall-Building 18', 'Beach Volleyball Court', 'Cricket Batting Cages', 'Female Fitness Class: Yoga', 'Female Fitness Room', 'Mixed Class: SpinFIT', 'Female Fitness Class: Female SpinFIT', 'Female Fitness Class: Pilates', 'Female Fitness Class: SuperFIT (Advanced Users)', 'Female Fitness Class: Zumba®️', 'MPH Multi-Sport Court 1 (Futsal, Volleyball & Basketball)', 'Female Fitness Class: Les Mills Body Pump', 'Female Swimming Pool', 'E- gaming Playstation', 'E- gaming Premium', 'Outdoor Padel Court 1 (Private Court)', 'MPH Indoor Squash Court 1 (60-Minute Bookings)', 'E- gaming Standard', 'Outdoor Tennis Courts', 'Outdoor Padel Court 3', 'Outdoor Padel Court 2', 'MPH Indoor Padel Court 3 (Private Court)', 'MPH Indoor Padel Court 1', 'Male Swimming Pool', 'Male Fitness Room', 'PADI Starfish Learn to Swim Program - LEVEL 1', 'PADI Starfish Learn to Swim Program - LEVEL 2', 'PADI Starfish Learn to Swim Program - LEVEL 3', 'PADI Starfish Learn to Swim Program - LEVEL 4', 'PADI Starfish Learn to Swim Program - LEVEL 5', 'PADI Starfish Learn to Swim Program - LEVEL 6', 'Multi-Sport Hall-Building 17', 'UDST Wolves Tennis Academy: Spring Term from Sept 7th – Dec 6th ,2025 (13-week program) - For Children Born in 2021', 'Female Fitness Class: Female Virtual SpinFIT', 'Male Fitness Class: Male Virtual SpinFIT', 'Female Fitness Class: AquaFIT', 'MPH Multi-Sport Court 2 (Futsal, Handball & Tennis)', 'MPH – Auxiliary Rooms', 'Natural Grass Cricket Ground', 'Natural Grass Football Pitch (Event Park)', 'MPH Indoor Squash Court 2 (90-Minute Bookings)', 'MPH Indoor Padel Court 2']:
+        print(k)
 #Example of how to calculate the date and time
 if not args.fd:
-    book_slot(session=session, first_name=args.fn, last_name=args.ln, id_udst=args.i, date=args.d, time=args.t, category=category[args.ca], range_time=range_time_chosen, login_cs=login_cs)
+    book_slot(session=session, first_name=args.fn, last_name=args.ln, id_udst=args.i, date=args.d, time=args.t, category=id, range_time=rental_time, login_cs=login_cs)
 else:
     date = future_day(args.fd)
-    book_slot(session=session, first_name=args.fn, last_name=args.ln, id_udst=args.i, date=date, time=args.t, category=category[args.ca], range_time=range_time_chosen, login_cs=login_cs)
+    book_slot(session=session, first_name=args.fn, last_name=args.ln, id_udst=args.i, date=date, time=args.t, category=id, range_time=rental_time, login_cs=login_cs)
