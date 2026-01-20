@@ -1,0 +1,39 @@
+name: Gym_Auto_Booking
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '50 5 * * 0'
+    - cron: '50 9 * * 1'
+    - cron: '0 12 * * 2'
+    - cron: '55 11 * * 3'
+    - cron: '20 4 * * 4'
+
+jobs:
+  automated-booking:
+    runs-on: windows-latest
+
+    env:
+      SCRIPT_TIMEZONE: Asia/Qatar
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Gym Booking
+        shell: powershell
+        run: >
+          python gym.py
+          --pa "${{ secrets.PASS_ME }}"
+          --i  "${{ secrets.ID_ME }}"
+          --fn "${{ secrets.ME_FIRST_NAME }}"
+          --ln "${{ secrets.ME_LAST_NAME }}"
+          --timezone Asia/Qatar
