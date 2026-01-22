@@ -31,9 +31,4 @@ jobs:
       - name: Run Gym Booking
         shell: powershell
         run: >
-          python gym.py
-          --pa "${{ secrets.PASS_ME }}"
-          --i  "${{ secrets.ID_ME }}"
-          --fn "${{ secrets.ME_FIRST_NAME }}"
-          --ln "${{ secrets.ME_LAST_NAME }}"
-          --timezone Asia/Qatar
+          python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'Male Fitness Room' --t 13.5 --fd 7
