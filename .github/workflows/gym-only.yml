@@ -28,7 +28,21 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Get Day and Time
+        id: get_datetime
+        shell: powershell
+        run: |
+          $time = Get-Date
+          $decimalTime = [math]::Round($time.Hour + ($time.Minute / 60), 2)
+          $decimalTime
+          echo "::set-output name=current_time::$decimalTime"
+
+      - name: Date And Time
+        run: |
+          echo "Current Day: ${{ steps.get_datetime.outputs.current_day }}"
+          echo "Current Hour: ${{ steps.get_datetime.outputs.current_hour }}"
+
       - name: Run Gym Booking
         shell: powershell
         run: >
-          python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'Male Fitness Room' --t 13.5 --fd 7
+          python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'Male Fitness Room' --t {{ steps.get_datetime.outputs.current_time }} --fd 7
