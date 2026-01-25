@@ -41,6 +41,7 @@ jobs:
         run: |
           echo "Current Day: ${{ steps.get_datetime.outputs.current_day }}"
           echo "Current Hour: ${{ steps.get_datetime.outputs.current_hour }}"
+          echo "Current Time: ${{ steps.get_datetime.outputs.current_time }}"
 
       - name: Run Gym Booking
         shell: powershell
