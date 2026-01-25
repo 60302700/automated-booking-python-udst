@@ -33,7 +33,7 @@ jobs:
         shell: powershell
         run: |
           $time = Get-Date
-          $decimalTime = [math]::Round($time.Hour + ($time.Minute / 60), 2)
+          $decimalTime = [math]::Round($time.Hour + ($time.Minute / 60) + 3, 2)
           $decimalTime
           echo "::set-output name=current_time::$decimalTime"
 
