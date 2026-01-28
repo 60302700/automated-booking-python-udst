@@ -1,0 +1,67 @@
+name: 60302700_AK_I
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 13 * * 1'   # Monday
+    - cron: '0 11 * * 1'    # Monday
+    - cron: '10 10 * * 2'   # Tuesday
+    - cron: '0 7 * * 3'     # Wednesday
+    - cron: '40 10 * * 4'   # Thursday
+
+jobs:
+  Automated-Booking:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Req Installation
+        run: pip install -r requirements.txt
+
+      - name: Getting Current Date And Time
+        id: get_datetime_win
+        run: python timing.py
+
+      - name: Date And Time
+        run: |
+          echo "Current Hour: ${{ env.Hour }}"
+          echo "Current Day:  ${{ env.Day }}"
+
+      - name: Auto Booking Logic
+        shell: powershell
+        run: |
+          $day  = "${{ env.Day }}"
+          $hour = [int]"${{ env.Hour }}"
+
+          Write-Host "Evaluating booking rules for $day at $hour"
+
+          if ($day -eq "Monday" -and $hour -ge 13 -and $hour -le 14) {
+              Write-Host "Monday Gym Booking"
+              python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca "Male Fitness Room" --t 13.5 --fd 7
+          }
+          elseif ($day -eq "Monday" -and $hour -ge 11 -and $hour -le 12) {
+              Write-Host "Monday Swimming Booking"
+              python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca "Male Fitness Room" --t 14 --fd 7
+          }
+          elseif ($day -eq "Tuesday" -and $hour -ge 10 -and $hour -le 11) {
+              Write-Host "Tuesday Swimming Booking"
+              python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca "Male Swimming Pool" --t 11 --fd 7
+          }
+          elseif ($day -eq "Wednesday" -and $hour -ge 17 -and $hour -le 8) {
+              Write-Host "Wednesday Gym Booking"
+              python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca "Male Fitness Room" --t 13.5 --fd 7
+          }
+          elseif ($day -eq "Thursday" -and $hour -ge 10 -and $hour -le 11) {
+              Write-Host "Thursday Gym Booking"
+              python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca "Male Fitness Room" --t 13.5 --fd 7
+          }
+          else {
+              Write-Host "No booking rule matched — exiting safely"
+          }
