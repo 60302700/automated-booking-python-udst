@@ -32,4 +32,4 @@ jobs:
           
       - name: Sunday-Gym
         shell: powershell
-        run: python gym.py --pa ${{ secrets.aqnaf_pass }} --i ${{ secrets.aqnad_id }} --ln ${{ secrets.aqnaf_ln }} --fn ${{ secrets.aqnaf_fn }} --ca 'Male Fitness Room' --t 13.5 --fd 0
+        run: python gym.py --pa ${{ secrets.aqnaf_pass }} --i ${{ secrets.aqnad_id }} --ln ${{ secrets.aqnaf_ln }} --fn ${{ secrets.aqnaf_fn }} --ca 'Male Fitness Room' --t 13.5 --fd 1
