@@ -1,0 +1,35 @@
+name: aqnaf_gym
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 10 * * *'
+
+jobs:
+  Automated-Booking:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Req Installation
+        run: pip install -r requirements.txt
+
+      - name: Getting Current Date And Time
+        id: get_datetime_win
+        run: python timing.py
+
+      - name: Date And Time
+        run: |
+          echo "Current Hour ${{ env.Hour }}"
+          echo "Current Day ${{ env.Day }}"
+          
+      - name: Sunday-Gym
+        shell: powershell
+        run: python gym.py --pa ${{ secrets.aqnaf_pass }} --i ${{ secrets.aqnad_id }} --ln ${{ secrets.aqnaf_ln }} --fn ${{ secrets.aqnaf_fn }} --ca 'Male Fitness Room' --t 13.5 --fd 0
