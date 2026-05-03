@@ -37,8 +37,4 @@ jobs:
       - name: Gym-Ratom
         shell: powershell
         run: python gym.py --pa ${{ secrets.ratom_pass }} --i ${{ secrets.ratom_id }} --ln ${{ secrets.ratom_ln }} --fn ${{ secrets.ratom_fn }} --ca 'Male Fitness Room' --t 13.5 --fd 1
-
-      - name: Gym-Me
-        shell: powershell
-        run: python gym.py --pa ${{ secrets.aqnaf_pass }} --i ${{ secrets.aqnad_id }} --ln ${{ secrets.aqnaf_ln }} --fn ${{ secrets.aqnaf_fn }} --ca 'Male Fitness Room' --t 13.5 --fd 1
         
