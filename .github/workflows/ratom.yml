@@ -1,0 +1,43 @@
+name: 60302700_AK_I
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 4 * * 6'   # Saturday  04:00 UTC = 07:00 AST → books Sunday 10:30
+    - cron: '0 7 * * 0'   # Sunday    07:00 UTC = 10:00 AST → books Monday 13:30
+    - cron: '0 4 * * 1'   # Monday    04:00 UTC = 07:00 AST → books Tuesday 10:30
+    - cron: '0 4 * * 3'   # Wednesday 04:00 UTC = 07:00 AST → books Thursday 10:30
+jobs:
+  Automated-Booking:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Req Installation
+        run: pip install -r requirements.txt
+      - name: Getting Current Date And Time
+        id: get_datetime_win
+        run: python timing.py
+      - name: Date And Time
+        run: |
+          echo "Current Hour ${{ env.Hour }}"
+          echo "Current Day ${{ env.Day }}"
+      - name: Sunday-Gym
+        shell: powershell
+        if: ${{ env.Day == 'Saturday' && env.Hour >= 7 && env.Hour <= 8 }}
+        run: python gym.py --pa ${{ secrets.ratom_pass }} --i ${{ secrets.ratom_id }} --ln ${{ secrets.ratom_ln }} --fn ${{ secrets.ratom_fn }} --ca 'Male Fitness Room' --t 10.5 --fd 1
+      - name: Monday-Gym
+        shell: powershell
+        if: ${{ env.Day == 'Sunday' && env.Hour >= 10 && env.Hour <= 11 }}
+        run: python gym.py --pa ${{ secrets.ratom_pass }} --i ${{ secrets.ratom_id }} --ln ${{ secrets.ratom_ln }} --fn ${{ secrets.ratom_fn }} --ca 'Male Fitness Room' --t 13.5 --fd 1
+      - name: Tuesday-Gym
+        shell: powershell
+        if: ${{ env.Day == 'Monday' && env.Hour >= 7 && env.Hour <= 8 }}
+        run: python gym.py --pa ${{ secrets.ratom_pass }} --i ${{ secrets.ratom_id }} --ln ${{ secrets.ratom_ln }} --fn ${{ secrets.ratom_fn }} --ca 'Male Fitness Room' --t 10.5 --fd 1
+      - name: Thursday-Gym
+        shell: powershell
+        if: ${{ env.Day == 'Wednesday' && env.Hour >= 7 && env.Hour <= 8 }}
+        run: python gym.py --pa ${{ secrets.ratom_pass }} --i ${{ secrets.ratom_id }} --ln ${{ secrets.ratom_ln }} --fn ${{ secrets.ratom_fn }} --ca 'Male Fitness Room' --t 10.5 --fd 1
