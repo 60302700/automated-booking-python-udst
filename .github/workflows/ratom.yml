@@ -31,7 +31,7 @@ jobs:
         run: python gym.py --pa ${{ secrets.ratom_pass }} --i ${{ secrets.ratom_id }} --ln ${{ secrets.ratom_ln }} --fn ${{ secrets.ratom_fn }} --ca 'Male Fitness Room' --t 10.5 --fd 1
       - name: Monday-Gym
         shell: powershell
-        if: ${{ env.Day == 'Monday' && env.Hour >= 11 && env.Hour <= 12 }}
+        
         run: python gym.py --pa ${{ secrets.ratom_pass }} --i ${{ secrets.ratom_id }} --ln ${{ secrets.ratom_ln }} --fn ${{ secrets.ratom_fn }} --ca 'Male Fitness Room' --t 13.5 --fd 1
       - name: Tuesday-Gym
         shell: powershell
