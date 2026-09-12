@@ -2,13 +2,14 @@ name: 60302700_AK_I
 
 on:
   workflow_dispatch:
+  # Schedule times are in UTC. Converted from Qatar time (UTC+3):
+  # Sunday 12:00 (Qatar) -> 09:00 UTC
+  # Tuesday 09:00 (Qatar) -> 06:00 UTC
+  # Wednesday 13:30 (Qatar) -> 10:30 UTC
   schedule:
-    - cron: '0 6 * * 0'
-    - cron: '30 10 * * 1'
-    - cron: '30 7 * * 2'
-    - cron: '30 7 * * 3'
-    - cron: '30 7 * * 4'
-    - cron: '0 14 * * 6'
+    - cron: "0 9 * * 0"
+    - cron: "0 6 * * 2"
+    - cron: "30 10 * * 3"
 
 jobs:
   Automated-Booking:
@@ -21,7 +22,7 @@ jobs:
       - name: Set up Python 3.x
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Req Installation
         run: pip install -r requirements.txt
@@ -37,30 +38,15 @@ jobs:
 
       - name: Sunday-Gym
         shell: powershell
-        if: ${{ env.Day == 'Sunday' && env.Hour >= 6 && env.Hour <= 7 }}
-        run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'Male Fitness Room' --t 9 --fd 7
-
-      - name: Monday-Gym
-        shell: powershell
-        if: ${{ env.Day == 'Monday' && env.Hour >= 10 && env.Hour <= 11 }}
-        run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'Male Fitness Room' --t 13.5 --fd 7
+        if: ${{ env.Day == 'Sunday' && env.Hour >= 9 && env.Hour <= 10 }}
+        run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'Male Fitness Room' --t 12 --fd 7
 
       - name: Tuesday-Gym
         shell: powershell
-        if: ${{ env.Day == 'Tuesday' && env.Hour >= 7 && env.Hour <= 8 }}
-        run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'Male Fitness Room' --t 10.5 --fd 7
+        if: ${{ env.Day == 'Tuesday' && env.Hour >= 6 && env.Hour <= 7 }}
+        run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'Male Fitness Room' --t 9 --fd 7
 
       - name: Wednesday-Gym
         shell: powershell
-        if: ${{ env.Day == 'Wednesday' && env.Hour >= 7 && env.Hour <= 8 }}
-        run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'Male Fitness Room' --t 10.5 --fd 7
-
-      - name: Thursday-Gym
-        shell: powershell
-        if: ${{ env.Day == 'Thursday' && env.Hour >= 7 && env.Hour <= 8 }}
-        run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'Male Fitness Room' --t 10.5 --fd 7
-
-      - name: Saturday-Football
-        shell: powershell
-        if: ${{ env.Day == 'Saturday' && env.Hour >= 14 && env.Hour <= 15 }}
-        run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'Turf Football Pitch' --t 14 --fd 7
+        if: ${{ env.Day == 'Wednesday' && env.Hour >= 10 && env.Hour <= 11 }}
+        run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'Male Fitness Room' --t 13.5 --fd 7

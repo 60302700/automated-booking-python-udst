@@ -1,0 +1,103 @@
+2026-02-01 21:54:56,767 [DEBUG] Starting new HTTPS connection (1): udstsport.udst.edu.qa:443
+2026-02-01 21:54:56,871 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /login HTTP/1.1" 200 4596
+2026-02-01 21:54:57,442 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /login HTTP/1.1" 302 None
+2026-02-01 21:54:57,480 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /login HTTP/1.1" 200 4659
+2026-02-01 21:59:22,747 [DEBUG] Starting new HTTPS connection (1): udstsport.udst.edu.qa:443
+2026-02-01 21:59:22,839 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /login HTTP/1.1" 200 4597
+2026-02-01 21:59:23,078 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /login HTTP/1.1" 302 None
+2026-02-01 21:59:23,150 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /home HTTP/1.1" 200 5771
+2026-02-01 21:59:23,182 [INFO] Login successful
+2026-02-01 21:59:23,239 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking HTTP/1.1" 302 None
+2026-02-01 21:59:23,242 [DEBUG] Starting new HTTP connection (1): udstsport.udst.edu.qa:80
+2026-02-01 21:59:23,277 [DEBUG] http://udstsport.udst.edu.qa:80 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 302 0
+2026-02-01 21:59:23,338 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 200 8119
+2026-02-01 22:00:25,899 [DEBUG] Starting new HTTPS connection (1): udstsport.udst.edu.qa:443
+2026-02-01 22:00:25,976 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /login HTTP/1.1" 200 4595
+2026-02-01 22:00:26,265 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /login HTTP/1.1" 302 None
+2026-02-01 22:00:26,343 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /home HTTP/1.1" 200 5772
+2026-02-01 22:00:26,375 [INFO] Login successful
+2026-02-01 22:00:26,431 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking HTTP/1.1" 302 None
+2026-02-01 22:00:26,434 [DEBUG] Starting new HTTP connection (1): udstsport.udst.edu.qa:80
+2026-02-01 22:00:26,511 [DEBUG] http://udstsport.udst.edu.qa:80 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 302 0
+2026-02-01 22:00:26,568 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 200 8120
+2026-02-01 22:00:34,161 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /sportsbooking/planyo/ulap.php HTTP/1.1" 200 12748
+2026-02-01 22:00:34,235 [DEBUG] Starting new HTTPS connection (1): www.planyo.com:443
+2026-02-01 22:00:34,654 [DEBUG] https://www.planyo.com:443 "POST /fetch-data.php?&id=56012&with_resources=1 HTTP/1.1" 200 2465
+2026-02-01 22:00:34,661 [INFO] Booking for Abdullah Musthafa (60302700) on February 05 2026 at 14
+2026-02-01 22:00:34,717 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking HTTP/1.1" 302 None
+2026-02-01 22:00:34,732 [DEBUG] http://udstsport.udst.edu.qa:80 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 302 0
+2026-02-01 22:00:34,791 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 200 8120
+2026-02-01 22:00:39,979 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /sportsbooking/planyo/ulap.php HTTP/1.1" 200 1161
+2026-02-01 22:00:39,981 [INFO] Booking successful!
+2026-05-03 15:55:22,045 [DEBUG] Starting new HTTPS connection (1): udstsport.udst.edu.qa:443
+2026-05-03 15:55:22,283 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /login HTTP/1.1" 200 4599
+2026-05-03 15:55:22,447 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /login HTTP/1.1" 302 None
+2026-05-03 15:55:22,522 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /home HTTP/1.1" 200 5768
+2026-05-03 15:55:22,555 [INFO] Login successful
+2026-05-03 15:55:22,625 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking HTTP/1.1" 302 None
+2026-05-03 15:55:22,628 [DEBUG] Starting new HTTP connection (1): udstsport.udst.edu.qa:80
+2026-05-03 15:55:22,687 [DEBUG] http://udstsport.udst.edu.qa:80 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 302 0
+2026-05-03 15:55:22,750 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 200 8117
+2026-05-03 15:55:28,512 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /sportsbooking/planyo/ulap.php HTTP/1.1" 200 10866
+2026-05-03 15:55:28,579 [DEBUG] Starting new HTTPS connection (1): www.planyo.com:443
+2026-05-03 15:55:29,913 [DEBUG] https://www.planyo.com:443 "POST /fetch-data.php?&id=56012&with_resources=1 HTTP/1.1" 200 2868
+2026-05-03 15:55:29,918 [INFO] Booking for Muhammad Munir (60306156) on May 07 2026 at 14
+2026-05-03 15:55:30,002 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking HTTP/1.1" 302 None
+2026-05-03 15:55:30,029 [DEBUG] http://udstsport.udst.edu.qa:80 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 302 0
+2026-05-03 15:55:30,093 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 200 8117
+2026-05-03 15:55:38,366 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /sportsbooking/planyo/ulap.php HTTP/1.1" 200 1164
+2026-05-03 15:55:38,367 [INFO] Booking successful!
+2026-05-03 16:18:02,806 [DEBUG] Starting new HTTPS connection (1): udstsport.udst.edu.qa:443
+2026-05-03 16:18:02,951 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /login HTTP/1.1" 200 4597
+2026-05-03 16:18:03,141 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /login HTTP/1.1" 302 None
+2026-05-03 16:18:03,215 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /home HTTP/1.1" 200 5771
+2026-05-03 16:18:03,239 [INFO] Login successful
+2026-05-03 16:18:03,328 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking HTTP/1.1" 302 None
+2026-05-03 16:18:03,329 [DEBUG] Starting new HTTP connection (1): udstsport.udst.edu.qa:80
+2026-05-03 16:18:03,440 [DEBUG] http://udstsport.udst.edu.qa:80 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 302 0
+2026-05-03 16:18:03,511 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 200 8120
+2026-05-03 16:18:08,985 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /sportsbooking/planyo/ulap.php HTTP/1.1" 200 10866
+2026-05-03 16:18:09,016 [DEBUG] Starting new HTTPS connection (1): www.planyo.com:443
+2026-05-03 16:18:09,507 [DEBUG] https://www.planyo.com:443 "POST /fetch-data.php?&id=56012&with_resources=1 HTTP/1.1" 200 2868
+2026-05-03 16:18:09,512 [INFO] Booking for Abdullah Musthafa (60302700) on May 07 2026 at 14
+2026-05-03 16:18:09,587 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking HTTP/1.1" 302 None
+2026-05-03 16:18:09,614 [DEBUG] http://udstsport.udst.edu.qa:80 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 302 0
+2026-05-03 16:18:09,683 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 200 8120
+2026-05-03 16:18:11,178 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /sportsbooking/planyo/ulap.php HTTP/1.1" 200 203
+2026-05-03 16:18:11,179 [INFO] Booking successful!
+2026-05-03 16:18:19,926 [DEBUG] Starting new HTTPS connection (1): udstsport.udst.edu.qa:443
+2026-05-03 16:18:20,260 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /login HTTP/1.1" 200 4596
+2026-05-03 16:18:20,602 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /login HTTP/1.1" 302 None
+2026-05-03 16:18:20,690 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /home HTTP/1.1" 200 5774
+2026-05-03 16:18:20,718 [INFO] Login successful
+2026-05-03 16:18:20,795 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking HTTP/1.1" 302 None
+2026-05-03 16:18:20,797 [DEBUG] Starting new HTTP connection (1): udstsport.udst.edu.qa:80
+2026-05-03 16:18:20,869 [DEBUG] http://udstsport.udst.edu.qa:80 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 302 0
+2026-05-03 16:18:20,936 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 200 8122
+2026-05-03 16:18:27,472 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /sportsbooking/planyo/ulap.php HTTP/1.1" 200 10866
+2026-05-03 16:18:27,505 [DEBUG] Starting new HTTPS connection (1): www.planyo.com:443
+2026-05-03 16:18:27,996 [DEBUG] https://www.planyo.com:443 "POST /fetch-data.php?&id=56012&with_resources=1 HTTP/1.1" 200 2868
+2026-05-03 16:18:28,002 [INFO] Booking for Abdullah Musthafa (60302700) on May 07 2026 at 13.5
+2026-05-03 16:18:28,082 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking HTTP/1.1" 302 None
+2026-05-03 16:18:28,411 [DEBUG] http://udstsport.udst.edu.qa:80 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 302 0
+2026-05-03 16:18:28,494 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 200 8122
+2026-05-03 16:18:33,634 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /sportsbooking/planyo/ulap.php HTTP/1.1" 200 1163
+2026-05-03 16:18:33,636 [INFO] Booking successful!
+2026-05-03 16:20:55,725 [DEBUG] Starting new HTTPS connection (1): udstsport.udst.edu.qa:443
+2026-05-03 16:20:55,904 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /login HTTP/1.1" 200 4598
+2026-05-03 16:20:56,100 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /login HTTP/1.1" 302 None
+2026-05-03 16:20:56,185 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /home HTTP/1.1" 200 5771
+2026-05-03 16:20:56,212 [INFO] Login successful
+2026-05-03 16:20:56,289 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking HTTP/1.1" 302 None
+2026-05-03 16:20:56,291 [DEBUG] Starting new HTTP connection (1): udstsport.udst.edu.qa:80
+2026-05-03 16:20:56,330 [DEBUG] http://udstsport.udst.edu.qa:80 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 302 0
+2026-05-03 16:20:56,394 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 200 8121
+2026-05-03 16:21:02,158 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /sportsbooking/planyo/ulap.php HTTP/1.1" 200 10866
+2026-05-03 16:21:02,203 [DEBUG] Starting new HTTPS connection (1): www.planyo.com:443
+2026-05-03 16:21:02,785 [DEBUG] https://www.planyo.com:443 "POST /fetch-data.php?&id=56012&with_resources=1 HTTP/1.1" 200 2868
+2026-05-03 16:21:02,790 [INFO] Booking for Abdullah Musthafa (60302700) on None at 13.5
+2026-05-03 16:21:02,860 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking HTTP/1.1" 302 None
+2026-05-03 16:21:02,874 [DEBUG] http://udstsport.udst.edu.qa:80 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 302 0
+2026-05-03 16:21:02,946 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 200 8121
+2026-05-03 16:21:03,515 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /sportsbooking/planyo/ulap.php HTTP/1.1" 200 178
+2026-05-03 16:21:03,517 [INFO] Booking successful!
