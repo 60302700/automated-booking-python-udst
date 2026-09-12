@@ -109,6 +109,8 @@ def post_booking_request(session: requests.Session, data: dict, headers: dict) -
 
     return response
 
+
+
 def get_DB(session,login_cs,udst_email):
     payload = {
     "mode": "upcoming_availability_search",
@@ -152,9 +154,14 @@ def get_DB(session,login_cs,udst_email):
     "sec-ch-ua": '"Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"',
     "sec-ch-ua-mobile": "?0",
     "sec-ch-ua-platform": '"Linux"',
-}
-    data = BeautifulSoup(session.post("https://udstsport.udst.edu.qa/sportsbooking/planyo/ulap.php",data=payload,headers=headers).json()['data']['code'],"html.parser").find_all(class_="wi-search-results__card-body")
-    rental_time = session.post("https://www.planyo.com/fetch-data.php?&id=56012&with_resources=1")
+}   
+    d = session.post("https://udstsport.udst.edu.qa/sportsbooking/planyo/ulap.php",data=payload,headers=headers)
+    data = BeautifulSoup(d.json()['data']['code'],"html.parser").find_all(class_="wi-search-results__card-body")
+    
+    now = datetime.now()
+    current_month = now.month
+    current_year = now.year
+    rental_time = session.post(f"https://www.planyo.com/fetch-data.php?callback=jQuery11200030016422366728412_1789246617319&month={current_month}&year={current_year}&id=56012&with_resources=1")
     rental_time = rental_time.json()["resources"]
     Database = {}
     for index in range(len(data)):
