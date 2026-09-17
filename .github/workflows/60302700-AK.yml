@@ -13,7 +13,9 @@ on:
 
 jobs:
   Automated-Booking:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
+    env:
+      TZ_OFFSET: "3"
 
     steps:
       - name: Checkout repository
@@ -28,25 +30,33 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Getting Current Date And Time
-        id: get_datetime_win
+        id: get_datetime
         run: python timing.py
+
+      - name: Debug timestamps
+        run: |
+          echo "Runner UTC: $(date -u)"
+          echo "GITHUB_RUN_ID: $GITHUB_RUN_ID"
+          echo "GITHUB_RUN_NUMBER: $GITHUB_RUN_NUMBER"
+          echo "Hour (env): $Hour"
+          echo "Day (env): $Day"
 
       - name: Date And Time
         run: |
-          echo "Current Hour ${{ env.Hour }}"
-          echo "Current Day ${{ env.Day }}"
+          echo "Current Hour $Hour"
+          echo "Current Day $Day"
 
       - name: Sunday-Gym
-        shell: powershell
+        shell: bash
         if: ${{ env.Day == 'Sunday' && env.Hour >= 9 && env.Hour <= 10 }}
         run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'Male Fitness Room' --t 12 --fd 7
 
       - name: Tuesday-Gym
-        shell: powershell
+        shell: bash
         if: ${{ env.Day == 'Tuesday' && env.Hour >= 6 && env.Hour <= 7 }}
         run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'Male Fitness Room' --t 9 --fd 7
 
       - name: Wednesday-Gym
-        shell: powershell
+        shell: bash
         if: ${{ env.Day == 'Wednesday' && env.Hour >= 10 && env.Hour <= 11 }}
         run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'Male Fitness Room' --t 13.5 --fd 7

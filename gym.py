@@ -162,6 +162,7 @@ def get_DB(session,login_cs,udst_email):
     current_month = now.month
     current_year = now.year
     rental_time = session.post(f"https://www.planyo.com/fetch-data.php?callback=jQuery11200030016422366728412_1789246617319&month={current_month}&year={current_year}&id=56012&with_resources=1")
+    
     rental_time = rental_time.json()["resources"]
     Database = {}
     for index in range(len(data)):
