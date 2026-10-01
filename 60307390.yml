@@ -2,21 +2,18 @@ name: 60302700_GR
 
 on:
   workflow_dispatch:
-
   # Schedule times are in UTC. Converted from Qatar time (UTC+3):
-  # Sunday 14:00 (Qatar) -> 11:00 UTC
-  # Tuesday 10:30 (Qatar) -> 07:30 UTC
-  # Thursday 09:00 (Qatar) -> 06:00 UTC
-
+  # Sunday 12:00 (Qatar) -> 09:00 UTC
+  # Tuesday 09:00 (Qatar) -> 06:00 UTC
+  # Wednesday 13:30 (Qatar) -> 10:30 UTC
   schedule:
-    - cron: "0 11 * * 0"
-    - cron: "30 7 * * 2"
-    - cron: "0 6 * * 4"
+    - cron: "0 9 * * 0"
+    - cron: "0 6 * * 2"
+    - cron: "30 10 * * 3"
 
 jobs:
   Automated-Booking:
     runs-on: ubuntu-latest
-
     env:
       TZ_OFFSET: "3"
 
@@ -51,15 +48,15 @@ jobs:
 
       - name: Sunday-Gym
         shell: bash
-        if: ${{ env.Day == 'Sunday' }}
-        run: python gym.py --pa ${{ secrets.PASS_60307390 }} --i ${{ secrets.ID_60307390 }} --ln ${{ secrets.LAST_NAME_60307390 }} --fn ${{ secrets.ME_FIRST_60307390 }} --ca 0 --t 14 --fd True
+        if: ${{ env.Day == 'Sunday'}}
+        run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'Male Fitness Room' --t 12 --fd 7
 
       - name: Tuesday-Gym
         shell: bash
-        if: ${{ env.Day == 'Tuesday' }}
-        run: python gym.py --pa ${{ secrets.PASS_60307390 }} --i ${{ secrets.ID_60307390 }} --ln ${{ secrets.LAST_NAME_60307390 }} --fn ${{ secrets.ME_FIRST_60307390 }} --ca 0 --t 10.5 --fd True
+        if: ${{ env.Day == 'Tuesday'}}
+        run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'Male Fitness Room' --t 9 --fd 7
 
-      - name: Thursday-Gym
+      - name: Wednesday-Gym
         shell: bash
-        if: ${{ env.Day == 'Thursday' }}
-        run: python gym.py --pa ${{ secrets.PASS_60307390 }} --i ${{ secrets.ID_60307390 }} --ln ${{ secrets.LAST_NAME_60307390 }} --fn ${{ secrets.ME_FIRST_60307390 }} --ca 0 --t 9 --fd True
+        if: ${{ env.Day == 'Thursday'}}
+        run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'Male Fitness Room' --t 13.5 --fd 7
