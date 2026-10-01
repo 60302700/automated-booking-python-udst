@@ -52,14 +52,14 @@ jobs:
       - name: Sunday-Gym
         shell: bash
         if: ${{ env.Day == 'Sunday' }}
-        run: python gym.py --pa ${{ secrets.PASS_60307390 }} --i ${{ secrets.ID_60307390 }} --ln ${{ secrets.LAST_NAME_60307390 }} --fn ${{ secrets.FIRST_NAME_60307390 }} --ca 0 --t 14 --fd True
+        run: python gym.py --pa ${{ secrets.PASS_60307390 }} --i ${{ secrets.ID_60307390 }} --ln ${{ secrets.LAST_NAME_60307390 }} --fn ${{ secrets.FIRST_NAME_60307390 }} --ca 0 --t 14 --fd 7
 
       - name: Tuesday-Gym
         shell: bash
         if: ${{ env.Day == 'Tuesday' }}
-        run: python gym.py --pa ${{ secrets.PASS_60307390 }} --i ${{ secrets.ID_60307390 }} --ln ${{ secrets.LAST_NAME_60307390 }} --fn ${{ secrets.FIRST_NAME_60307390 }} --ca 0 --t 10.5 --fd True
+        run: python gym.py --pa ${{ secrets.PASS_60307390 }} --i ${{ secrets.ID_60307390 }} --ln ${{ secrets.LAST_NAME_60307390 }} --fn ${{ secrets.FIRST_NAME_60307390 }} --ca 0 --t 10.5 --fd 7
 
       - name: Thursday-Gym
         shell: bash
         if: ${{ env.Day == 'Thursday' }}
-        run: python gym.py --pa ${{ secrets.PASS_60307390 }} --i ${{ secrets.ID_60307390 }} --ln ${{ secrets.LAST_NAME_60307390 }} --fn ${{ secrets.FIRST_NAME_60307390 }} --ca 0 --t 9 --fd True
+        run: python gym.py --pa ${{ secrets.PASS_60307390 }} --i ${{ secrets.ID_60307390 }} --ln ${{ secrets.LAST_NAME_60307390 }} --fn ${{ secrets.FIRST_NAME_60307390 }} --ca 0 --t 9 --fd 7
