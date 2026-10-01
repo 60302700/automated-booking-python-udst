@@ -263,3 +263,21 @@
 2026-09-13 00:12:46,382 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 200 8119
 2026-09-13 00:12:47,285 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /sportsbooking/planyo/ulap.php HTTP/1.1" 200 200
 2026-09-13 00:12:47,286 [INFO] Booking successful!
+2026-10-01 14:28:55,444 [DEBUG] Starting new HTTPS connection (1): udstsport.udst.edu.qa:443
+2026-10-01 14:28:55,560 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /login HTTP/1.1" 200 4597
+2026-10-01 14:28:55,806 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /login HTTP/1.1" 302 None
+2026-10-01 14:28:55,871 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /home HTTP/1.1" 200 5770
+2026-10-01 14:28:55,901 [INFO] Login successful
+2026-10-01 14:28:55,952 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking HTTP/1.1" 302 None
+2026-10-01 14:28:55,955 [DEBUG] Starting new HTTP connection (1): udstsport.udst.edu.qa:80
+2026-10-01 14:28:56,002 [DEBUG] http://udstsport.udst.edu.qa:80 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 302 0
+2026-10-01 14:28:56,064 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 200 8120
+2026-10-01 14:29:03,682 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /sportsbooking/planyo/ulap.php HTTP/1.1" 200 13268
+2026-10-01 14:29:03,725 [DEBUG] Starting new HTTPS connection (1): www.planyo.com:443
+2026-10-01 14:29:04,600 [DEBUG] https://www.planyo.com:443 "POST /fetch-data.php?callback=jQuery11200030016422366728412_1789246617319&month=10&year=2026&id=56012&with_resources=1 HTTP/1.1" 200 33165
+2026-10-01 14:29:04,719 [INFO] Booking for Abdullah Kavilkuth (60302700) on October 08 2026 at 13.5
+2026-10-01 14:29:04,774 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking HTTP/1.1" 302 None
+2026-10-01 14:29:04,782 [DEBUG] http://udstsport.udst.edu.qa:80 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 302 0
+2026-10-01 14:29:04,834 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 200 8120
+2026-10-01 14:29:09,619 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /sportsbooking/planyo/ulap.php HTTP/1.1" 200 1158
+2026-10-01 14:29:09,620 [INFO] Booking successful!
