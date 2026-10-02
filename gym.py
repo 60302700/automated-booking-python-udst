@@ -5,7 +5,7 @@ import logging
 from bs4 import BeautifulSoup
 import random
 import json
-#from sport_types import SportType
+from sport_types import SportType
 
 
 # Set up logging
@@ -242,10 +242,10 @@ def add_guests_to_data(session: requests.Session, data: dict) -> dict:
     return data
 
 
-def book_multi_purpose(session: requests.Session, data: dict, post_headers: dict, sport: str = "Futsal"):
-    data['rental_prop_Please_specify_the_sporting_code_'] = sport
+def book_multi_purpose(session: requests.Session, data: dict, post_headers: dict, sport):
+    data['rental_prop_Sporting_Code'] = sport
     # data['rental_prop_Sporting_Code'] = sport [ONLY FOR MULTI-SPORT HALL in B18]
-
+    print([data['rental_prop_Sporting_Code']])
     # TODO: Booking random sports 
 
     #! Review: Is this useful? (Since we already book on time, and only Futsal has this feature)
@@ -282,7 +282,7 @@ def book_multi_purpose(session: requests.Session, data: dict, post_headers: dict
         except requests.JSONDecodeError as e:
             logging.error(f"Encountered JSONDecodeError. Please check submission data. {e}")
 
-def book_slot(session, first_name, last_name, id_udst, date, time, category, range_time, login_cs, sport: str = "Futsal"):
+def book_slot(session, first_name, last_name, id_udst, date, time, category, range_time, login_cs, sport):
     """Make a booking using the authenticated session and necessary data."""
     logging.info(f"Booking for {first_name} {last_name} ({id_udst}) on {date} at {time}")
 
@@ -342,10 +342,11 @@ def book_slot(session, first_name, last_name, id_udst, date, time, category, ran
         'Connection': 'keep-alive',
         'X-CSRF-Token': booking_csrf_token,
     }
-
+    print(sport)
     if category in {'235824','235845'}:    # FOR GAMING BOOKING
         book_gaming(session, data, post_headers)
-    elif category in {'209258','209259'}:
+    elif sport is not None:
+        print(f"Booking for {sport} at Multi-Purpose Hall")
         book_multi_purpose(session, data, post_headers, sport)
     else:
         book_gym(session, data, post_headers)
@@ -379,22 +380,14 @@ args = parser.parse_args()
 # Login using the parsed arguments
 session, login_cs = login(id_udst=args.i, password=args.pa)
 
-# GYM, SWIMMING, STANDARD, HIGH-END GAMING (in order)
-category = ['178388', '244923', '235825','235824','209258','209259']
-range_time = ['1.5', '1', '2']
-
-category_ids = [
-        ('178388','1.5'),   # Gym
-        ('244934','1'),     # Swimming
-        ('235825','2'),     # Gaming Standard
-        ('235824', '2'),    # Gaming High-End
-        ('209258', '1'),    # MPH Court 1
-        ('209259', '1')     # MPH Court 2
-]
-
 if args.duration is not None:
     # If custom duration is provided
     range_time_chosen = args.duration
+
+Database = get_DB(session,login_cs,f'{id}@udst.edu.qa')
+facility = Database.get(args.ca)
+rental_time = facility.get("rental_time")
+id = facility.get("id")
 
 if args.s:
     # Experimenting with enums. Could add later? (Due to repetition)
@@ -402,25 +395,28 @@ if args.s:
         print("Invalid sport type. Reverting to Futsal")
         # sport = SportType.FUTSAL
         sport = "Futsal"
+        if not args.fd:
+            book_slot(session=session, first_name=args.fn, last_name=args.ln, id_udst=args.i, date=args.d, time=args.t, category=id, range_time=rental_time, login_cs=login_cs,sport=sport)
+        else:
+            date = future_day(args.fd)
+            book_slot(session=session, first_name=args.fn, last_name=args.ln, id_udst=args.i, date=date, time=args.t, category=id, range_time=rental_time, login_cs=login_cs,sport=sport)
     else:
         # sport = SportType[args.s]
         sport = args.s
-else:
-    sport = "Futsal" 
-
-Database = get_DB(session,login_cs,f'{id}@udst.edu.qa')
-#{"facility" : {id,rental duration}}
-
-facility = Database.get(args.ca)
-rental_time = facility.get("rental_time")
-id = facility.get("id")
+        if not args.fd:
+            book_slot(session=session, first_name=args.fn, last_name=args.ln, id_udst=args.i, date=args.d, time=args.t, category=id, range_time=rental_time, login_cs=login_cs)
+        else:
+            date = future_day(args.fd)
+            book_slot(session=session, first_name=args.fn, last_name=args.ln, id_udst=args.i, date=date, time=args.t, category=id, range_time=rental_time, login_cs=login_cs, sport=sport)
 
 if args.list:
     for k in ['Turf Football Pitch', '8- Lane Running Track (Event Park)', 'Multi-Sport Hall-Building 18', 'Beach Volleyball Court', 'Cricket Batting Cages', 'Female Fitness Class: Yoga', 'Female Fitness Room', 'Mixed Class: SpinFIT', 'Female Fitness Class: Female SpinFIT', 'Female Fitness Class: Pilates', 'Female Fitness Class: SuperFIT (Advanced Users)', 'Female Fitness Class: Zumba®️', 'MPH Multi-Sport Court 1 (Futsal, Volleyball & Basketball)', 'Female Fitness Class: Les Mills Body Pump', 'Female Swimming Pool', 'E- gaming Playstation', 'E- gaming Premium', 'Outdoor Padel Court 1 (Private Court)', 'MPH Indoor Squash Court 1 (60-Minute Bookings)', 'E- gaming Standard', 'Outdoor Tennis Courts', 'Outdoor Padel Court 3', 'Outdoor Padel Court 2', 'MPH Indoor Padel Court 3 (Private Court)', 'MPH Indoor Padel Court 1', 'Male Swimming Pool', 'Male Fitness Room', 'PADI Starfish Learn to Swim Program - LEVEL 1', 'PADI Starfish Learn to Swim Program - LEVEL 2', 'PADI Starfish Learn to Swim Program - LEVEL 3', 'PADI Starfish Learn to Swim Program - LEVEL 4', 'PADI Starfish Learn to Swim Program - LEVEL 5', 'PADI Starfish Learn to Swim Program - LEVEL 6', 'Multi-Sport Hall-Building 17', 'UDST Wolves Tennis Academy: Spring Term from Sept 7th – Dec 6th ,2025 (13-week program) - For Children Born in 2021', 'Female Fitness Class: Female Virtual SpinFIT', 'Male Fitness Class: Male Virtual SpinFIT', 'Female Fitness Class: AquaFIT', 'MPH Multi-Sport Court 2 (Futsal, Handball & Tennis)', 'MPH – Auxiliary Rooms', 'Natural Grass Cricket Ground', 'Natural Grass Football Pitch (Event Park)', 'MPH Indoor Squash Court 2 (90-Minute Bookings)', 'MPH Indoor Padel Court 2']:
         print(k)
 #Example of how to calculate the date and time
-if not args.fd:
-    book_slot(session=session, first_name=args.fn, last_name=args.ln, id_udst=args.i, date=args.d, time=args.t, category=id, range_time=rental_time, login_cs=login_cs)
-else:
-    date = future_day(args.fd)
-    book_slot(session=session, first_name=args.fn, last_name=args.ln, id_udst=args.i, date=date, time=args.t, category=id, range_time=rental_time, login_cs=login_cs)
+
+if not args.s:
+    if not args.fd:
+        book_slot(session=session, first_name=args.fn, last_name=args.ln, id_udst=args.i, date=args.d, time=args.t, category=id, range_time=rental_time, login_cs=login_cs)
+    else:
+        date = future_day(args.fd)
+        book_slot(session=session, first_name=args.fn, last_name=args.ln, id_udst=args.i, date=date, time=args.t, category=id, range_time=rental_time, login_cs=login_cs)
