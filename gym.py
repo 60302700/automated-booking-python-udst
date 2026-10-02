@@ -362,20 +362,36 @@ def book_slot(session, first_name, last_name, id_udst, date, time, category, ran
 parser = argparse.ArgumentParser(description='Gym script for booking a slot.')
 
 # Add other arguments as necessary
-parser.add_argument('--pa', required=True, type=str, help='Password')
+parser.add_argument('--pa', type=str, help='Password')
 parser.add_argument('--fn', type=str, help='First Name')
 parser.add_argument('--ln', type=str, help='Last Name')
-parser.add_argument('--i', required=True, type=str, help='User ID for login')
-parser.add_argument('--ca', type=str, required=True, help='Category index')
-parser.add_argument('--t',type=str,required=True,help="Time In 24 hrs format , 12:30 = 12.5")
-parser.add_argument('--fd',type=int,help="7 days ahead booking")
-parser.add_argument('--d',type=str,help="set the day and date")
+parser.add_argument('--i', type=str, help='User ID for login')
+parser.add_argument('--ca', type=str, help='Category index')
+parser.add_argument('--t', type=str, help="Time In 24 hrs format , 12:30 = 12.5")
+parser.add_argument('--fd', type=int, help="7 days ahead booking")
+parser.add_argument('--d', type=str, help="set the day and date")
 parser.add_argument('--duration', type=str, help="Add custom duration to booking")
 parser.add_argument('--s', type=str, help="For The Sport To Be Selected At The Court")
-parser.add_argument('--list', type=str, help="Listing Options")
+parser.add_argument('--list', action='store_true', help="List available options")
 
 # Parse the arguments
 args = parser.parse_args()
+
+if args.list:
+    for k in ['Turf Football Pitch', '8- Lane Running Track (Event Park)', 'Multi-Sport Hall-Building 18', 'Beach Volleyball Court', 'Cricket Batting Cages', 'Female Fitness Class: Yoga', 'Female Fitness Room', 'Mixed Class: SpinFIT', 'Female Fitness Class: Female SpinFIT', 'Female Fitness Class: Pilates', 'Female Fitness Class: SuperFIT (Advanced Users)', 'Female Fitness Class: Zumba®️', 'MPH Multi-Sport Court 1 (Futsal, Volleyball & Basketball)', 'Female Fitness Class: Les Mills Body Pump', 'Female Swimming Pool', 'E- gaming Playstation', 'E- gaming Premium', 'Outdoor Padel Court 1 (Private Court)', 'MPH Indoor Squash Court 1 (60-Minute Bookings)', 'E- gaming Standard', 'Outdoor Tennis Courts', 'Outdoor Padel Court 3', 'Outdoor Padel Court 2', 'MPH Indoor Padel Court 3 (Private Court)', 'MPH Indoor Padel Court 1', 'Male Swimming Pool', 'Male Fitness Room', 'PADI Starfish Learn to Swim Program - LEVEL 1', 'PADI Starfish Learn to Swim Program - LEVEL 2', 'PADI Starfish Learn to Swim Program - LEVEL 3', 'PADI Starfish Learn to Swim Program - LEVEL 4', 'PADI Starfish Learn to Swim Program - LEVEL 5', 'PADI Starfish Learn to Swim Program - LEVEL 6', 'Multi-Sport Hall-Building 17', 'UDST Wolves Tennis Academy: Spring Term from Sept 7th – Dec 6th ,2025 (13-week program) - For Children Born in 2021', 'Female Fitness Class: Female Virtual SpinFIT', 'Male Fitness Class: Male Virtual SpinFIT', 'Female Fitness Class: AquaFIT', 'MPH Multi-Sport Court 2 (Futsal, Handball & Tennis)', 'MPH – Auxiliary Rooms', 'Natural Grass Cricket Ground', 'Natural Grass Football Pitch (Event Park)', 'MPH Indoor Squash Court 2 (90-Minute Bookings)', 'MPH Indoor Padel Court 2']:
+        print(k)
+    raise SystemExit(0)
+
+missing_args = [
+    f'--{name}' for name, value in {
+        'pa': args.pa,
+        'i': args.i,
+        'ca': args.ca,
+        't': args.t,
+    }.items() if value is None
+]
+if missing_args:
+    parser.error(f"missing required arguments: {', '.join(missing_args)}")
 
 # Login using the parsed arguments
 session, login_cs = login(id_udst=args.i, password=args.pa)
@@ -409,9 +425,6 @@ if args.s:
             date = future_day(args.fd)
             book_slot(session=session, first_name=args.fn, last_name=args.ln, id_udst=args.i, date=date, time=args.t, category=id, range_time=rental_time, login_cs=login_cs, sport=sport)
 
-if args.list:
-    for k in ['Turf Football Pitch', '8- Lane Running Track (Event Park)', 'Multi-Sport Hall-Building 18', 'Beach Volleyball Court', 'Cricket Batting Cages', 'Female Fitness Class: Yoga', 'Female Fitness Room', 'Mixed Class: SpinFIT', 'Female Fitness Class: Female SpinFIT', 'Female Fitness Class: Pilates', 'Female Fitness Class: SuperFIT (Advanced Users)', 'Female Fitness Class: Zumba®️', 'MPH Multi-Sport Court 1 (Futsal, Volleyball & Basketball)', 'Female Fitness Class: Les Mills Body Pump', 'Female Swimming Pool', 'E- gaming Playstation', 'E- gaming Premium', 'Outdoor Padel Court 1 (Private Court)', 'MPH Indoor Squash Court 1 (60-Minute Bookings)', 'E- gaming Standard', 'Outdoor Tennis Courts', 'Outdoor Padel Court 3', 'Outdoor Padel Court 2', 'MPH Indoor Padel Court 3 (Private Court)', 'MPH Indoor Padel Court 1', 'Male Swimming Pool', 'Male Fitness Room', 'PADI Starfish Learn to Swim Program - LEVEL 1', 'PADI Starfish Learn to Swim Program - LEVEL 2', 'PADI Starfish Learn to Swim Program - LEVEL 3', 'PADI Starfish Learn to Swim Program - LEVEL 4', 'PADI Starfish Learn to Swim Program - LEVEL 5', 'PADI Starfish Learn to Swim Program - LEVEL 6', 'Multi-Sport Hall-Building 17', 'UDST Wolves Tennis Academy: Spring Term from Sept 7th – Dec 6th ,2025 (13-week program) - For Children Born in 2021', 'Female Fitness Class: Female Virtual SpinFIT', 'Male Fitness Class: Male Virtual SpinFIT', 'Female Fitness Class: AquaFIT', 'MPH Multi-Sport Court 2 (Futsal, Handball & Tennis)', 'MPH – Auxiliary Rooms', 'Natural Grass Cricket Ground', 'Natural Grass Football Pitch (Event Park)', 'MPH Indoor Squash Court 2 (90-Minute Bookings)', 'MPH Indoor Padel Court 2']:
-        print(k)
 #Example of how to calculate the date and time
 
 if not args.s:
