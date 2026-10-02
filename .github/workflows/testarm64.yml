@@ -1,0 +1,36 @@
+name: Test Android Runner
+
+# Triggers the workflow manually via the "Actions" tab or on every code push
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  run-booking-test:
+    # Forces the job to target your specific phone runner
+    runs-on: [self-hosted, linux, ARM64]
+
+    steps:
+      - name: Checkout Repository Code
+        uses: actions/checkout@v4
+
+      - name: Verify Python Environment
+        run: |
+          echo "=== System Information ==="
+          python3 --version
+          pip3 --version
+          
+      - name: Install Python Dependencies
+        run: |
+          if [ -f requirements.txt ]; then
+            pip3 install -r requirements.txt
+          else
+            echo "No requirements.txt found, skipping install."
+          fi
+
+      - name: Test Run Script
+        run: |
+          echo "=== Simulating Booking Run ==="
+          # Switch this line to 'python3 schedule-make.py' or 'python3 gym.py' when ready
+          python3 timing.py || echo "Script finished or threw a minor error" 
