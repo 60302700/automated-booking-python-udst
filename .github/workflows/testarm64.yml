@@ -9,7 +9,7 @@ on:
 jobs:
   run-booking-test:
     # Forces the job to target your specific phone runner
-    runs-on: [self-hosted, linux, ARM64]
+    runs-on: self-hosted
 
     steps:
       - name: Checkout Repository Code
