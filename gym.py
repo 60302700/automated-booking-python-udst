@@ -282,7 +282,7 @@ def book_multi_purpose(session: requests.Session, data: dict, post_headers: dict
         except requests.JSONDecodeError as e:
             logging.error(f"Encountered JSONDecodeError. Please check submission data. {e}")
 
-def book_slot(session, first_name, last_name, id_udst, date, time, category, range_time, login_cs, sport):
+def book_slot(session, first_name, last_name, id_udst, date, time, category, range_time, login_cs, sport=None):
     """Make a booking using the authenticated session and necessary data."""
     logging.info(f"Booking for {first_name} {last_name} ({id_udst}) on {date} at {time}")
 
@@ -424,8 +424,6 @@ if args.s:
         else:
             date = future_day(args.fd)
             book_slot(session=session, first_name=args.fn, last_name=args.ln, id_udst=args.i, date=date, time=args.t, category=id, range_time=rental_time, login_cs=login_cs, sport=sport)
-
-#Example of how to calculate the date and time
 
 if not args.s:
     if not args.fd:
