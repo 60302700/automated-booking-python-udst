@@ -3,7 +3,6 @@ from datetime import datetime, timedelta
 import argparse
 import logging
 from bs4 import BeautifulSoup
-import random
 import json
 from sport_types import SportType
 import time

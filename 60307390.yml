@@ -1,0 +1,45 @@
+name: 60307390_GR
+on:
+  schedule:
+    - cron: "0 2 * * 0"
+    - cron: "30 10 * * 2"
+    - cron: "0 9 * * 4"
+jobs:
+  Automated-Booking:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Get Day and Time
+        id: get_datetime
+        shell: powershell
+        run: |
+          $current_hour = Get-Date -Format 'HH'
+          $current_day = Get-Date -Format 'dddd'
+          echo "::set-output name=current_hour::$current_hour"
+          echo "::set-output name=current_day::$current_day"
+
+      - name: Date And Time
+        run: |
+          echo "Current Day: ${{ steps.get_datetime.outputs.current_day }}"
+          echo "Current Hour: ${{ steps.get_datetime.outputs.current_hour }}"
+      - name: Sunday-Gym
+        shell: powershell
+        if: ${ steps.get_datetime.outputs.current_day == 'Sunday' && steps.get_datetime.outputs.current_hour >= 2 && steps.get_datetime.outputs.current_hour <= 3 }
+        run: python gym.py --pa ${ secrets.PASS_60307390 } --i ${ secrets.ID_60307390 } --ln ${ secrets.LAST_NAME_60307390 } --fn ${ secrets.ME_FIRST_60307390 } --ca 0 --t 13.5 --fd True
+
+      - name: Tuesday-Gym
+        shell: powershell
+        if: ${ steps.get_datetime.outputs.current_day == 'Tuesday' && steps.get_datetime.outputs.current_hour >= 10 && steps.get_datetime.outputs.current_hour <= 11 }
+        run: python gym.py --pa ${ secrets.PASS_60307390 } --i ${ secrets.ID_60307390 } --ln ${ secrets.LAST_NAME_60307390 } --fn ${ secrets.ME_FIRST_60307390 } --ca 0 --t 13.5 --fd True
+
+      - name: Thursday-Gym
+        shell: powershell
+        if: ${ steps.get_datetime.outputs.current_day == 'Thursday' && steps.get_datetime.outputs.current_hour >= 9 && steps.get_datetime.outputs.current_hour <= 10 }
+        run: python gym.py --pa ${ secrets.PASS_60307390 } --i ${ secrets.ID_60307390 } --ln ${ secrets.LAST_NAME_60307390 } --fn ${ secrets.ME_FIRST_60307390 } --ca 0 --t 13.5 --fd True
