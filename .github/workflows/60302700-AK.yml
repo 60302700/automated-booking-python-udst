@@ -67,10 +67,8 @@ jobs:
         run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'MPH Multi-Sport Court 1 (Futsal, Volleyball & Basketball)' --t 9 --fd 7 --s "Futsal"
       - name: Football-Indoors-Build18
         shell: bash
-
         run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'Multi-Sport Hall-Building 18' --t 9 --fd 7 --s "Futsal"
 
       - name: Football-Indoors-MPH2
         shell: bash
-
         run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'MPH Multi-Sport Court 2 (Futsal, Handball & Tennis)' --t 9 --fd 7 --s "Futsal"

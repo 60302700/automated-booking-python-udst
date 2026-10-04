@@ -420,7 +420,7 @@ if args.s:
         # sport = SportType[args.s]
         sport = args.s
         if not args.fd:
-            book_slot(session=session, first_name=args.fn, last_name=args.ln, id_udst=args.i, date=args.d, time=args.t, category=id, range_time=rental_time, login_cs=login_cs)
+            book_slot(session=session, first_name=args.fn, last_name=args.ln, id_udst=args.i, date=args.d, time=args.t, category=id, range_time=rental_time, login_cs=login_cs,sport=sport)
         else:
             date = future_day(args.fd)
             book_slot(session=session, first_name=args.fn, last_name=args.ln, id_udst=args.i, date=date, time=args.t, category=id, range_time=rental_time, login_cs=login_cs, sport=sport)
