@@ -243,20 +243,10 @@ def add_guests_to_data(session: requests.Session, data: dict) -> dict:
 
 
 def book_multi_purpose(session: requests.Session, data: dict, post_headers: dict, sport):
-    data['rental_prop_Sporting_Code'] = sport
+    data['rental_prop_Please_specify_the_sporting_code_'] = sport
     # data['rental_prop_Sporting_Code'] = sport [ONLY FOR MULTI-SPORT HALL in B18]
-    print([data['rental_prop_Sporting_Code']])
-    # TODO: Booking random sports 
-
-    #! Review: Is this useful? (Since we already book on time, and only Futsal has this feature)
-    alternate_booking = False
-    alternate_courts_list = [('209258','209259')]
-    if sport == "Futsal":
-        alternate_booking = True
-        court_options = alternate_courts_list[0]        # To be replaced with a sport's specific index
-        alternative_court = court_options[0]
-        if alternative_court == data['resource_id']:
-            alternative_court = court_options[1]
+    print(data['rental_prop_Please_specify_the_sporting_code_'])
+    
 
     # dictionaries are passed by reference, so they are mutable by functions. you can choose to omit
     # the `data =` if you think it looks clearer
@@ -269,18 +259,6 @@ def book_multi_purpose(session: requests.Session, data: dict, post_headers: dict
     # The reason I'm repeating this code is to enable customization of booking for alternative courts when booking a sport
     for times in range(3):
         response = post_booking_request(session,data=data, headers=post_headers)
-        try:
-            response_json = response.json()
-            # If we allow for alternative booking AND we get an error signifying spot is taken...
-            if alternate_booking and response.status_code == 200 and response_json['response_code'] == 4:
-                print(f"Slot is already booked for {sport}. Trying with alternative court.")
-                data['resource_id'] = alternative_court 
-            elif response.status_code == 200:
-                break
-            else:
-                print(f"Response returned status code {response.status_code}")
-        except requests.JSONDecodeError as e:
-            logging.error(f"Encountered JSONDecodeError. Please check submission data. {e}")
 
 def book_slot(session, first_name, last_name, id_udst, date, time, category, range_time, login_cs, sport=None):
     """Make a booking using the authenticated session and necessary data."""
