@@ -64,15 +64,15 @@ jobs:
 
       - name: Football-Indoors-MPH1
         shell: bash
-        if: ${{ env.Day == 'Friday'}}
+        if: ${{ env.Day == 'Saturday'}}
         run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'MPH Multi-Sport Court 1 (Futsal, Volleyball & Basketball)' --t 14 --fd 7 --s "Futsal"
 
       - name: Football-Indoors-Build18
-        if: ${{ env.Day == 'Friday'}}
+        if: ${{ env.Day == 'Saturday'}}
         shell: bash
         run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'Multi-Sport Hall-Building 18' --t 14 --fd 7 --s "Futsal"
 
       - name: Football-Indoors-MPH2
-        if: ${{ env.Day == 'Friday'}}
+        if: ${{ env.Day == 'Saturday'}}
         shell: bash
         run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'MPH Multi-Sport Court 2 (Futsal, Handball & Tennis)' --t 14 --fd 7 --s "Futsal"
