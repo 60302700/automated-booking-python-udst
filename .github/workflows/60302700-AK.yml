@@ -10,6 +10,7 @@ on:
     - cron: "0 9 * * 0"
     - cron: "0 6 * * 2"
     - cron: "30 10 * * 4"
+    - cron: "0 6 * * 5"
 
 jobs:
   Automated-Booking:
@@ -63,12 +64,15 @@ jobs:
 
       - name: Football-Indoors-MPH1
         shell: bash
+        if: ${{ env.Day == 'Friday'}}
+        run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'MPH Multi-Sport Court 1 (Futsal, Volleyball & Basketball)' --t 14 --fd 7 --s "Futsal"
 
-        run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'MPH Multi-Sport Court 1 (Futsal, Volleyball & Basketball)' --t 7 --fd 7 --s "Futsal"
       - name: Football-Indoors-Build18
+        if: ${{ env.Day == 'Friday'}}
         shell: bash
-        run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'Multi-Sport Hall-Building 18' --t 7 --fd 7 --s "Futsal"
+        run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'Multi-Sport Hall-Building 18' --t 14 --fd 7 --s "Futsal"
 
       - name: Football-Indoors-MPH2
+        if: ${{ env.Day == 'Friday'}}
         shell: bash
-        run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'MPH Multi-Sport Court 2 (Futsal, Handball & Tennis)' --t 7 --fd 7 --s "Futsal"
+        run: python gym.py --pa ${{ secrets.PASS_ME }} --i ${{ secrets.ID_ME }} --ln ${{ secrets.ME_LAST_NAME }} --fn ${{ secrets.ME_FIRST_NAME }} --ca 'MPH Multi-Sport Court 2 (Futsal, Handball & Tennis)' --t 14 --fd 7 --s "Futsal"

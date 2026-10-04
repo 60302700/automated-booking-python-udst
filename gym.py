@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 import random
 import json
 from sport_types import SportType
-
+import time
 
 # Set up logging
 logging.basicConfig(
@@ -155,8 +155,16 @@ def get_DB(session,login_cs,udst_email):
     "sec-ch-ua-mobile": "?0",
     "sec-ch-ua-platform": '"Linux"',
 }   
-    d = session.post("https://udstsport.udst.edu.qa/sportsbooking/planyo/ulap.php",data=payload,headers=headers)
-    data = BeautifulSoup(d.json()['data']['code'],"html.parser").find_all(class_="wi-search-results__card-body")
+    for _ in range(3):
+        try:
+            
+            d = session.post("https://udstsport.udst.edu.qa/sportsbooking/planyo/ulap.php",data=payload,headers=headers)
+            data = BeautifulSoup(d.json()['data']['code'],"html.parser").find_all(class_="wi-search-results__card-body")
+            break
+        except Exception as e:
+            print(f"Unable to fetch data Database reason {e}")
+            print(data)
+            time.sleep(1)
     
     now = datetime.now()
     current_month = now.month

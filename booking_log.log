@@ -618,3 +618,20 @@
 2026-10-02 23:40:40,393 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /guest-list HTTP/1.1" 200 None
 2026-10-02 23:40:44,700 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /sportsbooking/planyo/ulap.php HTTP/1.1" 200 2360
 2026-10-02 23:40:44,702 [INFO] Booking successful!
+2026-10-04 14:12:08,081 [DEBUG] Starting new HTTPS connection (1): udstsport.udst.edu.qa:443
+2026-10-04 14:12:08,183 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /login HTTP/1.1" 200 4598
+2026-10-04 14:12:08,383 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /login HTTP/1.1" 302 None
+2026-10-04 14:12:08,452 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /home HTTP/1.1" 200 5770
+2026-10-04 14:12:08,487 [INFO] Login successful
+2026-10-04 14:12:08,534 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking HTTP/1.1" 302 None
+2026-10-04 14:12:08,537 [DEBUG] Starting new HTTP connection (1): udstsport.udst.edu.qa:80
+2026-10-04 14:12:08,562 [DEBUG] http://udstsport.udst.edu.qa:80 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 302 0
+2026-10-04 14:12:08,620 [DEBUG] https://udstsport.udst.edu.qa:443 "GET /booking?prop_res_client=UDST%2BCommunity&ppp_hidden_fields=prop_res_client HTTP/1.1" 200 8118
+2026-10-04 14:12:15,224 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /sportsbooking/planyo/ulap.php HTTP/1.1" 200 13268
+2026-10-04 14:12:21,968 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /sportsbooking/planyo/ulap.php HTTP/1.1" 200 13268
+2026-10-04 14:12:30,055 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /sportsbooking/planyo/ulap.php HTTP/1.1" 200 13268
+2026-10-04 14:12:34,627 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /sportsbooking/planyo/ulap.php HTTP/1.1" 500 None
+2026-10-04 14:12:34,663 [DEBUG] Resetting dropped connection: udstsport.udst.edu.qa
+2026-10-04 14:12:41,615 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /sportsbooking/planyo/ulap.php HTTP/1.1" 200 13268
+2026-10-04 14:12:47,873 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /sportsbooking/planyo/ulap.php HTTP/1.1" 200 13268
+2026-10-04 14:12:55,278 [DEBUG] https://udstsport.udst.edu.qa:443 "POST /sportsbooking/planyo/ulap.php HTTP/1.1" 200 13268
