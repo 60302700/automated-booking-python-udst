@@ -244,6 +244,7 @@ def add_guests_to_data(session: requests.Session, data: dict) -> dict:
 
 def book_multi_purpose(session: requests.Session, data: dict, post_headers: dict, sport):
     data['rental_prop_Please_specify_the_sporting_code_'] = sport
+    data['rental_prop_Sporting_Code'] = sport
     # data['rental_prop_Sporting_Code'] = sport [ONLY FOR MULTI-SPORT HALL in B18]
     print(data['rental_prop_Please_specify_the_sporting_code_'])
     
