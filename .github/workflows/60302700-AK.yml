@@ -10,7 +10,7 @@ on:
     - cron: "0 9 * * 0"
     - cron: "0 6 * * 2"
     - cron: "30 10 * * 4"
-    - cron: "0 6 * * 5"
+    - cron: "0 6 * * 6"
 
 jobs:
   Automated-Booking:
